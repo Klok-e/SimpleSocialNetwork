@@ -3,4 +3,5 @@
   &lt;TestAncestor&gt;
     &lt;TestId&gt;NUnit3x::FE407D6B-B70D-4F7E-9B2C-79B889F0D8C6::.NETCoreApp,Version=v3.1::Tests.Business.UserServiceTests.UserService_Register_Happy&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+&lt;/SessionState&gt;</s:String>
+	</wpf:ResourceDictionary>

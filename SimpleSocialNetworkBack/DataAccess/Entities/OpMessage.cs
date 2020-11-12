@@ -19,6 +19,6 @@ namespace DataAccess.Entities
 
         public DateTime SendDate { get; set; }
 
-        public virtual User? Poster { get; set; }
+        public virtual ApplicationUser? Poster { get; set; }
     }
 }

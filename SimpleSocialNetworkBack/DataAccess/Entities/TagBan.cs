@@ -8,12 +8,10 @@ namespace DataAccess.Entities
     {
         [Key] public int Id { get; set; }
 
-        [ForeignKey(nameof(Tag))] [Required] public string TagId { get; set; } = null!;
-        [ForeignKey(nameof(User))] [Required] public string UserId { get; set; } = null!;
+        [ForeignKey(nameof(Tag))] public string? TagId { get; set; }
+        [ForeignKey(nameof(User))] public string? UserId { get; set; }
 
-        [ForeignKey(nameof(Moderator))]
-        [Required]
-        public string ModeratorId { get; set; } = null!;
+        [ForeignKey(nameof(Moderator))] public string? ModeratorId { get; set; }
 
         public DateTime ExpirationDate { get; set; }
         public DateTime BanIssuedDate { get; set; }
@@ -21,7 +19,7 @@ namespace DataAccess.Entities
         public bool Cancelled { get; set; }
 
         public virtual Tag? Tag { get; set; }
-        public virtual User? User { get; set; }
-        public virtual User? Moderator { get; set; }
+        public virtual ApplicationUser? User { get; set; }
+        public virtual ApplicationUser? Moderator { get; set; }
     }
 }

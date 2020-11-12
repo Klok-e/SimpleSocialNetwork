@@ -6,22 +6,15 @@ namespace DataAccess.Entities
 {
     public class Subscription
     {
-        /// <summary>
-        /// Key
-        /// </summary>
-        [ForeignKey(nameof(Subscriber))]
-        public string SubscriberId { get; set; } = null!;
+        [Key] public int Id { get; set; }
 
-        /// <summary>
-        /// Key
-        /// </summary>
-        [ForeignKey(nameof(Target))]
-        public string TargetId { get; set; } = null!;
+        public string? SubscriberId { get; set; }
+        public string? TargetId { get; set; }
 
         public bool IsActive { get; set; }
 
-        public virtual User? Subscriber { get; set; }
+        public virtual ApplicationUser? Subscriber { get; set; }
 
-        public virtual User? Target { get; set; }
+        public virtual ApplicationUser? Target { get; set; }
     }
 }

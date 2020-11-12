@@ -18,10 +18,7 @@ namespace Business
 
             CreateMap<OpMessageTag, OpMessageTagModel>()
                 .ReverseMap();
-
-            CreateMap<SecurePassword, SecurePasswordModel>()
-                .ReverseMap();
-
+            
             CreateMap<Subscription, SubscriptionModel>()
                 .ReverseMap();
 
@@ -34,7 +31,7 @@ namespace Business
             CreateMap<TagModerator, TagModeratorModel>()
                 .ReverseMap();
 
-            CreateMap<User, UserModel>()
+            CreateMap<ApplicationUser, UserModel>()
                 .ReverseMap();
         }
     }

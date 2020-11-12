@@ -21,7 +21,6 @@
           <e p="MessageModel.cs" t="Include" />
           <e p="OpMessageModel.cs" t="Include" />
           <e p="OpMessageTagModel.cs" t="Include" />
-          <e p="SecurePasswordModel.cs" t="Include" />
           <e p="SubscriptionModel.cs" t="Include" />
           <e p="TagBanModel.cs" t="Include" />
           <e p="TagModel.cs" t="Include" />
@@ -46,15 +45,19 @@
       <e p="DataAccess" t="IncludeRecursive">
         <e p="DataAccess.csproj" t="IncludeRecursive" />
         <e p="Entities" t="Include">
+          <e p="ApplicationUser.cs" t="Include" />
           <e p="Message.cs" t="Include" />
           <e p="OpMessage.cs" t="Include" />
           <e p="OpMessageTag.cs" t="Include" />
-          <e p="SecurePassword.cs" t="Include" />
           <e p="Subscription.cs" t="Include" />
           <e p="Tag.cs" t="Include" />
           <e p="TagBan.cs" t="Include" />
           <e p="TagModerator.cs" t="Include" />
-          <e p="User.cs" t="Include" />
+        </e>
+        <e p="Migrations" t="Include">
+          <e p="20201112213821_init.Designer.cs" t="Include" />
+          <e p="20201112213821_init.cs" t="Include" />
+          <e p="SocialDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="SocialDbContext.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
