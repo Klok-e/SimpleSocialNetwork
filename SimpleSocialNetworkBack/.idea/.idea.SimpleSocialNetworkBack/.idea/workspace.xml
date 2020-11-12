@@ -9,18 +9,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="239d33a8-2d55-46f3-8aca-4806438a8afc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Business/MapperProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataAccess/SocialDbContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/SqliteInMemory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/Business.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Business.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/Class1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Class1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/DataAccess.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/DataAccess.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimpleSocialNetworkBack/SimpleSocialNetworkBack.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/SimpleSocialNetworkBack.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/UnitTest1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Models/MessageModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/MessageModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Models/OpMessageModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/OpMessageModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Models/OpMessageTagModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/OpMessageTagModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Models/SecurePasswordModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/SecurePasswordModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Models/SubscriptionModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/SubscriptionModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Models/TagBanModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/TagBanModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Models/TagModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/TagModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Models/TagModeratorModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/TagModeratorModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Models/UserModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/UserModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Business/UserServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Business/UserServiceTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/SqliteInMemory.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +30,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/869E6C21-96FE-460F-9B92-1C6D00DF784B/ec/a5b33b05/InvalidOperationException.cs" root0="SKIP_HIGHLIGHTING" />
@@ -58,26 +60,26 @@
         <option value="$PROJECT_DIR$/DataAccess/Entities/SecurePassword.cs" />
         <option value="$PROJECT_DIR$/DataAccess/Entities/Tag.cs" />
         <option value="$PROJECT_DIR$/DataAccess/Entities/TagBan.cs" />
-        <option value="$PROJECT_DIR$/Business/Models/MessageModel.cs" />
-        <option value="$PROJECT_DIR$/Business/Models/OpMessageModel.cs" />
-        <option value="$PROJECT_DIR$/Business/Models/OpMessageTagModel.cs" />
-        <option value="$PROJECT_DIR$/Business/Models/SecurePasswordModel.cs" />
-        <option value="$PROJECT_DIR$/Business/Models/SubscriptionModel.cs" />
-        <option value="$PROJECT_DIR$/Business/Models/TagBanModel.cs" />
-        <option value="$PROJECT_DIR$/Business/Models/TagModel.cs" />
-        <option value="$PROJECT_DIR$/Business/Models/TagModeratorModel.cs" />
-        <option value="$PROJECT_DIR$/Business/Models/UserModel.cs" />
         <option value="$PROJECT_DIR$/DataAccess/Entities/User.cs" />
         <option value="$PROJECT_DIR$/Business/Validation/SocialException.cs" />
         <option value="$PROJECT_DIR$/Business/Services/UserService.cs" />
         <option value="$PROJECT_DIR$/Tests/UnitTest1.cs" />
-        <option value="$PROJECT_DIR$/Tests/SqliteInMemory.cs" />
-        <option value="$PROJECT_DIR$/Tests/Business/UserServiceTests.cs" />
         <option value="$PROJECT_DIR$/DataAccess/Entities/Message.cs" />
         <option value="$PROJECT_DIR$/DataAccess/Entities/OpMessageTag.cs" />
         <option value="$PROJECT_DIR$/DataAccess/Entities/Subscription.cs" />
         <option value="$PROJECT_DIR$/DataAccess/Entities/TagModerator.cs" />
         <option value="$PROJECT_DIR$/DataAccess/SocialDbContext.cs" />
+        <option value="$PROJECT_DIR$/Tests/SqliteInMemory.cs" />
+        <option value="$PROJECT_DIR$/Business/Models/OpMessageTagModel.cs" />
+        <option value="$PROJECT_DIR$/Business/Models/TagModel.cs" />
+        <option value="$PROJECT_DIR$/Tests/Business/UserServiceTests.cs" />
+        <option value="$PROJECT_DIR$/Business/Models/MessageModel.cs" />
+        <option value="$PROJECT_DIR$/Business/Models/OpMessageModel.cs" />
+        <option value="$PROJECT_DIR$/Business/Models/SecurePasswordModel.cs" />
+        <option value="$PROJECT_DIR$/Business/Models/SubscriptionModel.cs" />
+        <option value="$PROJECT_DIR$/Business/Models/TagBanModel.cs" />
+        <option value="$PROJECT_DIR$/Business/Models/TagModeratorModel.cs" />
+        <option value="$PROJECT_DIR$/Business/Models/UserModel.cs" />
       </list>
     </option>
   </component>
@@ -95,7 +97,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../SimpleSocialNetworkTemplate" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.SimpleSocialNetworkBack">
@@ -140,7 +142,8 @@
       <updated>1605037988285</updated>
       <workItem from="1605037990395" duration="2443000" />
       <workItem from="1605126433355" duration="6051000" />
-      <workItem from="1605190451978" duration="9599000" />
+      <workItem from="1605190451978" duration="10173000" />
+      <workItem from="1605201944152" duration="1741000" />
     </task>
     <servers />
   </component>
@@ -162,6 +165,9 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -177,13 +183,36 @@
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
     <state x="560" y="253" key="Rider.ProjectTemplateDialog.Size/0.0.1920.1035@0.0.1920.1035" timestamp="1605040900835" />
-    <state x="643" y="200" key="RiderGenerateDialog" timestamp="1605199138289">
+    <state x="643" y="200" key="RiderGenerateDialog" timestamp="1605203485322">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state x="643" y="200" key="RiderGenerateDialog/0.0.1920.1035@0.0.1920.1035" timestamp="1605199138289" />
+    <state x="643" y="200" key="RiderGenerateDialog/0.0.1920.1035@0.0.1920.1035" timestamp="1605203485322" />
+    <state x="461" y="153" key="SettingsEditor" timestamp="1605201970252">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="461" y="153" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1605201970252" />
     <state x="624" y="236" key="run.anything.popup" timestamp="1605131913666">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
     <state x="624" y="236" key="run.anything.popup/0.0.1920.1035@0.0.1920.1035" timestamp="1605131913666" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Tests/Business/UserServiceTests.cs</url>
+          <line>57</line>
+          <properties documentPath="$PROJECT_DIR$/Tests/Business/UserServiceTests.cs" initialLine="57">
+            <startOffsets>
+              <option value="1606" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1670" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -1,8 +1,12 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Business;
+using Business.Models;
 using Business.Services;
 using DataAccess;
+using DataAccess.Entities;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
 namespace Tests.Business
@@ -10,15 +14,21 @@ namespace Tests.Business
     [TestFixture]
     public class UserServiceTests
     {
-        private SqliteInMemory _db;
+        private SqliteConnection _connection;
         private SocialDbContext _context;
         private IMapper _mapper;
 
         [SetUp]
         public void SetUp()
         {
-            _db = new SqliteInMemory();
-            _context = _db.InMemoryDatabase();
+            _connection = new SqliteConnection("DataSource=:memory:");
+            _connection.Open();
+            var options = new DbContextOptionsBuilder<SocialDbContext>()
+                .UseSqlite(_connection)
+                .Options;
+
+            _context = new SocialDbContext(options);
+            _context.Database.EnsureCreated();
 
             var profile = new MapperProfile();
             var configuration = new MapperConfiguration(cfg => cfg.AddProfile(profile));
@@ -28,7 +38,7 @@ namespace Tests.Business
         [TearDown]
         public void TearDown()
         {
-            _db.Dispose();
+            _connection.Close();
         }
 
         [Test]
@@ -42,10 +52,10 @@ namespace Tests.Business
             // act
             var user = await userService.Register(login, pass);
 
-            var dbUser = await _context.Users!.FindAsync(user.Login);
+            var dbUser = _mapper.Map<User, UserModel>(await _context.Users!.FindAsync(user.Login));
 
             // assert
-            Assert.AreEqual(user, dbUser);
+            Assert.IsTrue(UserModel.UserModelComparer.Equals(user, dbUser));
         }
     }
 }
