@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/.cache/JetBrains/Rider2020.2/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.cache/JetBrains/Rider2020.2/resharper-host/local/Transient/Rider/v202/SolutionCaches/_SimpleSocialNetworkBack.-1949558129.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.5.0/build/netcoreapp2.1" t="Include">
+      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
+    </e>
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.16.1/build/netcoreapp2.1/NUnit3.TestAdapter.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.16.1/build/netcoreapp2.1/NUnit3.TestAdapter.pdb" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.16.1/build/netcoreapp2.1/nunit.engine.api.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.16.1/build/netcoreapp2.1/nunit.engine.dll" t="Include" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="Business" t="IncludeRecursive">
+        <e p="Business.csproj" t="IncludeRecursive" />
+        <e p="Interfaces" t="Include">
+          <e p="IUserService.cs" t="Include" />
+        </e>
+        <e p="MapperProfile.cs" t="Include" />
+        <e p="Models" t="Include">
+          <e p="MessageModel.cs" t="Include" />
+          <e p="OpMessageModel.cs" t="Include" />
+          <e p="OpMessageTagModel.cs" t="Include" />
+          <e p="SecurePasswordModel.cs" t="Include" />
+          <e p="SubscriptionModel.cs" t="Include" />
+          <e p="TagBanModel.cs" t="Include" />
+          <e p="TagModel.cs" t="Include" />
+          <e p="TagModeratorModel.cs" t="Include" />
+          <e p="UserModel.cs" t="Include" />
+        </e>
+        <e p="Services" t="Include">
+          <e p="UserService.cs" t="Include" />
+        </e>
+        <e p="Validation" t="Include">
+          <e p="SocialException.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Business.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="DataAccess" t="IncludeRecursive">
+        <e p="DataAccess.csproj" t="IncludeRecursive" />
+        <e p="Entities" t="Include">
+          <e p="Message.cs" t="Include" />
+          <e p="OpMessage.cs" t="Include" />
+          <e p="OpMessageTag.cs" t="Include" />
+          <e p="SecurePassword.cs" t="Include" />
+          <e p="Subscription.cs" t="Include" />
+          <e p="Tag.cs" t="Include" />
+          <e p="TagBan.cs" t="Include" />
+          <e p="TagModerator.cs" t="Include" />
+          <e p="User.cs" t="Include" />
+        </e>
+        <e p="SocialDbContext.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="DataAccess.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="SimpleSocialNetworkBack" t="IncludeRecursive">
+        <e p="Controllers" t="Include">
+          <e p="WeatherForecastController.cs" t="Include" />
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="SimpleSocialNetworkBack.csproj" t="IncludeRecursive" />
+        <e p="Startup.cs" t="Include" />
+        <e p="WeatherForecast.cs" t="Include" />
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="SimpleSocialNetworkBack.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="SimpleSocialNetworkBack.sln" t="IncludeFlat" />
+      <e p="Tests" t="IncludeRecursive">
+        <e p="Business" t="Include">
+          <e p="UserServiceTests.cs" t="Include" />
+        </e>
+        <e p="SqliteInMemory.cs" t="Include" />
+        <e p="Tests.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
