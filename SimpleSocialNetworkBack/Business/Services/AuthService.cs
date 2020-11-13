@@ -17,13 +17,13 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Business.Services
 {
-    public class UserService : IUserService
+    public class AuthService : IAuthService
     {
         private readonly SocialDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly AppSettings _appSettings;
 
-        public UserService(SocialDbContext dbContext, IMapper mapper, IOptions<AppSettings> appSettings)
+        public AuthService(SocialDbContext dbContext, IMapper mapper, IOptions<AppSettings> appSettings)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -50,7 +50,7 @@ namespace Business.Services
         public async Task<LoggedInUser> Login(string login, string password)
         {
             // check whether user exists
-            var user = await _dbContext.Users!.FindAsync(login);
+            var user = await _dbContext.Users.FindAsync(login);
             if (user == null)
                 throw new SocialException("Nonexistent login");
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Common;
+using Business.Services;
 using DataAccess;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Authentication;
@@ -43,6 +44,8 @@ namespace SimpleSocialNetworkBack
             });
 
             services.AddSwaggerGen();
+
+            services.AddScoped<AuthService>();
 
 
             var appSettingsSection = Configuration.GetSection("AppSettings");

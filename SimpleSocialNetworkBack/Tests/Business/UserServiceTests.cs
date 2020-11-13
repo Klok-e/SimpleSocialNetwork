@@ -38,7 +38,8 @@ namespace Tests.Business
             var configuration = new MapperConfiguration(cfg => cfg.AddProfile(profile));
             _mapper = new Mapper(configuration);
 
-            _settings = Options.Create(new AppSettings {Secret = "123456789"});
+            _settings = Options.Create(new AppSettings
+                {Secret = "123456789asdddddasdafafwgerghrtyhergkernuitvlgbilerklgergjb"});
         }
 
         [TearDown]
@@ -51,12 +52,14 @@ namespace Tests.Business
         public async Task UserService_Register_Happy()
         {
             // arrange
-            var userService = new UserService(_context, _mapper, _settings);
+            var userService = new AuthService(_context, _mapper, _settings);
             var login = "abcde";
             var pass = "12345";
 
             // act
             var user = await userService.Register(login, pass);
+
+            var _ = await userService.Login(login, pass);
 
             var dbUser = await _context.Users!.FindAsync(user.Login);
 

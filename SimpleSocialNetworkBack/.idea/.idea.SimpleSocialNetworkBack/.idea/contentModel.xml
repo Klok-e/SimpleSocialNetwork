@@ -17,7 +17,7 @@
           <e p="AppSettings.cs" t="Include" />
         </e>
         <e p="Interfaces" t="Include">
-          <e p="IUserService.cs" t="Include" />
+          <e p="IAuthService.cs" t="Include" />
         </e>
         <e p="MapperProfile.cs" t="Include" />
         <e p="Models" t="Include">
@@ -25,7 +25,7 @@
           <e p="UserModel.cs" t="Include" />
         </e>
         <e p="Services" t="Include">
-          <e p="UserService.cs" t="Include" />
+          <e p="AuthService.cs" t="Include" />
         </e>
         <e p="Validation" t="Include">
           <e p="SocialException.cs" t="Include" />
