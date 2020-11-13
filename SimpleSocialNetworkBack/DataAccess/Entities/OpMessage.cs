@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,5 +21,7 @@ namespace DataAccess.Entities
         public DateTime SendDate { get; set; }
 
         public virtual ApplicationUser? Poster { get; set; }
+        
+        public virtual ICollection<OpMessageTag>? Tags { get; set; }
     }
 }

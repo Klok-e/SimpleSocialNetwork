@@ -1,31 +1,30 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Threading.Tasks;
-using AutoMapper;
-using Business.Interfaces;
-using Business.Models;
-using DataAccess;
-using DataAccess.Entities;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
+using AutoMapper;
 using Business.Common;
+using Business.Models;
 using Business.Validation;
+using DataAccess;
+using DataAccess.Entities;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Business.Services
+namespace Business.Services.Implementations
 {
     public class AuthService : IAuthService
     {
-        private readonly SocialDbContext _dbContext;
+        private readonly SocialDbContext _context;
         private readonly IMapper _mapper;
         private readonly AppSettings _appSettings;
 
-        public AuthService(SocialDbContext dbContext, IMapper mapper, IOptions<AppSettings> appSettings)
+        public AuthService(SocialDbContext context, IMapper mapper, IOptions<AppSettings> appSettings)
         {
-            _dbContext = dbContext;
+            _context = context;
             _mapper = mapper;
             _appSettings = appSettings.Value;
         }
@@ -33,16 +32,16 @@ namespace Business.Services
         public async Task<UserModel> Register(string login, string password)
         {
             // check whether user exists
-            var exists = await _dbContext.Users!.FindAsync(login);
+            var exists = await _context.Users!.FindAsync(login);
             if (exists != null)
-                throw new SocialException("Login is already taken");
+                throw new ValidationException("Login is already taken");
 
             var user = new ApplicationUser {Login = login};
-            await _dbContext.Users!.AddAsync(user);
+            await _context.Users!.AddAsync(user);
 
             user.Password = HashPassword(password);
 
-            await _dbContext.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return _mapper.Map<ApplicationUser, UserModel>(user);
         }
@@ -50,13 +49,13 @@ namespace Business.Services
         public async Task<LoggedInUser> Login(string login, string password)
         {
             // check whether user exists
-            var user = await _dbContext.Users.FindAsync(login);
+            var user = await _context.Users.FindAsync(login);
             if (user == null)
-                throw new SocialException("Nonexistent login");
+                throw new ValidationException("Nonexistent login");
 
 
             if (!CheckPasswordHash(user.Password!.Salt, user.Password!.Hashed, password))
-                throw new SocialException("Wrong password");
+                throw new ValidationException("Wrong password");
 
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();

@@ -1,9 +1,12 @@
+using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business;
 using Business.Common;
 using Business.Models;
 using Business.Services;
+using Business.Services.Implementations;
+using Business.Validation;
 using DataAccess;
 using DataAccess.Entities;
 using Microsoft.Data.Sqlite;
@@ -61,10 +64,14 @@ namespace Tests.Business
 
             var _ = await userService.Login(login, pass);
 
+            Func<Task> throws = async () => await userService.Login(login, pass + "a");
+
             var dbUser = await _context.Users!.FindAsync(user.Login);
 
             // assert
             Assert.AreEqual(user, _mapper.Map<ApplicationUser, UserModel>(dbUser));
+
+            Assert.ThrowsAsync<ValidationException>(async () => await throws());
         }
     }
 }

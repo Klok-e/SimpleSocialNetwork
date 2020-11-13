@@ -12,6 +12,9 @@ namespace Business
         {
             CreateMap<ApplicationUser, UserModel>()
                 .ReverseMap();
+            
+            CreateMap<OpMessage, OpMessageModel>()
+                .ReverseMap();
         }
     }
 }

@@ -16,19 +16,27 @@
         <e p="Common" t="Include">
           <e p="AppSettings.cs" t="Include" />
         </e>
-        <e p="Interfaces" t="Include">
-          <e p="IAuthService.cs" t="Include" />
-        </e>
         <e p="MapperProfile.cs" t="Include" />
         <e p="Models" t="Include">
+          <e p="CreateOpMessageModel.cs" t="Include" />
+          <e p="CredentialsModel.cs" t="Include" />
           <e p="LoggedInUser.cs" t="Include" />
+          <e p="OpMessageModel.cs" t="Include" />
           <e p="UserModel.cs" t="Include" />
         </e>
         <e p="Services" t="Include">
-          <e p="AuthService.cs" t="Include" />
+          <e p="Crud.cs" t="Include" />
+          <e p="IAuthService.cs" t="Include" />
+          <e p="IOpMessageService.cs" t="Include" />
+          <e p="IUserService.cs" t="Include" />
+          <e p="Implementations" t="Include">
+            <e p="AuthService.cs" t="Include" />
+            <e p="OpMessageService.cs" t="Include" />
+            <e p="UserService.cs" t="Include" />
+          </e>
         </e>
         <e p="Validation" t="Include">
-          <e p="SocialException.cs" t="Include" />
+          <e p="ValidationException.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
@@ -55,6 +63,8 @@
         <e p="Migrations" t="Include">
           <e p="20201112213821_init.Designer.cs" t="Include" />
           <e p="20201112213821_init.cs" t="Include" />
+          <e p="20201113142215_RemoveIdentityServer.Designer.cs" t="Include" />
+          <e p="20201113142215_RemoveIdentityServer.cs" t="Include" />
           <e p="SocialDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="SocialDbContext.cs" t="Include" />
@@ -68,14 +78,19 @@
         </e>
       </e>
       <e p="SimpleSocialNetworkBack" t="IncludeRecursive">
-        <e p="Controllers" t="Include" />
+        <e p="Controllers" t="Include">
+          <e p="AuthController.cs" t="Include" />
+          <e p="OpMessageController.cs" t="Include" />
+        </e>
+        <e p="Misc" t="Include">
+          <e p="AddAuthHeaderParameter.cs" t="Include" />
+        </e>
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
         </e>
         <e p="SimpleSocialNetworkBack.csproj" t="IncludeRecursive" />
         <e p="Startup.cs" t="Include" />
-        <e p="WeatherForecast.cs" t="Include" />
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />

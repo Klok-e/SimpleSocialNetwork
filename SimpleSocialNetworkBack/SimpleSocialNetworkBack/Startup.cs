@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Business;
 using Business.Common;
 using Business.Services;
+using Business.Services.Implementations;
 using DataAccess;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Authentication;
@@ -20,6 +23,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using SimpleSocialNetworkBack.Misc;
 
 namespace SimpleSocialNetworkBack
 {
@@ -36,6 +40,10 @@ namespace SimpleSocialNetworkBack
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.OperationFilter<AddRequiredHeaderParameter>();
+            });
 
             services.AddDbContext<SocialDbContext>(opt =>
             {
@@ -43,9 +51,18 @@ namespace SimpleSocialNetworkBack
                     .UseLazyLoadingProxies();
             });
 
-            services.AddSwaggerGen();
 
-            services.AddScoped<AuthService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IOpMessageService, OpMessageService>();
+
+            services.AddScoped<IMapper>(x =>
+            {
+                var myProfile = new MapperProfile();
+                var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
+
+                return new Mapper(configuration);
+            });
 
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -54,27 +71,12 @@ namespace SimpleSocialNetworkBack
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
-            services.AddAuthorization(options =>
-            {
-                var defaultAuthorizationPolicyBuilder = new AuthorizationPolicyBuilder(
-                    JwtBearerDefaults.AuthenticationScheme);
-
-                defaultAuthorizationPolicyBuilder =
-                    defaultAuthorizationPolicyBuilder.RequireAuthenticatedUser();
-
-                options.DefaultPolicy = defaultAuthorizationPolicyBuilder.Build();
-            });
-
-            services.AddAuthentication(x =>
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
                 {
-                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddJwtBearer(x =>
-                {
-                    x.RequireHttpsMetadata = false;
-                    x.SaveToken = true;
-                    x.TokenValidationParameters = new TokenValidationParameters
+                    opt.RequireHttpsMetadata = false;
+                    opt.SaveToken = true;
+                    opt.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(key),
@@ -82,6 +84,14 @@ namespace SimpleSocialNetworkBack
                         ValidateAudience = false
                     };
                 });
+
+            services.AddAuthorization(options =>
+            {
+                options.DefaultPolicy = new AuthorizationPolicyBuilder(
+                        JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser()
+                    .Build();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -96,6 +106,17 @@ namespace SimpleSocialNetworkBack
 
             app.UseSwagger();
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
+            
+            // accept X-Authorization and rename to Authorization so swagger ui works
+            // https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/1295#issuecomment-588297906
+            app.Use((httpContext, next) =>
+            {
+                if (httpContext.Request.Headers["X-Authorization"].Any())
+                    httpContext.Request.Headers.Add("Authorization", httpContext.Request.Headers["X-Authorization"]);
+
+                return next();
+            });
+            
 
             app.UseRouting();
 
