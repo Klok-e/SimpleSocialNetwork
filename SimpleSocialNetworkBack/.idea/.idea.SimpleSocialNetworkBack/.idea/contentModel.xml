@@ -13,18 +13,15 @@
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="Business" t="IncludeRecursive">
         <e p="Business.csproj" t="IncludeRecursive" />
+        <e p="Common" t="Include">
+          <e p="AppSettings.cs" t="Include" />
+        </e>
         <e p="Interfaces" t="Include">
           <e p="IUserService.cs" t="Include" />
         </e>
         <e p="MapperProfile.cs" t="Include" />
         <e p="Models" t="Include">
-          <e p="MessageModel.cs" t="Include" />
-          <e p="OpMessageModel.cs" t="Include" />
-          <e p="OpMessageTagModel.cs" t="Include" />
-          <e p="SubscriptionModel.cs" t="Include" />
-          <e p="TagBanModel.cs" t="Include" />
-          <e p="TagModel.cs" t="Include" />
-          <e p="TagModeratorModel.cs" t="Include" />
+          <e p="LoggedInUser.cs" t="Include" />
           <e p="UserModel.cs" t="Include" />
         </e>
         <e p="Services" t="Include">
@@ -49,6 +46,7 @@
           <e p="Message.cs" t="Include" />
           <e p="OpMessage.cs" t="Include" />
           <e p="OpMessageTag.cs" t="Include" />
+          <e p="SecurePassword.cs" t="Include" />
           <e p="Subscription.cs" t="Include" />
           <e p="Tag.cs" t="Include" />
           <e p="TagBan.cs" t="Include" />
@@ -70,9 +68,7 @@
         </e>
       </e>
       <e p="SimpleSocialNetworkBack" t="IncludeRecursive">
-        <e p="Controllers" t="Include">
-          <e p="WeatherForecastController.cs" t="Include" />
-        </e>
+        <e p="Controllers" t="Include" />
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />

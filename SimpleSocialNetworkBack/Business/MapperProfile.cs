@@ -10,27 +10,6 @@ namespace Business
     {
         public MapperProfile()
         {
-            CreateMap<Message, MessageModel>()
-                .ReverseMap();
-
-            CreateMap<OpMessage, OpMessageModel>()
-                .ReverseMap();
-
-            CreateMap<OpMessageTag, OpMessageTagModel>()
-                .ReverseMap();
-            
-            CreateMap<Subscription, SubscriptionModel>()
-                .ReverseMap();
-
-            CreateMap<Tag, TagModel>()
-                .ReverseMap();
-
-            CreateMap<TagBan, TagBanModel>()
-                .ReverseMap();
-
-            CreateMap<TagModerator, TagModeratorModel>()
-                .ReverseMap();
-
             CreateMap<ApplicationUser, UserModel>()
                 .ReverseMap();
         }

@@ -1,12 +1,14 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Business;
+using Business.Common;
 using Business.Models;
 using Business.Services;
 using DataAccess;
 using DataAccess.Entities;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using NUnit.Framework;
 
 namespace Tests.Business
@@ -17,6 +19,7 @@ namespace Tests.Business
         private SqliteConnection _connection;
         private SocialDbContext _context;
         private IMapper _mapper;
+        private IOptions<AppSettings> _settings;
 
         [SetUp]
         public void SetUp()
@@ -28,12 +31,14 @@ namespace Tests.Business
                 .UseLazyLoadingProxies()
                 .Options;
 
-            _context = new SocialDbContext(options, null);
+            _context = new SocialDbContext(options);
             _context.Database.EnsureCreated();
 
             var profile = new MapperProfile();
             var configuration = new MapperConfiguration(cfg => cfg.AddProfile(profile));
             _mapper = new Mapper(configuration);
+
+            _settings = Options.Create(new AppSettings {Secret = "123456789"});
         }
 
         [TearDown]
@@ -46,14 +51,17 @@ namespace Tests.Business
         public async Task UserService_Register_Happy()
         {
             // arrange
-            var userService = new UserService(_context, _mapper);
+            var userService = new UserService(_context, _mapper, _settings);
             var login = "abcde";
             var pass = "12345";
 
             // act
+            var user = await userService.Register(login, pass);
 
+            var dbUser = await _context.Users!.FindAsync(user.Login);
 
             // assert
+            Assert.AreEqual(user, _mapper.Map<ApplicationUser, UserModel>(dbUser));
         }
     }
 }

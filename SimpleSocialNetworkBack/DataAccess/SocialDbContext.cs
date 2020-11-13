@@ -1,28 +1,25 @@
 ﻿using System;
 using DataAccess.Entities;
-using IdentityServer4.EntityFramework.Options;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace DataAccess
 {
-    public class SocialDbContext : ApiAuthorizationDbContext<ApplicationUser>
+    public class SocialDbContext : DbContext
     {
-        public SocialDbContext(DbContextOptions options,
-            IOptions<OperationalStoreOptions> operationalStoreOptions) :
-            base(options, operationalStoreOptions)
+        public SocialDbContext(DbContextOptions options) : base(options)
         {
         }
 
-        public DbSet<Message>? Messages { get; set; }
-        public DbSet<OpMessage>? OpMessages { get; set; }
-        public DbSet<OpMessageTag>? OpMessageTags { get; set; }
-        public DbSet<Subscription>? Subscriptions { get; set; }
-        public DbSet<Tag>? Tags { get; set; }
-        public DbSet<TagBan>? TagBans { get; set; }
-        public DbSet<TagModerator>? TagModerators { get; set; }
-        public DbSet<ApplicationUser>? Users { get; set; }
+        public DbSet<Message> Messages { get; set; } = null!;
+        public DbSet<OpMessage> OpMessages { get; set; } = null!;
+        public DbSet<OpMessageTag> OpMessageTags { get; set; } = null!;
+        public DbSet<Subscription> Subscriptions { get; set; } = null!;
+        public DbSet<SecurePassword> SecurePasswords { get; set; } = null!;
+        public DbSet<Tag> Tags { get; set; } = null!;
+        public DbSet<TagBan> TagBans { get; set; } = null!;
+        public DbSet<TagModerator> TagModerators { get; set; } = null!;
+        public DbSet<ApplicationUser> Users { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

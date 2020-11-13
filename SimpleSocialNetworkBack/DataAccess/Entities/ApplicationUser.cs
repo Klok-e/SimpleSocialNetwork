@@ -1,16 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
 
 namespace DataAccess.Entities
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser
     {
-        [PersonalData] [Required] public string About { get; set; } = "";
+        [Key] public string Login { get; set; } = null!;
 
-        public virtual ICollection<Subscription>? Subscriptions { get; set; }
+        [Required] public string About { get; set; } = "";
         
+        public DateTime? DateBirth { get; set; }
+
+        public bool IsDeleted { get; set; }
+        
+        public virtual SecurePassword? Password { get; set; }
+        
+        public virtual ICollection<Subscription>? Subscriptions { get; set; }
+
         public virtual ICollection<Subscription>? Subscribers { get; set; }
     }
 }
