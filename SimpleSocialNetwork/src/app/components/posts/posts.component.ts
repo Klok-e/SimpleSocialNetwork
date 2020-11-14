@@ -40,4 +40,11 @@ export class PostsComponent implements OnInit {
       post.points -= 1;
     }
   }
+
+  public paragraphs(str: string | null | undefined): string[] {
+    if (typeof str !== 'string') {
+      return ['undefined (some error occurred)'];
+    }
+    return str.split('\n');
+  }
 }
