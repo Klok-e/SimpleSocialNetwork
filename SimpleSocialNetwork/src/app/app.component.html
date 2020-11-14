@@ -1,1 +1,26 @@
-<header>{{title}}</header>
+<header class="head_container">
+  <div class="header_cont">
+    <h1>GenericSocialNetwork</h1>
+  </div>
+  <nav>
+    <a routerLink="/">Home</a>
+    <a routerLink="/search">Search</a>
+    <a routerLink="/create-post">CreatePost</a>
+    <a routerLink="/profile">Profile</a>
+  </nav>
+</header>
+
+<div class="container">
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="foot_row">
+    Dmytro Sokolenko ma.ba1@rambler.ru
+  </div>
+  <div class="foot_row">
+    <small>&copy; Copyright {{year}}, Sokolenko Dmytro Corporation. All rights reserved.</small>
+  </div>
+</footer>

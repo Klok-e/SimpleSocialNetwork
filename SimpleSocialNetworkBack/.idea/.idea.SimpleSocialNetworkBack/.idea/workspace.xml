@@ -9,57 +9,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="239d33a8-2d55-46f3-8aca-4806438a8afc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/client_api_gen/generate_client_api.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/client_api_gen/swagger_api.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/client_api_gen/write_openapi_to_file.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/.openapi-generator-ignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/.openapi-generator/VERSION" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api/api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api/auth.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api/opMessage.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/configuration.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/encoder.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/git_push.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/model/createOpMessageModel.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/model/credentialsModel.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/model/loggedInUser.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/model/models.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/model/opMessageModel.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/model/userModel.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/variables.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Business/Models/CreateOpMessageModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Business/Models/CredentialsModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Business/Models/OpMessageModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Business/Services/Crud.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Business/Services/IAuthService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Business/Services/IOpMessageService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Business/Services/IUserService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Business/Services/Implementations/OpMessageService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Business/Services/Implementations/UserService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Business/Validation/ValidationException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataAccess/Migrations/20201113142215_RemoveIdentityServer.Designer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataAccess/Migrations/20201113142215_RemoveIdentityServer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/AuthController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/OpMessageController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/Misc/AddAuthHeaderParameter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/styles.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/Interfaces/IAuthService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/MapperProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/MapperProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Services/Implementations/AuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/Validation/SocialException.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Entities/OpMessage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Entities/OpMessage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Migrations/SocialDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Migrations/SocialDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimpleSocialNetworkBack/SimpleSocialNetworkBack.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/SimpleSocialNetworkBack.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimpleSocialNetworkBack/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimpleSocialNetworkBack/WeatherForecast.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Business/UserServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Business/UserServiceTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +156,8 @@
       <workItem from="1605190451978" duration="10173000" />
       <workItem from="1605201944152" duration="15386000" />
       <workItem from="1605260351601" duration="20605000" />
-      <workItem from="1605302454425" duration="2373000" />
+      <workItem from="1605302454425" duration="2979000" />
+      <workItem from="1605347864681" duration="4570000" />
     </task>
     <servers />
   </component>
@@ -258,22 +211,22 @@
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
     <state x="748" y="276" key="FileChooserDialogImpl/0.0.1920.1035@0.0.1920.1035" timestamp="1605201335096" />
-    <state width="1874" height="264" key="GridCell.Tab.0.bottom" timestamp="1605305947601">
+    <state width="1874" height="264" key="GridCell.Tab.0.bottom" timestamp="1605307257009">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="264" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1605305947601" />
-    <state width="1874" height="264" key="GridCell.Tab.0.center" timestamp="1605305947600">
+    <state width="1874" height="264" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1605307257009" />
+    <state width="1874" height="264" key="GridCell.Tab.0.center" timestamp="1605307257007">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="264" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1605305947600" />
-    <state width="1874" height="264" key="GridCell.Tab.0.left" timestamp="1605305947599">
+    <state width="1874" height="264" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1605307257007" />
+    <state width="1874" height="264" key="GridCell.Tab.0.left" timestamp="1605307257006">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="264" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1605305947599" />
-    <state width="1874" height="264" key="GridCell.Tab.0.right" timestamp="1605305947600">
+    <state width="1874" height="264" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1605307257006" />
+    <state width="1874" height="264" key="GridCell.Tab.0.right" timestamp="1605307257008">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="264" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1605305947600" />
+    <state width="1874" height="264" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1605307257008" />
     <state width="1874" height="353" key="GridCell.Tab.1.bottom" timestamp="1605286678943">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
