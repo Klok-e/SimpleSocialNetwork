@@ -5,7 +5,7 @@
   <nav>
     <a routerLink="/">Home</a>
     <a routerLink="/search">Search</a>
-    <a routerLink="/create-post">CreatePost</a>
+    <a *ngIf="loggedIn()" routerLink="/create-post">CreatePost</a>
     <a *ngIf="loggedIn()" routerLink="/profile">Profile</a>
     <a *ngIf="!loggedIn()" routerLink="/login">Login</a>
     <a *ngIf="!loggedIn()" routerLink="/register">Register</a>
