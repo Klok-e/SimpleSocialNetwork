@@ -1,1 +1,17 @@
-<p>posts works!</p>
+<div *ngIf="opMessages!==null" class="posts">
+  <article *ngFor="let post of opMessages">
+    <div class="post_head">
+      <div class="points">
+        <div (click)="upvote(post.id)" class="arrow up"></div>
+        <span>{{post.points}}</span>
+        <div (click)="downvote(post.id)" class="arrow down"></div>
+      </div>
+      {{post.title}} {{post.sendDate | date:'d/M/yy, h:mm a'}}
+    </div>
+    {{post.content}}
+  </article>
+</div>
+
+<div *ngIf="opMessages===null" class="loader_center">
+  <div class="loader"></div>
+</div>

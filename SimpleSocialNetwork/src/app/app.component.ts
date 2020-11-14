@@ -13,5 +13,7 @@ export class AppComponent {
   constructor(private auth: AuthService) {
   }
 
-
+  public loggedIn(): boolean {
+    return this.auth.getCurrentUserValue() !== null;
+  }
 }

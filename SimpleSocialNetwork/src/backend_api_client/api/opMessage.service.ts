@@ -90,9 +90,9 @@ export class OpMessageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiOpMessageGet(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<OpMessageModel>;
-    public apiOpMessageGet(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<OpMessageModel>>;
-    public apiOpMessageGet(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<OpMessageModel>>;
+    public apiOpMessageGet(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<Array<OpMessageModel>>;
+    public apiOpMessageGet(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<Array<OpMessageModel>>>;
+    public apiOpMessageGet(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<Array<OpMessageModel>>>;
     public apiOpMessageGet(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -117,7 +117,7 @@ export class OpMessageService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<OpMessageModel>(`${this.configuration.basePath}/api/OpMessage`,
+        return this.httpClient.get<Array<OpMessageModel>>(`${this.configuration.basePath}/api/OpMessage`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,

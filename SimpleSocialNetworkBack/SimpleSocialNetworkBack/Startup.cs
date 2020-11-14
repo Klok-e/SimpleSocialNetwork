@@ -40,10 +40,7 @@ namespace SimpleSocialNetworkBack
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.OperationFilter<AddRequiredHeaderParameter>();
-            });
+            services.AddSwaggerGen(c => { c.OperationFilter<AddRequiredHeaderParameter>(); });
 
             services.AddDbContext<SocialDbContext>(opt =>
             {
@@ -92,6 +89,13 @@ namespace SimpleSocialNetworkBack
                     .RequireAuthenticatedUser()
                     .Build();
             });
+
+            services.AddCors(o => o.AddPolicy("allow_all", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -104,9 +108,14 @@ namespace SimpleSocialNetworkBack
 
             app.UseHttpsRedirection();
 
+
             app.UseSwagger();
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
-            
+
+
+            app.UseCors("allow_all");
+
+
             // accept X-Authorization and rename to Authorization so swagger ui works
             // https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/1295#issuecomment-588297906
             app.Use((httpContext, next) =>
@@ -116,7 +125,7 @@ namespace SimpleSocialNetworkBack
 
                 return next();
             });
-            
+
 
             app.UseRouting();
 

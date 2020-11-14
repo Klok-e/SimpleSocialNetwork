@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {ApiModule} from '../backend_api_client';
+import {ApiModule, BASE_PATH} from '../backend_api_client';
 import {HttpClientModule} from '@angular/common/http';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -27,7 +27,9 @@ import {RegisterComponent} from './components/register/register.component';
     HttpClientModule,
     ApiModule,
   ],
-  providers: [],
+  providers: [
+    {provide: BASE_PATH, useValue: 'https://localhost:5001'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -158,17 +158,26 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/OpMessageModel"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OpMessageModel"
+                  }
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OpMessageModel"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OpMessageModel"
+                  }
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OpMessageModel"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OpMessageModel"
+                  }
                 }
               }
             }

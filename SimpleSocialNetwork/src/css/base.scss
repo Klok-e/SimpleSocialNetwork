@@ -1,0 +1,14 @@
+// colors
+$blue1: #203245;
+$blue2: #2965a1;
+$blue3: #367cc4;
+$blue4: #58a8fd;
+$primary: #263032;
+$text_color: #e8e8e8;
+$text_color_red: #fa4343;
+
+// apply to all component hosts
+:host {
+  display: block;
+  width: 100%;
+}

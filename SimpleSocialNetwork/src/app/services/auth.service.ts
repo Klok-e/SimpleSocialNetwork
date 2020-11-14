@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CredentialsModel, LoggedInUser, UserModel, AuthService as GenAuthService} from '../../backend_api_client';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,16 +19,21 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  register(userRegister: CredentialsModel): Observable<UserModel> {
+  public register(userRegister: CredentialsModel): Observable<UserModel> {
     return this.auth.apiAuthRegisterPost(userRegister, 'body');
   }
 
-  login(userLogin: CredentialsModel): void {
-    const obs = this.auth.apiAuthLoginPost(userLogin, 'body');
-    localStorage.setItem('currentUser', JSON.stringify(obs));
+  public login(userLogin: CredentialsModel): Observable<LoggedInUser> {
+    return this.auth.apiAuthLoginPost(userLogin, 'body').pipe(
+      map((user) => {
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.currentUserSubject.next(user);
+        return user;
+      })
+    );
   }
 
-  logout(): void {
+  public logout(): void {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }

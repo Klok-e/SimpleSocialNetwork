@@ -9,9 +9,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="239d33a8-2d55-46f3-8aca-4806438a8afc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/client_api_gen/generate_client_api.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/client_api_gen/generate_client_api.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/client_api_gen/swagger_api.json" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/client_api_gen/swagger_api.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/create-post/create-post.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/create-post/create-post.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/login/login.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/login/login.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/page-not-found/page-not-found.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/page-not-found/page-not-found.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/posts/posts.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/posts/posts.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/posts/posts.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/posts/posts.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/posts/posts.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/posts/posts.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/guards/auth.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/guards/auth.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api/opMessage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api/opMessage.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/css/styles.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/OpMessageController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/OpMessageController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimpleSocialNetworkBack/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/Startup.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,9 +101,9 @@
         <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/AuthController.cs" />
         <option value="$PROJECT_DIR$/Business/MapperProfile.cs" />
         <option value="$PROJECT_DIR$/Business/Services/Implementations/OpMessageService.cs" />
+        <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Misc/AddAuthHeaderParameter.cs" />
         <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/OpMessageController.cs" />
         <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Startup.cs" />
-        <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Misc/AddAuthHeaderParameter.cs" />
       </list>
     </option>
   </component>
@@ -157,7 +173,7 @@
       <workItem from="1605201944152" duration="15386000" />
       <workItem from="1605260351601" duration="20605000" />
       <workItem from="1605302454425" duration="2979000" />
-      <workItem from="1605347864681" duration="4570000" />
+      <workItem from="1605347864681" duration="6984000" />
     </task>
     <servers />
   </component>
@@ -211,22 +227,22 @@
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
     <state x="748" y="276" key="FileChooserDialogImpl/0.0.1920.1035@0.0.1920.1035" timestamp="1605201335096" />
-    <state width="1874" height="264" key="GridCell.Tab.0.bottom" timestamp="1605307257009">
+    <state width="1874" height="264" key="GridCell.Tab.0.bottom" timestamp="1605381868130">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="264" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1605307257009" />
-    <state width="1874" height="264" key="GridCell.Tab.0.center" timestamp="1605307257007">
+    <state width="1874" height="264" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1605381868130" />
+    <state width="1874" height="264" key="GridCell.Tab.0.center" timestamp="1605381868130">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="264" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1605307257007" />
-    <state width="1874" height="264" key="GridCell.Tab.0.left" timestamp="1605307257006">
+    <state width="1874" height="264" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1605381868130" />
+    <state width="1874" height="264" key="GridCell.Tab.0.left" timestamp="1605381868130">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="264" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1605307257006" />
-    <state width="1874" height="264" key="GridCell.Tab.0.right" timestamp="1605307257008">
+    <state width="1874" height="264" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1605381868130" />
+    <state width="1874" height="264" key="GridCell.Tab.0.right" timestamp="1605381868130">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="264" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1605307257008" />
+    <state width="1874" height="264" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1605381868130" />
     <state width="1874" height="353" key="GridCell.Tab.1.bottom" timestamp="1605286678943">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>

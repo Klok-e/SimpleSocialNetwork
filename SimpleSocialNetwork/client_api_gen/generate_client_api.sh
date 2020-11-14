@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -r client_api_gen/api/
+rm -r src/backend_api_client/
 openapi-generator generate \
   -i client_api_gen/swagger_api.json \
   -g typescript-angular \

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Business.Models;
@@ -38,10 +39,10 @@ namespace SimpleSocialNetworkBack.Controllers
                 return BadRequest();
             }
         }
-        
+
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<OpMessageModel>> GetOpMessages()
+        public async Task<ActionResult<IEnumerable<OpMessageModel>>> GetOpMessages()
         {
             try
             {
