@@ -9,39 +9,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="239d33a8-2d55-46f3-8aca-4806438a8afc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/client_api_gen/swagger_api.json" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/client_api_gen/swagger_api.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/posts/posts.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/posts/posts.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/register/register.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/register/register.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/register/register.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/register/register.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/css/base.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/css/base.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/model/problemDetails.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/model/problemDetails.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/css/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/css/styles.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/MapperProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/MapperProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/Models/CreateOpMessageModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/Requests/CreateOpMessageModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/Models/CredentialsModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/Requests/CredentialsModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/Models/LoggedInUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/Answers/LoggedInUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/Models/OpMessageModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/Answers/OpMessageModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/Models/UserModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/Answers/UserModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/Services/IAuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Services/IAuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/Services/IOpMessageService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Services/IOpMessageService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/Services/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Services/IUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/Services/Implementations/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Services/Implementations/AuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/Services/Implementations/OpMessageService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Services/Implementations/OpMessageService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Business/Services/Implementations/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Services/Implementations/UserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/AuthController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/OpMessageController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/OpMessageController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimpleSocialNetworkBack/SimpleSocialNetworkBack.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/SimpleSocialNetworkBack.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimpleSocialNetworkBack/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Business/UserServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Business/UserServiceTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +159,7 @@
       <workItem from="1605302454425" duration="2979000" />
       <workItem from="1605347864681" duration="7586000" />
       <workItem from="1605454608396" duration="6867000" />
-      <workItem from="1605470759120" duration="1820000" />
+      <workItem from="1605470759120" duration="4141000" />
     </task>
     <servers />
   </component>
@@ -243,22 +213,22 @@
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
     <state x="748" y="276" key="FileChooserDialogImpl/0.0.1920.1035@0.0.1920.1035" timestamp="1605201335096" />
-    <state width="1874" height="264" key="GridCell.Tab.0.bottom" timestamp="1605474008890">
+    <state width="1874" height="264" key="GridCell.Tab.0.bottom" timestamp="1605477325313">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="264" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1605474008890" />
-    <state width="1874" height="264" key="GridCell.Tab.0.center" timestamp="1605474008889">
+    <state width="1874" height="264" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1605477325313" />
+    <state width="1874" height="264" key="GridCell.Tab.0.center" timestamp="1605477325312">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="264" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1605474008889" />
-    <state width="1874" height="264" key="GridCell.Tab.0.left" timestamp="1605474008888">
+    <state width="1874" height="264" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1605477325312" />
+    <state width="1874" height="264" key="GridCell.Tab.0.left" timestamp="1605477325312">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="264" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1605474008888" />
-    <state width="1874" height="264" key="GridCell.Tab.0.right" timestamp="1605474008890">
+    <state width="1874" height="264" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1605477325312" />
+    <state width="1874" height="264" key="GridCell.Tab.0.right" timestamp="1605477325313">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="264" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1605474008890" />
+    <state width="1874" height="264" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1605477325313" />
     <state width="1874" height="353" key="GridCell.Tab.1.bottom" timestamp="1605286678943">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
@@ -335,10 +305,10 @@
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
     <state x="461" y="153" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1605201970252" />
-    <state width="349" height="317" key="javadoc.popup.new" timestamp="1605474315381">
+    <state width="349" height="317" key="javadoc.popup.new" timestamp="1605477026378">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="349" height="317" key="javadoc.popup.new/0.0.1920.1035@0.0.1920.1035" timestamp="1605474315381" />
+    <state width="349" height="317" key="javadoc.popup.new/0.0.1920.1035@0.0.1920.1035" timestamp="1605477026378" />
     <state x="624" y="236" key="run.anything.popup" timestamp="1605131913666">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>

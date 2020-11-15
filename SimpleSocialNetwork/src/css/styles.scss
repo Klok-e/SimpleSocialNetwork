@@ -33,6 +33,7 @@ header {
   background-color: $blue2;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 
   nav {
     display: inline-flex;
@@ -40,6 +41,7 @@ header {
     justify-content: center;
     flex-grow: 1;
     align-items: center;
+    flex-wrap: wrap;
 
     * {
       padding: 8pt 10pt 8pt 10pt;
