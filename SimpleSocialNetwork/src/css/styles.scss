@@ -24,6 +24,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  font: 16px sans-serif;
 }
 
 
@@ -40,20 +41,12 @@ header {
     flex-grow: 1;
     align-items: center;
 
-    a {
+    * {
       padding: 8pt 10pt 8pt 10pt;
       margin: 0 20pt 0 20pt;
-      display: inline-block;
-      color: whitesmoke;
-      text-decoration: none;
-      background: $blue3;
     }
 
-    a:hover {
-      background: $blue4;
-    }
-
-    a:last-child {
+    *:last-child {
       margin-right: 100pt;
     }
   }

@@ -16,4 +16,8 @@ export class AppComponent {
   public loggedIn(): boolean {
     return this.auth.getCurrentUserValue() !== null;
   }
+
+  public logout(): void {
+    this.auth.logout();
+  }
 }

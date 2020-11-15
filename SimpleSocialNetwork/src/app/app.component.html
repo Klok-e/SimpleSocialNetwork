@@ -3,13 +3,13 @@
     <h1>GenericSocialNetwork</h1>
   </div>
   <nav>
-    <a routerLink="/">Home</a>
-    <a routerLink="/search">Search</a>
-    <a *ngIf="loggedIn()" routerLink="/create-post">CreatePost</a>
-    <a *ngIf="loggedIn()" routerLink="/profile">Profile</a>
-    <a *ngIf="loggedIn()" routerLink="/logout">Logout</a>
-    <a *ngIf="!loggedIn()" routerLink="/login">Login</a>
-    <a *ngIf="!loggedIn()" routerLink="/register">Register</a>
+    <a routerLink="/" class="bttn">Home</a>
+    <a routerLink="/search" class="bttn">Search</a>
+    <a *ngIf="loggedIn()" routerLink="/create-post" class="bttn">CreatePost</a>
+    <a *ngIf="loggedIn()" routerLink="/profile" class="bttn">Profile</a>
+    <button *ngIf="loggedIn()" (click)="logout()" class="bttn">Logout</button>
+    <a *ngIf="!loggedIn()" routerLink="/login" class="bttn">Login</a>
+    <a *ngIf="!loggedIn()" routerLink="/register" class="bttn">Register</a>
   </nav>
 </header>
 

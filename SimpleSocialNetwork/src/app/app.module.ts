@@ -11,7 +11,6 @@ import {CreatePostComponent} from './components/create-post/create-post.componen
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {ReadPostComponent} from './components/read-post/read-post.component';
-import {LogOutComponent} from './components/log-out/log-out.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
@@ -23,8 +22,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     CreatePostComponent,
     LoginComponent,
     RegisterComponent,
-    ReadPostComponent,
-    LogOutComponent
+    ReadPostComponent
   ],
   imports: [
     BrowserModule,

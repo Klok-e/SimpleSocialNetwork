@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Business.Models
 {
     public class CreateOpMessageModel
     {
+        [Required]
         public string Title { get; set; } = null!;
         public string Content { get; set; } = null!;
 
