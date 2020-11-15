@@ -3,14 +3,9 @@
 app-root {
   background-color: $blue1;
   color: $text_color;
-}
-
-app-root {
   min-height: 100vh;
-  width: 100%;
   margin: 0;
-  color: white;
-  display: flex;
+  display: flex !important;
   flex-direction: column;
 }
 
@@ -45,11 +40,13 @@ header {
 
     * {
       padding: 8pt 10pt 8pt 10pt;
-      margin: 0 20pt 0 20pt;
+      margin: 10pt 20pt 10pt 20pt;
     }
 
     *:last-child {
-      margin-right: 100pt;
+      @media (min-width: 1200px) {
+        margin-right: 100pt;
+      }
     }
   }
 
@@ -63,9 +60,9 @@ header {
 // content
 .container {
   background-color: $blue0;
-  width: 80%;
-  @media (max-width: 1200px) {
-    width: 100%;
+
+  @media (min-width: 1200px) {
+    width: 80%;
   }
   margin-left: auto;
   margin-right: auto;
