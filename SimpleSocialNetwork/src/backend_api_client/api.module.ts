@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { AuthService } from './api/auth.service';
 import { OpMessageService } from './api/opMessage.service';
+import { UserService } from './api/user.service';
 
 @NgModule({
   imports:      [],

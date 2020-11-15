@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Business.Models
+namespace Business.Models.Requests
 {
     public class CredentialsModel
     {

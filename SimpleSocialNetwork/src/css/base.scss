@@ -13,18 +13,3 @@ $text_color_red: #fa4343;
   display: block;
   width: 100%;
 }
-
-// common
-.bttn {
-  display: inline-block;
-  color: whitesmoke;
-  text-decoration: none;
-  background: $blue3;
-  border: none;
-  font: 16px sans-serif;
-}
-
-.bttn:hover {
-  background: $blue4;
-  cursor: pointer;
-}

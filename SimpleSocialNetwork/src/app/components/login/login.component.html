@@ -1,13 +1,36 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="login">Login</label>
-    <input id="login" formControlName="login" placeholder="Your login" type="text"/>
-  </div>
-  <div>
-    <label for="password">Password</label>
-    <input id="password" formControlName="password" placeholder="*******" type="password"/>
-  </div>
-  <div>
-    <button type="submit" [disabled]="!loginForm.valid">Send</button>
-  </div>
-</form>
+<div class="form_container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="login">Login</label>
+      <div class="break"></div>
+      <input id="login" formControlName="login" placeholder="Your login" type="text"/>
+      <div *ngIf="loginForm.controls.login.invalid &&
+        (loginForm.controls.login.dirty || loginForm.controls.login.touched)"
+           class="validation_err">
+        <div *ngIf="loginForm.controls.login.errors?.required">
+          Login is required.
+        </div>
+      </div>
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <div class="break"></div>
+      <input id="password" formControlName="password" placeholder="*******" type="password"/>
+      <div *ngIf="loginForm.controls.password.invalid &&
+        (loginForm.controls.password.dirty || loginForm.controls.password.touched)"
+           class="validation_err">
+        <div *ngIf="loginForm.controls.password.errors?.required">
+          Password is required.
+        </div>
+      </div>
+    </div>
+    <div>
+      <button type="submit">Login</button>
+    </div>
+    <div *ngIf="incorrectCredentials" class="validation_err">
+      <div>
+        Login credentials are incorrect
+      </div>
+    </div>
+  </form>
+</div>

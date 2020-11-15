@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using Business.Models;
+using Business.Models.Answers;
 using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 

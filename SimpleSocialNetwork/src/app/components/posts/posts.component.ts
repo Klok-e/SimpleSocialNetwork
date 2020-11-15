@@ -23,7 +23,7 @@ export class PostsComponent implements OnInit {
     });
   }
 
-  public upvote(postId: number | undefined): void {
+  public upvote(postId: number): void {
     const post = this.opMessages?.find((x) => {
       return x.id === postId;
     });
@@ -32,7 +32,7 @@ export class PostsComponent implements OnInit {
     }
   }
 
-  public downvote(postId: number | undefined): void {
+  public downvote(postId: number): void {
     const post = this.opMessages?.find((x) => {
       return x.id === postId;
     });
@@ -41,10 +41,7 @@ export class PostsComponent implements OnInit {
     }
   }
 
-  public paragraphs(str: string | null | undefined): string[] {
-    if (typeof str !== 'string') {
-      return ['undefined (some error occurred)'];
-    }
+  public paragraphs(str: string): string[] {
     return str.split('\n');
   }
 }

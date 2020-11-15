@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Models;
+using Business.Models.Answers;
+using Business.Models.Requests;
 using DataAccess;
 using DataAccess.Entities;
 

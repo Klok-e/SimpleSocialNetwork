@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Business.Models
+namespace Business.Models.Answers
 {
     public class LoggedInUser : IEquatable<LoggedInUser>
     {

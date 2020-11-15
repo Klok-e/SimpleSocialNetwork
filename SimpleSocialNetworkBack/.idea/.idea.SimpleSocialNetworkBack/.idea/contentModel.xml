@@ -18,11 +18,15 @@
         </e>
         <e p="MapperProfile.cs" t="Include" />
         <e p="Models" t="Include">
-          <e p="CreateOpMessageModel.cs" t="Include" />
-          <e p="CredentialsModel.cs" t="Include" />
-          <e p="LoggedInUser.cs" t="Include" />
-          <e p="OpMessageModel.cs" t="Include" />
-          <e p="UserModel.cs" t="Include" />
+          <e p="Answers" t="Include">
+            <e p="LoggedInUser.cs" t="Include" />
+            <e p="OpMessageModel.cs" t="Include" />
+            <e p="UserModel.cs" t="Include" />
+          </e>
+          <e p="Requests" t="Include">
+            <e p="CreateOpMessageModel.cs" t="Include" />
+            <e p="CredentialsModel.cs" t="Include" />
+          </e>
         </e>
         <e p="Services" t="Include">
           <e p="Crud.cs" t="Include" />
@@ -81,6 +85,7 @@
         <e p="Controllers" t="Include">
           <e p="AuthController.cs" t="Include" />
           <e p="OpMessageController.cs" t="Include" />
+          <e p="UserController.cs" t="Include" />
         </e>
         <e p="Misc" t="Include">
           <e p="AddAuthHeaderParameter.cs" t="Include" />

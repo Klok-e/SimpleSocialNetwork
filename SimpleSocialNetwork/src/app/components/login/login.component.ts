@@ -11,6 +11,8 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
+  incorrectCredentials = false;
+
   constructor(private auth: AuthService, private formBuilder: FormBuilder, private router: Router) {
     this.loginForm = this.formBuilder.group({
       login: new FormControl('', [
@@ -25,12 +27,20 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public onSubmit(): void {
-    this.auth.login({
-      login: this.loginForm.value.login,
-      password: this.loginForm.value.password,
-    }).subscribe((login) => {
-      this.router.navigate(['/']);
-    });
+  public async onSubmit(): Promise<void> {
+    if (!this.loginForm.valid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
+    try {
+      const _ = await this.auth.login({
+        login: this.loginForm.value.login,
+        password: this.loginForm.value.password,
+      }).toPromise();
+      await this.router.navigate(['/']);
+    } catch (e) {
+      this.incorrectCredentials = true;
+    }
   }
 }

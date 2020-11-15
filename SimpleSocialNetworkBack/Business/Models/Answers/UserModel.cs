@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Business.Models
+namespace Business.Models.Answers
 {
     public class UserModel : IEquatable<UserModel>
     {

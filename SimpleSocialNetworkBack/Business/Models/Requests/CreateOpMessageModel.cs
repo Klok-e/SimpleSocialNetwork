@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Business.Models
+namespace Business.Models.Requests
 {
     public class CreateOpMessageModel
     {

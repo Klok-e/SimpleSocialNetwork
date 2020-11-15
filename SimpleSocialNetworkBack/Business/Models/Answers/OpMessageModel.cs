@@ -1,8 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using DataAccess.Entities;
 
-namespace Business.Models
+namespace Business.Models.Answers
 {
     public class OpMessageModel
     {

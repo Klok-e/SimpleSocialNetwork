@@ -1,13 +1,17 @@
 using System;
 using System.Threading.Tasks;
 using Business.Models;
+using Business.Models.Answers;
+using Business.Models.Requests;
 using Business.Services;
 using Business.Validation;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SimpleSocialNetworkBack.Controllers
 {
+    [Produces("application/json")]
     [ApiController]
     [Route("/api/[controller]")]
     [AllowAnonymous]
@@ -21,6 +25,8 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         [HttpPost("register")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<UserModel>> Register([FromBody] CredentialsModel cred)
         {
             try
@@ -35,6 +41,8 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         [HttpPost("login")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<LoggedInUser>> Login([FromBody] CredentialsModel cred)
         {
             try

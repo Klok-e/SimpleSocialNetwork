@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Models;
+using Business.Models.Answers;
 using DataAccess;
 using DataAccess.Entities;
 
@@ -23,6 +24,11 @@ namespace Business.Services.Implementations
             var user = await _context.Users.FindAsync(login);
 
             return _mapper.Map<ApplicationUser, UserModel>(user);
+        }
+
+        public async Task<bool> UserExists(string login)
+        {
+            return await _context.Users.FindAsync(login) != null;
         }
     }
 }

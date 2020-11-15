@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthService} from './services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ export class AppComponent {
   year = new Date().getFullYear();
   title = 'SimpleSocialNetwork';
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private route: Router) {
   }
 
   public loggedIn(): boolean {
@@ -19,5 +20,6 @@ export class AppComponent {
 
   public logout(): void {
     this.auth.logout();
+    this.route.navigate(['']);
   }
 }
