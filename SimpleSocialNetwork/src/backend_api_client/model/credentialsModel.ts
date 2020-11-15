@@ -12,7 +12,7 @@
 
 
 export interface CredentialsModel { 
-    login?: string | null;
-    password?: string | null;
+    login: string;
+    password: string;
 }
 

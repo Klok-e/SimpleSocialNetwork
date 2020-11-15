@@ -12,8 +12,8 @@
 
 
 export interface CreateOpMessageModel { 
-    title?: string | null;
-    content?: string | null;
-    tags?: Array<string> | null;
+    title: string;
+    content: string;
+    tags: Array<string>;
 }
 

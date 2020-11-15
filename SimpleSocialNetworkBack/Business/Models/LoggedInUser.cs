@@ -1,12 +1,12 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Business.Models
 {
     public class LoggedInUser : IEquatable<LoggedInUser>
     {
-        public string Login { get; set; } = null!;
-
-        public string Token { get; set; } = null!;
+        [Required] public string Login { get; set; } = null!;
+        [Required] public string Token { get; set; } = null!;
 
         public bool Equals(LoggedInUser? other)
         {

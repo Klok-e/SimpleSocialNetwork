@@ -189,29 +189,34 @@
   "components": {
     "schemas": {
       "CredentialsModel": {
+        "required": [
+          "login",
+          "password"
+        ],
         "type": "object",
         "properties": {
           "login": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "password": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
       "UserModel": {
+        "required": [
+          "about",
+          "isDeleted",
+          "login"
+        ],
         "type": "object",
         "properties": {
           "login": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "about": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "dateBirth": {
             "type": "string",
@@ -225,41 +230,53 @@
         "additionalProperties": false
       },
       "LoggedInUser": {
+        "required": [
+          "login",
+          "token"
+        ],
         "type": "object",
         "properties": {
           "login": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "token": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
       "CreateOpMessageModel": {
+        "required": [
+          "content",
+          "tags",
+          "title"
+        ],
         "type": "object",
         "properties": {
           "title": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "content": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "tags": {
             "type": "array",
             "items": {
               "type": "string"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "OpMessageModel": {
+        "required": [
+          "content",
+          "id",
+          "isDeleted",
+          "points",
+          "sendDate",
+          "title"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -271,12 +288,10 @@
             "nullable": true
           },
           "title": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "content": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "points": {
             "type": "integer",

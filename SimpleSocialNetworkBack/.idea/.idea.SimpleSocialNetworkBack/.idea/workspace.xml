@@ -9,16 +9,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="239d33a8-2d55-46f3-8aca-4806438a8afc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/log-out/log-out.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/log-out/log-out.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/log-out/log-out.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/log-out/log-out.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/css/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/css/styles.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Models/CreateOpMessageModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/CreateOpMessageModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Models/CredentialsModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/CredentialsModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Models/LoggedInUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/LoggedInUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Models/OpMessageModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/OpMessageModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Models/UserModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Models/UserModel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,21 +65,16 @@
         <option value="$PROJECT_DIR$/DataAccess/Entities/SecurePassword.cs" />
         <option value="$PROJECT_DIR$/DataAccess/SocialDbContext.cs" />
         <option value="$PROJECT_DIR$/Business/Common/AppSettings.cs" />
-        <option value="$PROJECT_DIR$/Business/Models/UserModel.cs" />
         <option value="$PROJECT_DIR$/Business/Services/UserService.cs" />
         <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/appsettings.json" />
-        <option value="$PROJECT_DIR$/Business/Models/LoggedInUser.cs" />
         <option value="$PROJECT_DIR$/Business/Services/AuthService.cs" />
         <option value="$PROJECT_DIR$/Tests/Business/UserServiceTests.cs" />
         <option value="$PROJECT_DIR$/Business/Services/IAuthService.cs" />
         <option value="$PROJECT_DIR$/Business/Services/Crud.cs" />
         <option value="$PROJECT_DIR$/Business/Services/OpMessageService.cs" />
-        <option value="$PROJECT_DIR$/Business/Models/OpMessageModel.cs" />
         <option value="$PROJECT_DIR$/Business/Services/Implementations/dd.cs" />
-        <option value="$PROJECT_DIR$/Business/Models/CreateOpMessageModel.cs" />
         <option value="$PROJECT_DIR$/DataAccess/Entities/OpMessage.cs" />
         <option value="$PROJECT_DIR$/Business/Models/LoginRequestModel.cs" />
-        <option value="$PROJECT_DIR$/Business/Models/CredentialsModel.cs" />
         <option value="$PROJECT_DIR$/Business/Services/IUserService.cs" />
         <option value="$PROJECT_DIR$/Business/Services/IOpMessageService.cs" />
         <option value="$PROJECT_DIR$/Business/Services/Implementations/AuthService.cs" />
@@ -95,6 +85,11 @@
         <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Misc/AddAuthHeaderParameter.cs" />
         <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/OpMessageController.cs" />
         <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Startup.cs" />
+        <option value="$PROJECT_DIR$/Business/Models/CreateOpMessageModel.cs" />
+        <option value="$PROJECT_DIR$/Business/Models/CredentialsModel.cs" />
+        <option value="$PROJECT_DIR$/Business/Models/LoggedInUser.cs" />
+        <option value="$PROJECT_DIR$/Business/Models/OpMessageModel.cs" />
+        <option value="$PROJECT_DIR$/Business/Models/UserModel.cs" />
       </list>
     </option>
   </component>
@@ -165,7 +160,7 @@
       <workItem from="1605260351601" duration="20605000" />
       <workItem from="1605302454425" duration="2979000" />
       <workItem from="1605347864681" duration="7586000" />
-      <workItem from="1605454608396" duration="1854000" />
+      <workItem from="1605454608396" duration="2246000" />
     </task>
     <servers />
   </component>

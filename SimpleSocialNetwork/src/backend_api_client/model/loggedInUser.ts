@@ -12,7 +12,7 @@
 
 
 export interface LoggedInUser { 
-    login?: string | null;
-    token?: string | null;
+    login: string;
+    token: string;
 }
 

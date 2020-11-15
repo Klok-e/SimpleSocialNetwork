@@ -1,21 +1,17 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using DataAccess.Entities;
 
 namespace Business.Models
 {
     public class OpMessageModel
     {
-        public int Id { get; set; }
-
+        [Required] public int Id { get; set; }
         public string? PosterId { get; set; }
-
-        public string Title { get; set; } = null!;
-        public string Content { get; set; } = null!;
-
-        public int Points { get; set; }
-
-        public bool IsDeleted { get; set; }
-
-        public DateTime SendDate { get; set; }
+        [Required] public string Title { get; set; } = null!;
+        [Required] public string Content { get; set; } = null!;
+        [Required] public int Points { get; set; }
+        [Required] public bool IsDeleted { get; set; }
+        [Required] public DateTime SendDate { get; set; }
     }
 }

@@ -6,19 +6,18 @@ namespace Business.Models
 {
     public class UserModel : IEquatable<UserModel>
     {
-        public string Login { get; set; } = null!;
-
-        public string About { get; set; } = null!;
+        [Required] public string Login { get; set; } = null!;
+        [Required] public string About { get; set; } = null!;
 
         public DateTime? DateBirth { get; set; }
-
-        public bool IsDeleted { get; set; }
+        [Required] public bool IsDeleted { get; set; }
 
         public bool Equals(UserModel? other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Login == other.Login && About == other.About && Nullable.Equals(DateBirth, other.DateBirth) && IsDeleted == other.IsDeleted;
+            return Login == other.Login && About == other.About && Nullable.Equals(DateBirth, other.DateBirth) &&
+                   IsDeleted == other.IsDeleted;
         }
 
         public override bool Equals(object? obj)

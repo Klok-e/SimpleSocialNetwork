@@ -12,9 +12,9 @@
 
 
 export interface UserModel { 
-    login?: string | null;
-    about?: string | null;
+    login: string;
+    about: string;
     dateBirth?: string | null;
-    isDeleted?: boolean;
+    isDeleted: boolean;
 }
 

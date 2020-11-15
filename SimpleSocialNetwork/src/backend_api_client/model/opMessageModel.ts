@@ -12,12 +12,12 @@
 
 
 export interface OpMessageModel { 
-    id?: number;
+    id: number;
     posterId?: string | null;
-    title?: string | null;
-    content?: string | null;
-    points?: number;
-    isDeleted?: boolean;
-    sendDate?: string;
+    title: string;
+    content: string;
+    points: number;
+    isDeleted: boolean;
+    sendDate: string;
 }
 
