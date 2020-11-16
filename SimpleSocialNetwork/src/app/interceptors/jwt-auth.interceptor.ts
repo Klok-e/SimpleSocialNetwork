@@ -3,22 +3,46 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor, HttpErrorResponse
 } from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {AuthService} from '../services/auth.service';
+import {catchError, finalize, map} from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {fromPromise} from 'rxjs/internal-compatibility';
 
 @Injectable()
 export class JwtAuthInterceptor implements HttpInterceptor {
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private router: Router) {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const currentUser = this.auth.getCurrentUserValue();
     if (currentUser?.token) {
-      request.headers.append('X-Authorization', `Bearer ` + currentUser.token);
+      request = request.clone({
+        setHeaders: {
+          'X-Authorization': `Bearer ` + currentUser.token,
+        }
+      });
     }
-    return next.handle(request);
+    // console.log(request);
+    return next.handle(request).pipe(
+      catchError(x => this.handleAuthError(x))
+    );
+  }
+
+  // tslint:disable-next-line:no-any
+  // https://stackoverflow.com/questions/46017245/how-to-handle-unauthorized-requestsstatus-with-401-or-403-with-new-httpclient/46017463
+  private handleAuthError(err: HttpErrorResponse): Observable<any> {
+    // handle auth error or rethrow
+    if (err.status === 401 || err.status === 403) {
+      return fromPromise(this.router.navigate([''])).pipe(
+        map(_ => {
+          return err.message;
+        })
+      );
+    }
+    return throwError(err);
   }
 }

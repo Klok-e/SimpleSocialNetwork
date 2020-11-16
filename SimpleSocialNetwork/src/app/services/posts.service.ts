@@ -14,7 +14,11 @@ export class PostsService {
     return this.posts.apiOpMessageGet('body');
   }
 
-  public createPost(message: CreateOpMessageModel): Observable<OpMessageModel> {
+  public getPost(id: number): Observable<OpMessageModel> {
+    return this.posts.apiOpMessageIdGet(id, 'body');
+  }
+
+  public createPost(message: CreateOpMessageModel): Observable<number> {
     return this.posts.apiOpMessagePost(message, 'body');
   }
 }

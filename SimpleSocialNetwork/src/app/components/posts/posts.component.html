@@ -17,8 +17,9 @@
       </div>
     </div>
     <div class="post_content">
-      <p *ngFor="let par of paragraphs(post.content)">
-        {{par}}
+      <p *ngFor="let par of paragraphs(post.content).pars">
+        {{par.p}}
+        <span *ngIf="par.last && paragraphs(post.content).wasTruncated">...</span>
       </p>
     </div>
     <div class="post_foot">

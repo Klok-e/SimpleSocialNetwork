@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {CredentialsModel, LoggedInUser, UserModel, AuthService as GenAuthService} from '../../backend_api_client';
+import {CredentialsModel, LoggedInUser, UserModel, AuthService as GenAuthService, UserService} from '../../backend_api_client';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class AuthService {
     );
   }
 
-  public logout(): void {
+  public async logout(): Promise<void> {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Business.Common;
 using Business.Models;
-using Business.Models.Answers;
+using Business.Models.Responses;
 using Business.Validation;
 using DataAccess;
 using DataAccess.Entities;

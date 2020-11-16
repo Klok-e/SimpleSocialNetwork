@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {ApiModule, BASE_PATH} from '../backend_api_client';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -12,6 +12,7 @@ import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {ReadPostComponent} from './components/read-post/read-post.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {JwtAuthInterceptor} from './interceptors/jwt-auth.interceptor';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ReactiveFormsModule,
   ],
   providers: [
-    {provide: BASE_PATH, useValue: 'https://localhost:5001'}
+    {provide: BASE_PATH, useValue: 'https://localhost:5001'},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtAuthInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

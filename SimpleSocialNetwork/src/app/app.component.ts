@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from './services/auth.service';
 import {Router} from '@angular/router';
 
@@ -18,8 +18,8 @@ export class AppComponent {
     return this.auth.getCurrentUserValue() !== null;
   }
 
-  public logout(): void {
-    this.auth.logout();
-    this.route.navigate(['']);
+  public async logout(): Promise<void> {
+    await this.auth.logout();
+    await this.route.navigate(['']);
   }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Business.Models.Answers
+namespace Business.Models.Responses
 {
     public class OpMessageModel
     {

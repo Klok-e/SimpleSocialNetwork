@@ -131,7 +131,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OpMessageModel"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             }
@@ -162,6 +163,46 @@
                   "items": {
                     "$ref": "#/components/schemas/OpMessageModel"
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/OpMessage/{id}": {
+      "get": {
+        "tags": [
+          "OpMessage"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpMessageModel"
                 }
               }
             }

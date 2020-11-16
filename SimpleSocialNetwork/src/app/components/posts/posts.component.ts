@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PostsService} from '../../services/posts.service';
 import {OpMessageModel} from '../../../backend_api_client';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-posts',
@@ -41,7 +42,24 @@ export class PostsComponent implements OnInit {
     }
   }
 
-  public paragraphs(str: string): string[] {
-    return str.split('\n');
+  public paragraphs(str: string): { pars: { p: string, last: boolean }[], wasTruncated: boolean } {
+    let wasTruncated = false;
+    let pars: string[];
+    if (str.length > 200) {
+      wasTruncated = true;
+      pars = str.slice(0, 200).split('\n');
+    } else {
+      pars = str.split('\n');
+    }
+
+    return {
+      pars: pars.map((x: string, ind: number) => {
+        return {
+          p: x,
+          last: ind === pars.length - 1
+        };
+      }),
+      wasTruncated
+    };
   }
 }

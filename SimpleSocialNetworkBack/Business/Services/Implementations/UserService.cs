@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Models;
-using Business.Models.Answers;
+using Business.Models.Responses;
 using DataAccess;
 using DataAccess.Entities;
 

@@ -1,1 +1,24 @@
-<p>create-post works!</p>
+<div class="form_container">
+  <form [formGroup]="createPostForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="title">Title</label>
+      <div class="break"></div>
+      <input id="title" formControlName="title" placeholder="Title" type="text"/>
+      <div *ngIf="createPostForm.controls.title.invalid &&
+        (createPostForm.controls.title.dirty || createPostForm.controls.title.touched)"
+           class="validation_err">
+        <div *ngIf="createPostForm.controls.title.errors?.required">
+          Title is required.
+        </div>
+      </div>
+    </div>
+    <div>
+      <label for="content">Content</label>
+      <div class="break"></div>
+      <textarea id="content" formControlName="content"></textarea>
+    </div>
+    <div>
+      <button type="submit">Post</button>
+    </div>
+  </form>
+</div>

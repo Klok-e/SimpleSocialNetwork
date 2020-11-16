@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Models;
-using Business.Models.Answers;
 using Business.Models.Requests;
+using Business.Models.Responses;
 
 namespace Business.Services
 {
@@ -10,6 +10,8 @@ namespace Business.Services
     {
         Task<IEnumerable<OpMessageModel>> GetAll();
 
-        public Task<OpMessageModel> MakeAPost(UserModel user, CreateOpMessageModel model);
+        Task<int> MakeAPost(string user, CreateOpMessageModel model);
+
+        Task<OpMessageModel> GetById(int id);
     }
 }
