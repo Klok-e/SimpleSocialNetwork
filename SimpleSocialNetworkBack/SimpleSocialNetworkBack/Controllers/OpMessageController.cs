@@ -19,78 +19,41 @@ namespace SimpleSocialNetworkBack.Controllers
     public class OpMessageController : ControllerBase
     {
         private readonly IOpMessageService _opMessageService;
-        private readonly IUserService _userService;
 
-        public OpMessageController(IOpMessageService opMessageService, IUserService userService)
+        public OpMessageController(IOpMessageService opMessageService)
         {
             _opMessageService = opMessageService;
-            _userService = userService;
         }
 
         [HttpPost]
         [Authorize]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<int>> CreateOpMessage([FromBody] CreateOpMessageModel opMessage)
         {
             var username = User.Identity.Name!;
-            try
-            {
-                var post = await _opMessageService.MakeAPost(username, opMessage);
-                return Ok(post);
-            }
-            catch (ValidationException e)
-            {
-                return BadRequest();
-            }
+
+            var post = await _opMessageService.MakeAPost(username, opMessage);
+            return Ok(post);
         }
 
         [HttpGet("{id}")]
         [AllowAnonymous]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<OpMessageModel>> GetOpMessage(int id)
         {
-            try
-            {
-                return Ok(await _opMessageService.GetById(id));
-            }
-            catch (ValidationException e)
-            {
-                return BadRequest();
-            }
+            return Ok(await _opMessageService.GetById(id));
         }
 
         [HttpGet]
         [AllowAnonymous]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<OpMessageModel>>> GetOpMessages()
         {
-            try
-            {
-                return Ok(await _opMessageService.GetAll());
-            }
-            catch (ValidationException e)
-            {
-                return BadRequest();
-            }
+            return Ok(await _opMessageService.GetAll());
         }
 
-        [HttpGet("comments")]
+        [HttpGet("comments/{postId}")]
         [AllowAnonymous]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<CommentModel>>> GetComments(int postId)
         {
-            try
-            {
-                return Ok(await _opMessageService.GetComments(postId));
-            }
-            catch (ValidationException e)
-            {
-                return BadRequest();
-            }
+            return Ok(await _opMessageService.GetComments(postId));
         }
     }
 }

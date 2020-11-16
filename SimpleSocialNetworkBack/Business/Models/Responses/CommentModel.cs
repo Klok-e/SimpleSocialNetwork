@@ -11,8 +11,6 @@ namespace Business.Models.Responses
 
         [Required] public int MessageId { get; set; }
 
-        [Required] public string PosterId { get; set; } = null!;
-
         [Required] public string Content { get; set; } = null!;
 
         [Required] public int Points { get; set; }
@@ -20,5 +18,7 @@ namespace Business.Models.Responses
         [Required] public bool IsDeleted { get; set; }
 
         [Required] public DateTime SendDate { get; set; }
+        
+        [Required] public string PosterId { get; set; } = null!;
     }
 }

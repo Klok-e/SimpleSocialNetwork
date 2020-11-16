@@ -20,7 +20,6 @@ import { Observable }                                        from 'rxjs';
 import { CommentModel } from '../model/models';
 import { CreateOpMessageModel } from '../model/models';
 import { OpMessageModel } from '../model/models';
-import { ProblemDetails } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -93,15 +92,12 @@ export class OpMessageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiOpMessageCommentsGet(postId?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<CommentModel>>;
-    public apiOpMessageCommentsGet(postId?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<CommentModel>>>;
-    public apiOpMessageCommentsGet(postId?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<CommentModel>>>;
-    public apiOpMessageCommentsGet(postId?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
-
-        let queryParameters = new HttpParams({encoder: this.encoder});
-        if (postId !== undefined && postId !== null) {
-          queryParameters = this.addToHttpParams(queryParameters,
-            <any>postId, 'postId');
+    public apiOpMessageCommentsPostIdGet(postId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<CommentModel>>;
+    public apiOpMessageCommentsPostIdGet(postId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<CommentModel>>>;
+    public apiOpMessageCommentsPostIdGet(postId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<CommentModel>>>;
+    public apiOpMessageCommentsPostIdGet(postId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+        if (postId === null || postId === undefined) {
+            throw new Error('Required parameter postId was null or undefined when calling apiOpMessageCommentsPostIdGet.');
         }
 
         let headers = this.defaultHeaders;
@@ -124,9 +120,8 @@ export class OpMessageService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<Array<CommentModel>>(`${this.configuration.basePath}/api/OpMessage/comments`,
+        return this.httpClient.get<Array<CommentModel>>(`${this.configuration.basePath}/api/OpMessage/comments/${encodeURIComponent(String(postId))}`,
             {
-                params: queryParameters,
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

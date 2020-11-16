@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CreateOpMessageModel, OpMessageModel, OpMessageService} from '../../backend_api_client';
+import {CommentModel, CreateOpMessageModel, OpMessageModel, OpMessageService} from '../../backend_api_client';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -20,5 +20,9 @@ export class PostsService {
 
   public createPost(message: CreateOpMessageModel): Observable<number> {
     return this.posts.apiOpMessagePost(message, 'body');
+  }
+
+  public getComments(postId: number): Observable<CommentModel[]> {
+    return this.posts.apiOpMessageCommentsPostIdGet(postId, 'body');
   }
 }

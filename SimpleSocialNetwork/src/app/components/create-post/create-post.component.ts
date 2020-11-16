@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {PostsService} from '../../services/posts.service';
+import {map, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-post',
@@ -31,15 +32,14 @@ export class CreatePostComponent implements OnInit {
       return;
     }
 
-    try {
-      const newPostId = await this.posts.createPost({
-        content: this.createPostForm.value.content as string,
-        title: this.createPostForm.value.title as string,
-        tags: []
-      }).toPromise();
-      await this.router.navigate([`posts/${newPostId}`]);
-    } catch (e) {
-      console.log(e);
-    }
+    this.posts.createPost({
+      content: this.createPostForm.value.content as string,
+      title: this.createPostForm.value.title as string,
+      tags: []
+    }).pipe(
+      mergeMap(postId => {
+        return this.router.navigate([`posts/${postId}`]);
+      })
+    ).subscribe();
   }
 }

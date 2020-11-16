@@ -14,11 +14,11 @@
 export interface CommentModel { 
     opId: number;
     messageId: number;
-    posterId: string;
     content: string;
     points: number;
     isDeleted: boolean;
     sendDate: string;
+    posterId: string;
 }
 
 

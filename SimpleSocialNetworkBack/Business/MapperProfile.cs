@@ -15,6 +15,8 @@ namespace Business
                 .ReverseMap();
 
             CreateMap<Message, CommentModel>()
+                .ForMember(dest => dest.PosterId,
+                    opt => opt.MapFrom(src => src.Poster.Login))
                 .ReverseMap();
 
             CreateMap<OpMessage, OpMessageModel>()

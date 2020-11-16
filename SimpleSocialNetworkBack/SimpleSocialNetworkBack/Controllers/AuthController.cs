@@ -25,35 +25,17 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         [HttpPost("register")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<UserModel>> Register([FromBody] CredentialsModel cred)
         {
-            try
-            {
-                var registered = await _authService.Register(cred.Login, cred.Password);
-                return Ok(registered);
-            }
-            catch (ValidationException e)
-            {
-                return BadRequest();
-            }
+            var registered = await _authService.Register(cred.Login, cred.Password);
+            return Ok(registered);
         }
 
         [HttpPost("login")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<LoggedInUser>> Login([FromBody] CredentialsModel cred)
         {
-            try
-            {
-                var registered = await _authService.Login(cred.Login, cred.Password);
-                return Ok(registered);
-            }
-            catch (ValidationException e)
-            {
-                return BadRequest();
-            }
+            var registered = await _authService.Login(cred.Login, cred.Password);
+            return Ok(registered);
         }
     }
 }

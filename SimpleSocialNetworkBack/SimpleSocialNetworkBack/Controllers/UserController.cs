@@ -24,19 +24,10 @@ namespace SimpleSocialNetworkBack.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<bool>> UserExists([Required] string login)
         {
-            try
-            {
-                var exists = await _userService.UserExists(login);
-                return Ok(exists);
-            }
-            catch (ValidationException e)
-            {
-                return BadRequest();
-            }
+            var exists = await _userService.UserExists(login);
+            return Ok(exists);
         }
     }
 }

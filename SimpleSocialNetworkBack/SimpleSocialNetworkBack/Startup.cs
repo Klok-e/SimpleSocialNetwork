@@ -41,7 +41,7 @@ namespace SimpleSocialNetworkBack
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(opt => { opt.Filters.Add<CustomExceptionFilter>(); });
             services.AddSwaggerGen(c =>
             {
                 c.OperationFilter<AddRequiredHeaderParameter>();
@@ -61,6 +61,7 @@ namespace SimpleSocialNetworkBack
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IOpMessageService, OpMessageService>();
 
             services.AddScoped<IMapper>(x =>

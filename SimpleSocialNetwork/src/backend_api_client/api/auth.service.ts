@@ -19,7 +19,6 @@ import { Observable }                                        from 'rxjs';
 
 import { CredentialsModel } from '../model/models';
 import { LoggedInUser } from '../model/models';
-import { ProblemDetails } from '../model/models';
 import { UserModel } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';

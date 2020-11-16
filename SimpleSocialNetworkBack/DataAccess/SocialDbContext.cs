@@ -32,12 +32,16 @@ namespace DataAccess
                 .ValueGeneratedOnAdd()
                 .UseIdentityColumn();
             modelBuilder.Entity<Message>()
+                .Property(x => x.Content)
+                .IsRequired();
+            modelBuilder.Entity<Message>()
                 .HasOne(x => x.OpMessage)
                 .WithMany(x => x!.Messages)
                 .HasForeignKey(x => x.OpId);
             modelBuilder.Entity<Message>()
                 .HasOne(x => x.Poster)
-                .WithMany(x => x!.Messages);
+                .WithMany(x => x!.Messages)
+                .IsRequired();
 
             modelBuilder.Entity<OpMessageTag>()
                 .HasKey(x => new {x.TagId, x.OpId});

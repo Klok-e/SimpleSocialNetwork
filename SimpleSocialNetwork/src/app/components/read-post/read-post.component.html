@@ -21,8 +21,48 @@
     </p>
   </div>
 </article>
-
-
+<div class="form_container">
+  <form [formGroup]="commentForm" (ngSubmit)="sendComment()">
+    <span>Write a comment:</span>
+    <div>
+      <label for="content">Content</label>
+      <div class="break"></div>
+      <textarea id="content" formControlName="content"></textarea>
+      <div *ngIf="commentForm.controls.content.invalid &&
+        (commentForm.controls.content.dirty || commentForm.controls.content.touched)"
+           class="validation_err">
+        <div *ngIf="commentForm.controls.content.errors?.required">
+          Content is required.
+        </div>
+      </div>
+    </div>
+    <div>
+      <button type="submit">Send</button>
+    </div>
+  </form>
+</div>
+<div *ngIf="comments.length > 0" class="comments">
+  <div class="comment" *ngFor="let comment of comments">
+    <div class="comment_head">
+      <div class="points">
+        <div (click)="upvoteComment(comment.messageId)" class="small arrow up"></div>
+        <span>{{comment.points}}</span>
+        <div (click)="downvoteComment(comment.messageId)" class="small arrow down"></div>
+      </div>
+      <div class="cred_title">
+        <div class="credits">
+          <div>Comment by: <a routerLink="/u/{{comment.posterId}}">/u/{{comment.posterId}}</a></div>
+          <div>At {{comment.sendDate | date:'d/M/yy, h:mm a'}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="comment_content">
+      <p *ngFor="let par of paragraphs(comment.content)">
+        {{par}}
+      </p>
+    </div>
+  </div>
+</div>
 
 
 <div *ngIf="post === null" class="loader_center">

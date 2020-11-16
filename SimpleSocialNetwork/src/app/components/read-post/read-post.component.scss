@@ -1,7 +1,7 @@
 @import '~src/css/base';
 
 article {
-  margin: 30pt 20pt 20pt 20pt;
+  margin: 30pt 20pt 0pt 20pt;
   padding: 10pt 10pt 10pt 10pt;
   background-color: $blue1-5;
   border: 1px solid $blue1-5;
@@ -58,6 +58,72 @@ article {
   }
 }
 
+.form_container {
+  margin: 0 20pt 0 20pt;
+  justify-content: left;
+
+  form {
+    background-color: $blue2;
+    flex-grow: 1;
+    padding: 10pt 10pt 10pt 10pt;
+  }
+}
+
+.comments {
+  margin: 20pt 15pt 20pt 15pt;
+  padding: 10pt 10pt 10pt 10pt;
+
+  .comment {
+    margin: 5pt 5pt 5pt 5pt;
+    padding: 10pt 10pt 10pt 10pt;
+    background-color: $blue1-5;
+    .comment_head {
+      margin: 5pt 5pt 5pt 5pt;
+      display: flex;
+      flex-direction: row;
+
+      align-items: center;
+
+      .points {
+        margin-right: 10pt;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+
+        .arrow:hover {
+          cursor: pointer;
+          border-color: $text_color_red;
+        }
+      }
+
+      .cred_title {
+        display: flex;
+        flex-direction: column;
+
+        .credits {
+          display: flex;
+          flex-direction: row;
+
+          div {
+            display: inline-block;
+          }
+
+          div:last-child {
+            margin-left: 10pt;
+          }
+
+          a {
+            color: $text_color;
+          }
+        }
+      }
+    }
+
+    .comment_content {
+      margin: 10pt 10pt 10pt 10pt;
+    }
+  }
+}
 
 .loader_center {
   display: flex;
@@ -65,6 +131,10 @@ article {
   width: 100%;
   justify-content: center;
   align-items: center;
+}
+
+.arrow.small{
+  padding: 6px;
 }
 
 .arrow {

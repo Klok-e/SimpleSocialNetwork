@@ -45,9 +45,9 @@ export class PostsComponent implements OnInit {
   public paragraphs(str: string): { pars: { p: string, last: boolean }[], wasTruncated: boolean } {
     let wasTruncated = false;
     let pars: string[];
-    if (str.length > 200) {
+    if (str.length > 500) {
       wasTruncated = true;
-      pars = str.slice(0, 200).split('\n');
+      pars = str.slice(0, 500).split('\n');
     } else {
       pars = str.split('\n');
     }

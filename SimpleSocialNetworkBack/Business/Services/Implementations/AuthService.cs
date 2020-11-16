@@ -54,7 +54,6 @@ namespace Business.Services.Implementations
             if (user == null)
                 throw new ValidationException("Nonexistent login");
 
-
             if (!CheckPasswordHash(user.Password!.Salt, user.Password!.Hashed, password))
                 throw new ValidationException("Wrong password");
 

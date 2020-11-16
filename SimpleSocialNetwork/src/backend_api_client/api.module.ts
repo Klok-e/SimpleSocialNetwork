@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 
 import { AuthService } from './api/auth.service';
+import { CommentService } from './api/comment.service';
 import { OpMessageService } from './api/opMessage.service';
 import { UserService } from './api/user.service';
 

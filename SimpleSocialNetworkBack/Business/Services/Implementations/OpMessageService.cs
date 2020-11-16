@@ -6,6 +6,7 @@ using AutoMapper;
 using Business.Models;
 using Business.Models.Requests;
 using Business.Models.Responses;
+using Business.Validation;
 using DataAccess;
 using DataAccess.Entities;
 
@@ -33,6 +34,8 @@ namespace Business.Services.Implementations
         public async Task<int> MakeAPost(string user, CreateOpMessageModel model)
         {
             var appUser = await _context.Users.FindAsync(user);
+            if (appUser == null)
+                throw new BadCredentialsException("Nonexistent user");
             var op = new OpMessage
             {
                 Content = model.Content,
@@ -57,7 +60,9 @@ namespace Business.Services.Implementations
         public async Task<IEnumerable<CommentModel>> GetComments(int postId)
         {
             var op = await _context.OpMessages.FindAsync(postId);
-            return op.Messages.Select(x => _mapper.Map<Message, CommentModel>(x));
+            return op.Messages
+                .OrderByDescending(x => x.SendDate)
+                .Select(x => _mapper.Map<Message, CommentModel>(x));
         }
     }
 }
