@@ -76,5 +76,21 @@ namespace SimpleSocialNetworkBack.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet("comments")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<CommentModel>>> GetComments(int postId)
+        {
+            try
+            {
+                return Ok(await _opMessageService.GetComments(postId));
+            }
+            catch (ValidationException e)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

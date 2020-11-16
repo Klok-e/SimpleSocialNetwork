@@ -23,6 +23,7 @@
             <e p="CredentialsModel.cs" t="Include" />
           </e>
           <e p="Responses" t="Include">
+            <e p="CommentModel.cs" t="Include" />
             <e p="LoggedInUser.cs" t="Include" />
             <e p="OpMessageModel.cs" t="Include" />
             <e p="UserModel.cs" t="Include" />
@@ -65,10 +66,8 @@
           <e p="TagModerator.cs" t="Include" />
         </e>
         <e p="Migrations" t="Include">
-          <e p="20201112213821_init.Designer.cs" t="Include" />
-          <e p="20201112213821_init.cs" t="Include" />
-          <e p="20201113142215_RemoveIdentityServer.Designer.cs" t="Include" />
-          <e p="20201113142215_RemoveIdentityServer.cs" t="Include" />
+          <e p="20201116135848_IdentityToMessage.Designer.cs" t="Include" />
+          <e p="20201116135848_IdentityToMessage.cs" t="Include" />
           <e p="SocialDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="SocialDbContext.cs" t="Include" />

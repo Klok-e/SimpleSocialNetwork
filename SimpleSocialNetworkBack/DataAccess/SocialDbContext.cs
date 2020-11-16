@@ -27,17 +27,28 @@ namespace DataAccess
 
             modelBuilder.Entity<Message>()
                 .HasKey(x => new {x.OpId, x.MessageId});
+            modelBuilder.Entity<Message>()
+                .Property(x => x.MessageId)
+                .ValueGeneratedOnAdd()
+                .UseIdentityColumn();
+            modelBuilder.Entity<Message>()
+                .HasOne(x => x.OpMessage)
+                .WithMany(x => x!.Messages)
+                .HasForeignKey(x => x.OpId);
+            modelBuilder.Entity<Message>()
+                .HasOne(x => x.Poster)
+                .WithMany(x => x!.Messages);
 
             modelBuilder.Entity<OpMessageTag>()
                 .HasKey(x => new {x.TagId, x.OpId});
 
             modelBuilder.Entity<Subscription>()
                 .HasOne(x => x.Subscriber)
-                .WithMany(x => x!.Subscriptions)
+                .WithMany(x => x.Subscriptions)
                 .HasForeignKey(x => x.SubscriberId);
             modelBuilder.Entity<Subscription>()
                 .HasOne(x => x.Target)
-                .WithMany(x => x!.Subscribers)
+                .WithMany(x => x.Subscribers)
                 .HasForeignKey(x => x.TargetId);
 
             modelBuilder.Entity<TagModerator>()

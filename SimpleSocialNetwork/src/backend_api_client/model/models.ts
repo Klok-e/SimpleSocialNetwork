@@ -1,3 +1,4 @@
+export * from './commentModel';
 export * from './createOpMessageModel';
 export * from './credentialsModel';
 export * from './loggedInUser';

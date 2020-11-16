@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(SocialDbContext))]
-    [Migration("20201113142215_RemoveIdentityServer")]
-    partial class RemoveIdentityServer
+    [Migration("20201116135848_IdentityToMessage")]
+    partial class IdentityToMessage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,7 +47,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("MessageId")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -59,8 +61,7 @@ namespace DataAccess.Migrations
                     b.Property<int>("Points")
                         .HasColumnType("int");
 
-                    b.Property<string>("PosterId")
-                        .IsRequired()
+                    b.Property<string>("PosterLogin")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("SendDate")
@@ -68,7 +69,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("OpId", "MessageId");
 
-                    b.HasIndex("PosterId");
+                    b.HasIndex("PosterLogin");
 
                     b.ToTable("Messages");
                 });
@@ -231,11 +232,17 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.Message", b =>
                 {
-                    b.HasOne("DataAccess.Entities.ApplicationUser", "Poster")
-                        .WithMany()
-                        .HasForeignKey("PosterId")
+                    b.HasOne("DataAccess.Entities.OpMessage", "OpMessage")
+                        .WithMany("Messages")
+                        .HasForeignKey("OpId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("DataAccess.Entities.ApplicationUser", "Poster")
+                        .WithMany("Messages")
+                        .HasForeignKey("PosterLogin");
+
+                    b.Navigation("OpMessage");
 
                     b.Navigation("Poster");
                 });
@@ -336,6 +343,8 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.ApplicationUser", b =>
                 {
+                    b.Navigation("Messages");
+
                     b.Navigation("Password");
 
                     b.Navigation("Subscribers");
@@ -345,6 +354,8 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.OpMessage", b =>
                 {
+                    b.Navigation("Messages");
+
                     b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618

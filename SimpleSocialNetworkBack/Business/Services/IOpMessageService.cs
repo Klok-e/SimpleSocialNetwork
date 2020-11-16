@@ -13,5 +13,7 @@ namespace Business.Services
         Task<int> MakeAPost(string user, CreateOpMessageModel model);
 
         Task<OpMessageModel> GetById(int id);
+
+        Task<IEnumerable<CommentModel>> GetComments(int postId);
     }
 }

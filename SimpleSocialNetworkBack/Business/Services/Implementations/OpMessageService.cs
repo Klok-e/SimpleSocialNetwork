@@ -53,5 +53,11 @@ namespace Business.Services.Implementations
             var opMessage = await _context.OpMessages.FindAsync(id);
             return _mapper.Map<OpMessage, OpMessageModel>(opMessage);
         }
+
+        public async Task<IEnumerable<CommentModel>> GetComments(int postId)
+        {
+            var op = await _context.OpMessages.FindAsync(postId);
+            return op.Messages.Select(x => _mapper.Map<Message, CommentModel>(x));
+        }
     }
 }

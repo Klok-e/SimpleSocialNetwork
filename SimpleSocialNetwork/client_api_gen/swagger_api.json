@@ -220,6 +220,48 @@
         }
       }
     },
+    "/api/OpMessage/comments": {
+      "get": {
+        "tags": [
+          "OpMessage"
+        ],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommentModel"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/User": {
       "get": {
         "tags": [
@@ -389,6 +431,46 @@
             "nullable": true
           },
           "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "points": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "sendDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CommentModel": {
+        "required": [
+          "content",
+          "isDeleted",
+          "messageId",
+          "opId",
+          "points",
+          "posterId",
+          "sendDate"
+        ],
+        "type": "object",
+        "properties": {
+          "opId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "messageId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "posterId": {
             "type": "string"
           },
           "content": {
