@@ -43,17 +43,18 @@ header {
       padding: 8pt 10pt 8pt 10pt;
       margin: 10pt 20pt 10pt 20pt;
     }
-
-    *:last-child {
-      @media (min-width: 1200px) {
-        margin-right: 100pt;
-      }
-    }
   }
 
   .header_cont {
     display: inline-flex;
     margin-left: 40pt;
+  }
+
+  .logged_in_as {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10pt 20pt 10pt 20pt;
   }
 }
 

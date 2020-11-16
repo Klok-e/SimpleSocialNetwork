@@ -11,7 +11,7 @@ export class AppComponent {
   year = new Date().getFullYear();
   title = 'SimpleSocialNetwork';
 
-  constructor(private auth: AuthService, private route: Router) {
+  constructor(public auth: AuthService, private route: Router) {
   }
 
   public loggedIn(): boolean {

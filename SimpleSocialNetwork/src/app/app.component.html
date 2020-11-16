@@ -11,6 +11,9 @@
     <a *ngIf="!loggedIn()" routerLink="/login" class="bttn">Login</a>
     <a *ngIf="!loggedIn()" routerLink="/register" class="bttn">Register</a>
   </nav>
+  <div *ngIf="auth.getCurrentUserValue()" class="logged_in_as">
+    Logged in as: {{auth.getCurrentUserValue().login}}
+  </div>
 </header>
 
 <div class="container">
