@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Business.Models.Requests;
 using Business.Services;
@@ -22,10 +23,18 @@ namespace SimpleSocialNetworkBack.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult> CreateComment([FromBody] CreateCommentModel comment)
+        public async Task<ActionResult> CreateComment([Required] [FromBody] CreateCommentModel comment)
         {
             var username = User.Identity.Name!;
             await _commentService.CreateComment(username, comment);
+            return Ok();
+        }
+
+        [HttpPost("vote")]
+        [Authorize]
+        public async Task<ActionResult> VoteComment([Required] [FromBody] VoteComment vote)
+        {
+            await _commentService.VoteComment(vote);
             return Ok();
         }
     }

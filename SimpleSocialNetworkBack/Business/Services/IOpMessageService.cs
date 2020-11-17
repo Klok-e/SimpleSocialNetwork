@@ -17,5 +17,7 @@ namespace Business.Services
         Task<IEnumerable<CommentModel>> GetComments(int postId);
 
         Task<bool> PostExists(int postId);
+
+        Task VotePost(VotePost votePost);
     }
 }

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PostsService} from '../../services/posts.service';
-import {OpMessageModel} from '../../../backend_api_client';
-import {map} from 'rxjs/operators';
+import {OpMessageModel, VoteType} from '../../../backend_api_client';
 
 @Component({
   selector: 'app-posts',
@@ -30,6 +29,8 @@ export class PostsComponent implements OnInit {
     });
     if (typeof post?.points === 'number') {
       post.points += 1;
+      this.posts.votePost({postId, voteType: VoteType.NUMBER_1})
+        .subscribe();
     }
   }
 
@@ -39,6 +40,8 @@ export class PostsComponent implements OnInit {
     });
     if (typeof post?.points === 'number') {
       post.points -= 1;
+      this.posts.votePost({postId, voteType: VoteType.NUMBER_2})
+        .subscribe();
     }
   }
 

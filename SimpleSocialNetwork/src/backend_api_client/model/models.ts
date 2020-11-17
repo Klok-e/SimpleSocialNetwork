@@ -5,3 +5,6 @@ export * from './credentialsModel';
 export * from './loggedInUser';
 export * from './opMessageModel';
 export * from './userModel';
+export * from './voteComment';
+export * from './votePost';
+export * from './voteType';

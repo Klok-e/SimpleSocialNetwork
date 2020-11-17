@@ -6,5 +6,7 @@ namespace Business.Services
     public interface ICommentService
     {
         public Task CreateComment(string user, CreateCommentModel comment);
+
+        public Task VoteComment(VoteComment vote);
     }
 }

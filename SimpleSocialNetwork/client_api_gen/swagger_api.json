@@ -27,7 +27,8 @@
                 "$ref": "#/components/schemas/CredentialsModel"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -65,7 +66,8 @@
                 "$ref": "#/components/schemas/CredentialsModel"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -103,7 +105,40 @@
                 "$ref": "#/components/schemas/CreateCommentModel"
               }
             }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
           }
+        }
+      }
+    },
+    "/api/Comment/vote": {
+      "post": {
+        "tags": [
+          "Comment"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VoteComment"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VoteComment"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VoteComment"
+              }
+            }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -134,7 +169,8 @@
                 "$ref": "#/components/schemas/CreateOpMessageModel"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -234,7 +270,7 @@
         }
       }
     },
-    "/api/OpMessage/comments/exists/{postId}": {
+    "/api/OpMessage/exists/{postId}": {
       "get": {
         "tags": [
           "OpMessage"
@@ -260,6 +296,38 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/OpMessage/vote": {
+      "post": {
+        "tags": [
+          "OpMessage"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VotePost"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VotePost"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VotePost"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -370,6 +438,36 @@
         },
         "additionalProperties": false
       },
+      "VoteType": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "VoteComment": {
+        "required": [
+          "messageId",
+          "opId",
+          "voteType"
+        ],
+        "type": "object",
+        "properties": {
+          "opId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "messageId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "voteType": {
+            "$ref": "#/components/schemas/VoteType"
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateOpMessageModel": {
         "required": [
           "content",
@@ -468,6 +566,23 @@
           },
           "posterId": {
             "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VotePost": {
+        "required": [
+          "postId",
+          "voteType"
+        ],
+        "type": "object",
+        "properties": {
+          "postId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "voteType": {
+            "$ref": "#/components/schemas/VoteType"
           }
         },
         "additionalProperties": false

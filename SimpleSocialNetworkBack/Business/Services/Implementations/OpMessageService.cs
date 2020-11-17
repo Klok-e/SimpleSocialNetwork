@@ -71,5 +71,20 @@ namespace Business.Services.Implementations
         {
             return await _context.OpMessages.FindAsync(postId) != null;
         }
+
+        public async Task VotePost(VotePost votePost)
+        {
+            var post = await _context.OpMessages.FindAsync(votePost.PostId);
+            if (post == null)
+                throw new ValidationException("Nonexistent post");
+
+            post.Points += votePost.VoteType switch
+            {
+                VoteType.Up => 1,
+                VoteType.Down => -1,
+                _ => throw new ValidationException("Unknown VoteType value")
+            };
+            await _context.SaveChangesAsync();
+        }
     }
 }

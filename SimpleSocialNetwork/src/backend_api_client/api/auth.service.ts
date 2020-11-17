@@ -92,10 +92,13 @@ export class AuthService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiAuthLoginPost(credentialsModel?: CredentialsModel, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<LoggedInUser>;
-    public apiAuthLoginPost(credentialsModel?: CredentialsModel, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<LoggedInUser>>;
-    public apiAuthLoginPost(credentialsModel?: CredentialsModel, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<LoggedInUser>>;
-    public apiAuthLoginPost(credentialsModel?: CredentialsModel, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public apiAuthLoginPost(credentialsModel: CredentialsModel, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<LoggedInUser>;
+    public apiAuthLoginPost(credentialsModel: CredentialsModel, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<LoggedInUser>>;
+    public apiAuthLoginPost(credentialsModel: CredentialsModel, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<LoggedInUser>>;
+    public apiAuthLoginPost(credentialsModel: CredentialsModel, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+        if (credentialsModel === null || credentialsModel === undefined) {
+            throw new Error('Required parameter credentialsModel was null or undefined when calling apiAuthLoginPost.');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -145,10 +148,13 @@ export class AuthService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiAuthRegisterPost(credentialsModel?: CredentialsModel, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<UserModel>;
-    public apiAuthRegisterPost(credentialsModel?: CredentialsModel, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<UserModel>>;
-    public apiAuthRegisterPost(credentialsModel?: CredentialsModel, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<UserModel>>;
-    public apiAuthRegisterPost(credentialsModel?: CredentialsModel, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public apiAuthRegisterPost(credentialsModel: CredentialsModel, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<UserModel>;
+    public apiAuthRegisterPost(credentialsModel: CredentialsModel, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<UserModel>>;
+    public apiAuthRegisterPost(credentialsModel: CredentialsModel, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<UserModel>>;
+    public apiAuthRegisterPost(credentialsModel: CredentialsModel, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+        if (credentialsModel === null || credentialsModel === undefined) {
+            throw new Error('Required parameter credentialsModel was null or undefined when calling apiAuthRegisterPost.');
+        }
 
         let headers = this.defaultHeaders;
 

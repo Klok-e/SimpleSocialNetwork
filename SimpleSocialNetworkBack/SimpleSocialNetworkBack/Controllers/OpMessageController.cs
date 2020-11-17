@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Business.Models;
@@ -27,7 +28,7 @@ namespace SimpleSocialNetworkBack.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<int>> CreateOpMessage([FromBody] CreateOpMessageModel opMessage)
+        public async Task<ActionResult<int>> CreateOpMessage([Required] [FromBody] CreateOpMessageModel opMessage)
         {
             var username = User.Identity.Name!;
 
@@ -56,11 +57,19 @@ namespace SimpleSocialNetworkBack.Controllers
             return Ok(await _opMessageService.GetComments(postId));
         }
 
-        [HttpGet("comments/exists/{postId}")]
+        [HttpGet("exists/{postId}")]
         [AllowAnonymous]
         public async Task<ActionResult<bool>> PostExists(int postId)
         {
             return Ok(await _opMessageService.PostExists(postId));
+        }
+
+        [HttpPost("vote")]
+        [Authorize]
+        public async Task<ActionResult> VotePost([Required] [FromBody] VotePost vote)
+        {
+            await _opMessageService.VotePost(vote);
+            return Ok();
         }
     }
 }

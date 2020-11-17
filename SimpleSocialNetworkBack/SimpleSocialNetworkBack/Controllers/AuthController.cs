@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Business.Models;
 using Business.Models.Requests;
@@ -25,14 +26,14 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<UserModel>> Register([FromBody] CredentialsModel cred)
+        public async Task<ActionResult<UserModel>> Register([Required] [FromBody] CredentialsModel cred)
         {
             var registered = await _authService.Register(cred.Login, cred.Password);
             return Ok(registered);
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<LoggedInUser>> Login([FromBody] CredentialsModel cred)
+        public async Task<ActionResult<LoggedInUser>> Login([Required] [FromBody] CredentialsModel cred)
         {
             var registered = await _authService.Login(cred.Login, cred.Password);
             return Ok(registered);

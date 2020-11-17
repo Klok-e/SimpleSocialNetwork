@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CommentModel, CommentService, OpMessageModel} from '../../../backend_api_client';
+import {CommentModel, CommentService, OpMessageModel, VoteType} from '../../../backend_api_client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PostsService} from '../../services/posts.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -33,24 +33,32 @@ export class ReadPostComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
       const postId = +id;
-      this.posts.postExists(postId).pipe(
-        mergeMap(exists => {
-          if (!exists) {
-            this.router.navigate(['404-route-please-match-this-really-long-route'], {skipLocationChange: true});
-            return throwError(new Error('Post doesn\'t exist'));
+      if (isNaN(postId)) {
+        this.navigateTo404();
+      } else {
+        this.posts.postExists(postId).pipe(
+          mergeMap(exists => {
+            if (!exists) {
+              this.navigateTo404();
+              return throwError(new Error('Post doesn\'t exist'));
+            }
+            return this.posts.getPost(postId);
+          }),
+          mergeMap(post => {
+            this.post = post;
+            return this.updateComments(postId);
+          })
+        ).subscribe({
+          error: e => {
+            console.log(e);
           }
-          return this.posts.getPost(postId);
-        }),
-        mergeMap(post => {
-          this.post = post;
-          return this.updateComments(postId);
-        })
-      ).subscribe({
-        error: e => {
-          console.log(e);
-        }
-      });
+        });
+      }
     }
+  }
+
+  private navigateTo404(): void {
+    this.router.navigate(['404-route-please-match-this-really-long-route'], {skipLocationChange: true});
   }
 
   private updateComments(postId: number): Observable<void> {
@@ -63,12 +71,16 @@ export class ReadPostComponent implements OnInit {
   public upvote(): void {
     if (this.post !== null) {
       this.post.points += 1;
+      this.posts.votePost({postId: this.post.id, voteType: VoteType.NUMBER_1})
+        .subscribe();
     }
   }
 
   public downvote(): void {
     if (this.post !== null) {
       this.post.points -= 1;
+      this.posts.votePost({postId: this.post.id, voteType: VoteType.NUMBER_2})
+        .subscribe();
     }
   }
 
@@ -78,6 +90,11 @@ export class ReadPostComponent implements OnInit {
     });
     if (comment !== undefined) {
       comment.points += 1;
+      this.commentService.apiCommentVotePost({
+        messageId: comment.messageId,
+        opId: comment.opId,
+        voteType: VoteType.NUMBER_1
+      }).subscribe();
     }
   }
 
@@ -87,6 +104,11 @@ export class ReadPostComponent implements OnInit {
     });
     if (comment !== undefined) {
       comment.points -= 1;
+      this.commentService.apiCommentVotePost({
+        messageId: comment.messageId,
+        opId: comment.opId,
+        voteType: VoteType.NUMBER_2
+      }).subscribe();
     }
   }
 

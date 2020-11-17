@@ -22,6 +22,9 @@
             <e p="CreateCommentModel.cs" t="Include" />
             <e p="CreateOpMessageModel.cs" t="Include" />
             <e p="CredentialsModel.cs" t="Include" />
+            <e p="VoteComment.cs" t="Include" />
+            <e p="VotePost.cs" t="Include" />
+            <e p="VoteType.cs" t="Include" />
           </e>
           <e p="Responses" t="Include">
             <e p="CommentModel.cs" t="Include" />
