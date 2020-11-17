@@ -130,6 +130,10 @@ footer.footer .foot_row {
   font: 16px sans-serif;
 }
 
+.bttn.active {
+  background: $blue2-3;
+}
+
 .bttn:hover {
   background: $blue4;
   cursor: pointer;

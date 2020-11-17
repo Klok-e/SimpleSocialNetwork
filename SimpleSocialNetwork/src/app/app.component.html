@@ -3,13 +3,20 @@
     <h1>GenericSocialNetwork</h1>
   </div>
   <nav>
-    <a routerLink="/" class="bttn">Home</a>
-    <a routerLink="/search" class="bttn">Search</a>
-    <a *ngIf="loggedIn()" routerLink="/create-post" class="bttn">CreatePost</a>
-    <a *ngIf="loggedIn()" routerLink="/u/{{auth.getCurrentUserValue()?.login}}" class="bttn">Profile</a>
-    <button *ngIf="loggedIn()" (click)="logout()" class="bttn">Logout</button>
-    <a *ngIf="!loggedIn()" routerLink="/login" class="bttn">Login</a>
-    <a *ngIf="!loggedIn()" routerLink="/register" class="bttn">Register</a>
+    <a routerLink="/" routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact:true}" class="bttn">Home</a>
+    <a routerLink="/search" routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact:true}" class="bttn">Search</a>
+    <a *ngIf="loggedIn()" routerLink="/create-post" routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact:true}" class="bttn">CreatePost</a>
+    <a *ngIf="loggedIn()" routerLink="/u/{{auth.getCurrentUserValue()?.login}}" routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact:true}" class="bttn">Profile</a>
+    <a *ngIf="loggedIn()" routerLink="" (click)="logout()"
+       class="bttn">Logout</a>
+    <a *ngIf="!loggedIn()" routerLink="/login" routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact:true}" class="bttn">Login</a>
+    <a *ngIf="!loggedIn()" routerLink="/register" routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact:true}" class="bttn">Register</a>
   </nav>
   <div *ngIf="loggedIn()" class="logged_in_as">
     Logged in as: {{auth.getCurrentUserValue()?.login}}

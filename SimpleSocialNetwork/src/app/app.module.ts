@@ -13,6 +13,7 @@ import {RegisterComponent} from './components/register/register.component';
 import {ReadPostComponent} from './components/read-post/read-post.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {JwtAuthInterceptor} from './interceptors/jwt-auth.interceptor';
+import {UserProfileComponent} from './components/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {JwtAuthInterceptor} from './interceptors/jwt-auth.interceptor';
     CreatePostComponent,
     LoginComponent,
     RegisterComponent,
-    ReadPostComponent
+    ReadPostComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

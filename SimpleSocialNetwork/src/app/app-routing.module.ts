@@ -7,11 +7,13 @@ import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {AuthGuard} from './guards/auth.guard';
 import {ReadPostComponent} from './components/read-post/read-post.component';
+import {UserProfileComponent} from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
   {path: '', component: PostsComponent, pathMatch: 'full'},
   {path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuard]},
   {path: 'posts/:id', component: ReadPostComponent},
+  {path: 'u/:userName', component: UserProfileComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: '**', component: PageNotFoundComponent}
