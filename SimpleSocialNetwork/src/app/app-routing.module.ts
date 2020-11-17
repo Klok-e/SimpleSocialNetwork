@@ -9,9 +9,9 @@ import {AuthGuard} from './guards/auth.guard';
 import {ReadPostComponent} from './components/read-post/read-post.component';
 
 const routes: Routes = [
-  {path: '', component: PostsComponent},
+  {path: '', component: PostsComponent, pathMatch: 'full'},
   {path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuard]},
-  {path: 'posts/:id', component: ReadPostComponent},
+  {path: 'posts/:id', component: ReadPostComponent, canActivate: []},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: '**', component: PageNotFoundComponent}

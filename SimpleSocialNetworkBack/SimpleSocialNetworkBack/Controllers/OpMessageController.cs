@@ -55,5 +55,12 @@ namespace SimpleSocialNetworkBack.Controllers
         {
             return Ok(await _opMessageService.GetComments(postId));
         }
+
+        [HttpGet("comments/exists/{postId}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<bool>> PostExists(int postId)
+        {
+            return Ok(await _opMessageService.PostExists(postId));
+        }
     }
 }

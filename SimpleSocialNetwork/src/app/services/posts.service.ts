@@ -25,4 +25,8 @@ export class PostsService {
   public getComments(postId: number): Observable<CommentModel[]> {
     return this.posts.apiOpMessageCommentsPostIdGet(postId, 'body');
   }
+
+  public postExists(postId: number): Observable<boolean> {
+    return this.posts.apiOpMessageCommentsExistsPostIdGet(postId);
+  }
 }

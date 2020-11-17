@@ -60,9 +60,16 @@ namespace Business.Services.Implementations
         public async Task<IEnumerable<CommentModel>> GetComments(int postId)
         {
             var op = await _context.OpMessages.FindAsync(postId);
+            if (op == null)
+                throw new ValidationException("Nonexistent postId");
             return op.Messages
                 .OrderByDescending(x => x.SendDate)
                 .Select(x => _mapper.Map<Message, CommentModel>(x));
+        }
+
+        public async Task<bool> PostExists(int postId)
+        {
+            return await _context.OpMessages.FindAsync(postId) != null;
         }
     }
 }

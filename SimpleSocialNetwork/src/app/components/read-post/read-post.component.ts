@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {PostsService} from '../../services/posts.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {map, mergeMap} from 'rxjs/operators';
-import {EMPTY, Observable} from 'rxjs';
+import {EMPTY, Observable, throwError} from 'rxjs';
 
 @Component({
   selector: 'app-read-post',
@@ -33,14 +33,21 @@ export class ReadPostComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
       const postId = +id;
-      this.posts.getPost(postId).pipe(
+      this.posts.postExists(postId).pipe(
+        mergeMap(exists => {
+          if (!exists) {
+            this.router.navigate(['404-route-please-match-this-really-long-route'], {skipLocationChange: true});
+            return throwError(new Error('Post doesn\'t exist'));
+          }
+          return this.posts.getPost(postId);
+        }),
         mergeMap(post => {
           this.post = post;
           return this.updateComments(postId);
         })
       ).subscribe({
-        error: _ => {
-          this.router.navigate(['']);
+        error: e => {
+          console.log(e);
         }
       });
     }
