@@ -20,24 +20,30 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const userName = this.route.snapshot.paramMap.get('userName');
-    if (userName === null) {
-      this.navigateTo404();
-      return;
-    }
-    this.userService.getUser(userName);
-    this.userService.user
-      .subscribe({
-        error: (e: HttpErrorResponse) => {
-          if (e.status === 400 || e.status === 401 || e.status === 403) {
-            this.navigateTo404();
+    this.route.paramMap.subscribe(params => {
+      const userName = params.get('userName');
+      if (userName === null) {
+        this.navigateTo404();
+        return;
+      }
+      this.userService.getUser(userName);
+      this.userService.user
+        .subscribe({
+          error: (e: HttpErrorResponse) => {
+            if (e.status === 400 || e.status === 401 || e.status === 403) {
+              this.navigateTo404();
+            }
           }
-        }
-      });
+        });
+    });
   }
 
   get user(): UserModel | LimitedUserModel | null {
     return this.userService.currentUser;
+  }
+
+  get pageBelongsToCurrentUser(): boolean {
+    return this.user?.login === this.auth.getCurrentUserValue()?.login;
   }
 
   private navigateTo404(): void {

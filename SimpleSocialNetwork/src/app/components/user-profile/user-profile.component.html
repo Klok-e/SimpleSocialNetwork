@@ -2,7 +2,7 @@
   <nav>
     <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
        routerLink="./subs">Subscriptions</a>
-    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
+    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" *ngIf="pageBelongsToCurrentUser"
        routerLink="./change-info">Change info</a>
   </nav>
 
