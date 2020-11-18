@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CommentModel, CommentService, OpMessageModel, VoteType} from '../../../backend_api_client';
+import {CommentModel, CommentApiService, OpMessageModel, VoteType} from '../../../backend_api_client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PostsService} from '../../services/posts.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -20,7 +20,7 @@ export class ReadPostComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private posts: PostsService,
-              private commentService: CommentService,
+              private commentService: CommentApiService,
               private formBuilder: FormBuilder) {
     this.commentForm = formBuilder.group({
       content: new FormControl('', [
@@ -31,30 +31,32 @@ export class ReadPostComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    if (id !== null) {
-      const postId = +id;
-      if (isNaN(postId)) {
-        this.navigateTo404();
-      } else {
-        this.posts.postExists(postId).pipe(
-          mergeMap(exists => {
-            if (!exists) {
-              this.navigateTo404();
-              return throwError(new Error('Post doesn\'t exist'));
-            }
-            return this.posts.getPost(postId);
-          }),
-          mergeMap(post => {
-            this.post = post;
-            return this.updateComments(postId);
-          })
-        ).subscribe({
-          error: e => {
-            console.log(e);
-          }
-        });
-      }
+    if (id === null) {
+      this.navigateTo404();
+      return;
     }
+    const postId = +id;
+    if (isNaN(postId)) {
+      this.navigateTo404();
+      return;
+    }
+    this.posts.postExists(postId).pipe(
+      mergeMap(exists => {
+        if (!exists) {
+          this.navigateTo404();
+          return throwError(new Error('Post doesn\'t exist'));
+        }
+        return this.posts.getPost(postId);
+      }),
+      mergeMap(post => {
+        this.post = post;
+        return this.updateComments(postId);
+      })
+    ).subscribe({
+      error: e => {
+        console.log(e);
+      }
+    });
   }
 
   private navigateTo404(): void {

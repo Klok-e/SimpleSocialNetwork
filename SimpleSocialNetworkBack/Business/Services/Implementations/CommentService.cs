@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Business.Common;
 using Business.Models.Requests;
 using Business.Validation;
 using DataAccess;
@@ -10,15 +11,19 @@ namespace Business.Services.Implementations
     public class CommentService : ICommentService
     {
         private readonly SocialDbContext _context;
+        private readonly TypedClaimsPrincipal _principal;
 
-        public CommentService(SocialDbContext context)
+        public CommentService(
+            SocialDbContext context,
+            TypedClaimsPrincipal principal)
         {
             _context = context;
+            _principal = principal;
         }
 
-        public async Task CreateComment(string user, CreateCommentModel comment)
+        public async Task CreateComment(CreateCommentModel comment)
         {
-            var userEnt = await _context.Users.FindAsync(user);
+            var userEnt = await _context.Users.FindAsync(_principal.Name);
             if (userEnt == null)
                 throw new BadCredentialsException("Nonexistent user");
 

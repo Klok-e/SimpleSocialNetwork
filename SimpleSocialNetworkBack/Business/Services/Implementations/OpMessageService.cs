@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Business.Common;
 using Business.Models;
 using Business.Models.Requests;
 using Business.Models.Responses;
@@ -16,11 +17,16 @@ namespace Business.Services.Implementations
     {
         private readonly SocialDbContext _context;
         private readonly IMapper _mapper;
+        private readonly TypedClaimsPrincipal _principal;
 
-        public OpMessageService(SocialDbContext context, IMapper mapper)
+        public OpMessageService(
+            SocialDbContext context,
+            IMapper mapper,
+            TypedClaimsPrincipal principal)
         {
             _context = context;
             _mapper = mapper;
+            _principal = principal;
         }
 
         public Task<IEnumerable<OpMessageModel>> GetAll()
@@ -31,9 +37,9 @@ namespace Business.Services.Implementations
                 .AsEnumerable());
         }
 
-        public async Task<int> MakeAPost(string user, CreateOpMessageModel model)
+        public async Task<int> MakeAPost(CreateOpMessageModel model)
         {
-            var appUser = await _context.Users.FindAsync(user);
+            var appUser = await _context.Users.FindAsync(_principal.Name);
             if (appUser == null)
                 throw new BadCredentialsException("Nonexistent user");
             var op = new OpMessage

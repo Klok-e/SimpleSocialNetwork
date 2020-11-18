@@ -13,6 +13,8 @@ namespace Business
         {
             CreateMap<ApplicationUser, UserModel>()
                 .ReverseMap();
+            CreateMap<ApplicationUser, LimitedUserModel>()
+                .ReverseMap();
 
             CreateMap<Message, CommentModel>()
                 .ForMember(dest => dest.PosterId,

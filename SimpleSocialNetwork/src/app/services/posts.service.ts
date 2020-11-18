@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CommentModel, CreateOpMessageModel, OpMessageModel, OpMessageService, VotePost} from '../../backend_api_client';
+import {CommentModel, CreateOpMessageModel, OpMessageModel, OpMessageApiService, VotePost} from '../../backend_api_client';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 })
 export class PostsService {
 
-  constructor(private posts: OpMessageService) {
+  constructor(private posts: OpMessageApiService) {
   }
 
   public getAllPosts(): Observable<OpMessageModel[]> {

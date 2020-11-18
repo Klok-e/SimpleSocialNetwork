@@ -48,11 +48,11 @@ namespace DataAccess
 
             modelBuilder.Entity<Subscription>()
                 .HasOne(x => x.Subscriber)
-                .WithMany(x => x.Subscriptions)
+                .WithMany(x => x!.Subscriptions)
                 .HasForeignKey(x => x.SubscriberId);
             modelBuilder.Entity<Subscription>()
                 .HasOne(x => x.Target)
-                .WithMany(x => x.Subscribers)
+                .WithMany(x => x!.Subscribers)
                 .HasForeignKey(x => x.TargetId);
 
             modelBuilder.Entity<TagModerator>()

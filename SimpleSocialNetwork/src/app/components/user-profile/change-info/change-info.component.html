@@ -1,0 +1,17 @@
+<div class="form_container">
+  <form [formGroup]="changeInfoForm" (ngSubmit)="onSave()">
+    <div>
+      <label for="about">About</label>
+      <div class="break"></div>
+      <textarea id="about" formControlName="about"></textarea>
+    </div>
+    <div>
+      <label for="dateOfBirth">Date of birth</label>
+      <div class="break"></div>
+      <input type="date" id="dateOfBirth" formControlName="dateOfBirth"/>
+    </div>
+    <div>
+      <button type="submit">Save</button>
+    </div>
+  </form>
+</div>

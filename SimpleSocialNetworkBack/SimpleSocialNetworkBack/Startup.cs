@@ -10,6 +10,7 @@ using Business;
 using Business.Common;
 using Business.Services;
 using Business.Services.Implementations;
+using Business.Validation;
 using DataAccess;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Authentication;
@@ -17,6 +18,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -63,6 +65,11 @@ namespace SimpleSocialNetworkBack
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IOpMessageService, OpMessageService>();
+
+            services.AddHttpContextAccessor();
+            services.AddTransient(opt => new TypedClaimsPrincipal(
+                opt.GetService<IHttpContextAccessor>()?.HttpContext.User ??
+                throw new NotImplementedException("Isn't reachable, i hope")));
 
             services.AddScoped<IMapper>(x =>
             {

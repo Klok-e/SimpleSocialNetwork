@@ -1,0 +1,73 @@
+@import "../../../css/base";
+
+:host {
+  display: flex;
+  flex-direction: row;
+
+  .vertical_container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: flex-start;
+    justify-content: left;
+
+    nav {
+      display: inline-flex;
+      flex-direction: row;
+      justify-content: center;
+      //flex-grow: 1;
+      align-items: center;
+      flex-wrap: wrap;
+
+      * {
+        padding: 8pt 10pt 8pt 10pt;
+        margin: 10pt 20pt 10pt 20pt;
+
+        color: $text_color;
+        text-decoration: none;
+        background-color: $blue2;
+      }
+
+      *:hover {
+        background-color: $blue3;
+      }
+
+      *.active {
+        background-color: $blue2-5;
+      }
+    }
+  }
+
+  aside {
+    display: flex;
+    flex-direction: column;
+    width: 200pt;
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      background-color: $blue1;
+      padding: 5pt 10pt 5pt 10pt;
+
+      .item {
+        display: inline;
+        background-color: $blue2;
+        padding: 5pt 10pt 5pt 10pt;
+        margin: 5pt 0 5pt 0;
+        overflow: hidden;
+      }
+
+      button {
+        color: $text_color;
+        text-decoration: none;
+        border: none;
+        font: 16px sans-serif;
+      }
+
+      button:hover {
+        background: $blue4;
+        cursor: pointer;
+      }
+    }
+  }
+}

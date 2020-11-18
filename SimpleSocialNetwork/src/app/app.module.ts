@@ -14,6 +14,9 @@ import {ReadPostComponent} from './components/read-post/read-post.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {JwtAuthInterceptor} from './interceptors/jwt-auth.interceptor';
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
+import { ProfileSubscriptionsComponent } from './components/user-profile/profile-subscriptions/profile-subscriptions.component';
+import { ChangeInfoComponent } from './components/user-profile/change-info/change-info.component';
+import {DatePipe} from '@angular/common';
 
 
 @NgModule({
@@ -25,7 +28,9 @@ import {UserProfileComponent} from './components/user-profile/user-profile.compo
     LoginComponent,
     RegisterComponent,
     ReadPostComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ProfileSubscriptionsComponent,
+    ChangeInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +43,7 @@ import {UserProfileComponent} from './components/user-profile/user-profile.compo
   providers: [
     {provide: BASE_PATH, useValue: 'https://localhost:5001'},
     {provide: HTTP_INTERCEPTORS, useClass: JwtAuthInterceptor, multi: true},
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

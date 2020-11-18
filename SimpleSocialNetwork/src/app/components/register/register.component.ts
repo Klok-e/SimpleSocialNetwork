@@ -11,7 +11,7 @@ import {
 } from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
-import {UserService} from '../../../backend_api_client';
+import {UserApiService} from '../../../backend_api_client';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
   constructor(private auth: AuthService,
               private formBuilder: FormBuilder,
               private router: Router,
-              private users: UserService) {
+              private users: UserApiService) {
     this.loginForm = this.formBuilder.group({
       login: new FormControl('', [
         Validators.required

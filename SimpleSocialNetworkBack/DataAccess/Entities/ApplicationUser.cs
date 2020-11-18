@@ -8,7 +8,7 @@ namespace DataAccess.Entities
     {
         [Key] public string Login { get; set; } = null!;
 
-        [Required] public string About { get; set; } = "";
+        public string? About { get; set; }
 
         public DateTime? DateBirth { get; set; }
 

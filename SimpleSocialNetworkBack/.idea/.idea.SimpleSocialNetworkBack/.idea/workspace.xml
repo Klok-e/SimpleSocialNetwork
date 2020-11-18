@@ -9,8 +9,47 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="239d33a8-2d55-46f3-8aca-4806438a8afc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/client_api_gen/generate_client_api.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/client_api_gen/generate_client_api.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/client_api_gen/swagger_api.json" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/client_api_gen/swagger_api.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/read-post/read-post.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/read-post/read-post.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/register/register.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/user-profile/user-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/user-profile/user-profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/user-profile/user-profile.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/user-profile/user-profile.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/user-profile/user-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/components/user-profile/user-profile.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/guards/auth.guard.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/interceptors/jwt-auth.interceptor.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/services/auth.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/services/posts.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/services/posts.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/app/services/posts.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api/auth.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api/comment.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api/opMessage.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/api/user.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/model/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/backend_api_client/model/models.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/css/base.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/css/base.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SimpleSocialNetwork/src/css/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../SimpleSocialNetwork/src/css/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SimpleSocialNetworkBack/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/MapperProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/MapperProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Services/ICommentService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Services/ICommentService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Services/IOpMessageService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Services/IOpMessageService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Services/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Services/IUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Services/Implementations/CommentService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Services/Implementations/CommentService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Services/Implementations/OpMessageService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Services/Implementations/OpMessageService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Business/Services/Implementations/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Business/Services/Implementations/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/Entities/ApplicationUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Entities/ApplicationUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/Migrations/SocialDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Migrations/SocialDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/SocialDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/SocialDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/CommentController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/CommentController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/OpMessageController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/OpMessageController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimpleSocialNetworkBack/Misc/CustomExceptionFilter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/Misc/CustomExceptionFilter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimpleSocialNetworkBack/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleSocialNetworkBack/Startup.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,22 +67,20 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/12347E5B-AFCD-42B4-8A81-D075BFA223AE/bd/3c0bed15/ExceptionContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/74B28109-DF63-4BE1-91E3-839583301D4E/70/8bd2e21c/UnauthorizedResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/C380C79A-28E2-4B2E-BE08-C035CC2444AC/1/IdentityServiceCollectionUIExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/A646A1B6-9A6B-4695-9F2B-93D08BF1D8F7/14/DbSet.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/736E533F-7585-4782-99A2-1365D5C0AEBA/1F/AuthenticationBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0C1EC258-8F10-4905-A6A3-E6C3F4F92435/b4/b5c09151/AuthorizationOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/736E533F-7585-4782-99A2-1365D5C0AEBA/2/IdentityServerBuilderConfigurationExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/74B28109-DF63-4BE1-91E3-839583301D4E/82/c2916dc3/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/F9B7D2EE-C4FD-432F-A52C-CB3A9E9DE266/3/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/B538A170-1CD3-4843-86B8-076E88796BC8/1/SwaggerUIMiddleware.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/21901C3C-5ECB-4ECA-8F8A-1D237071786F/54/b94d6e92/HttpContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/B538A170-1CD3-4843-86B8-076E88796BC8/3/SwaggerUIBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15501BB9-CEF5-426F-A9C4-CDACC295D138/20/4fad6bbd/ClaimsPrincipal.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Business/Services/Implementations/dd.cs" />
-        <option value="$PROJECT_DIR$/Business/Models/LoginRequestModel.cs" />
-        <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Misc/AddAuthHeaderParameter.cs" />
-        <option value="$PROJECT_DIR$/Business/Models/CreateOpMessageModel.cs" />
-        <option value="$PROJECT_DIR$/Business/Models/CredentialsModel.cs" />
         <option value="$PROJECT_DIR$/Business/Models/LoggedInUser.cs" />
         <option value="$PROJECT_DIR$/Business/Models/OpMessageModel.cs" />
         <option value="$PROJECT_DIR$/Business/Models/UserModel.cs" />
@@ -57,39 +94,44 @@
         <option value="$PROJECT_DIR$/Business/Models/Requests/LoginModel.cs" />
         <option value="$PROJECT_DIR$/Business/Models/Answers/LoginTaken.cs" />
         <option value="$PROJECT_DIR$/Business/Models/Requests/IsLoginTakenModel.cs" />
-        <option value="$PROJECT_DIR$/Business/Services/IUserService.cs" />
-        <option value="$PROJECT_DIR$/Business/Services/Implementations/UserService.cs" />
         <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/userController.cs" />
         <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/SimpleSocialNetworkBack.csproj" />
         <option value="$PROJECT_DIR$/Business/Services/ICrud.cs" />
         <option value="$PROJECT_DIR$/Business/Models/Responses/LoggedInUser.cs" />
         <option value="$PROJECT_DIR$/Business/Models/Responses/UserModel.cs" />
         <option value="$PROJECT_DIR$/DataAccess/Entities/OpMessage.cs" />
-        <option value="$PROJECT_DIR$/DataAccess/Entities/ApplicationUser.cs" />
         <option value="$PROJECT_DIR$/Business/Models/Requests/CreateCommentModel.cs" />
         <option value="$PROJECT_DIR$/Business/Services/Implementations/AuthService.cs" />
         <option value="$PROJECT_DIR$/Business/Validation/BadCredentialsException.cs" />
-        <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Misc/CustomExceptionFilter.cs" />
-        <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Startup.cs" />
-        <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/UserController.cs" />
         <option value="$PROJECT_DIR$/Business/Models/Responses/OpMessageModel.cs" />
         <option value="$PROJECT_DIR$/Business/Models/Responses/CommentModel.cs" />
-        <option value="$PROJECT_DIR$/Business/MapperProfile.cs" />
         <option value="$PROJECT_DIR$/DataAccess/Entities/Message.cs" />
-        <option value="$PROJECT_DIR$/DataAccess/SocialDbContext.cs" />
         <option value="$PROJECT_DIR$/Business/Models/Requests/UpvoteComment.cs" />
-        <option value="$PROJECT_DIR$/Business/Services/ICommentService.cs" />
         <option value="$PROJECT_DIR$/Business/Models/Requests/UpdownvoteComment.cs" />
-        <option value="$PROJECT_DIR$/Business/Services/Implementations/CommentService.cs" />
         <option value="$PROJECT_DIR$/Business/Models/VoteType.cs" />
         <option value="$PROJECT_DIR$/Business/Models/Requests/VoteType.cs" />
         <option value="$PROJECT_DIR$/Business/Models/Requests/VoteComment.cs" />
         <option value="$PROJECT_DIR$/Business/Models/Requests/VotePost.cs" />
-        <option value="$PROJECT_DIR$/Business/Services/Implementations/OpMessageService.cs" />
-        <option value="$PROJECT_DIR$/Business/Services/IOpMessageService.cs" />
-        <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/OpMessageController.cs" />
         <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/AuthController.cs" />
+        <option value="$PROJECT_DIR$/Tests/Business/UserServiceTests.cs" />
+        <option value="$PROJECT_DIR$/Business/Models/Responses/LimitedUserModel.cs" />
+        <option value="$PROJECT_DIR$/Business/MapperProfile.cs" />
+        <option value="$PROJECT_DIR$/Business/Validation/ForbiddenException.cs" />
+        <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Misc/CustomExceptionFilter.cs" />
+        <option value="$PROJECT_DIR$/Business/Services/IOpMessageService.cs" />
+        <option value="$PROJECT_DIR$/Business/Services/Implementations/OpMessageService.cs" />
+        <option value="$PROJECT_DIR$/Business/Services/ICommentService.cs" />
+        <option value="$PROJECT_DIR$/Business/Services/Implementations/CommentService.cs" />
+        <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/OpMessageController.cs" />
         <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/CommentController.cs" />
+        <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Startup.cs" />
+        <option value="$PROJECT_DIR$/Business/Common/TypedClaimsPrincipal.cs" />
+        <option value="$PROJECT_DIR$/Business/Services/IUserService.cs" />
+        <option value="$PROJECT_DIR$/Business/Services/Implementations/UserService.cs" />
+        <option value="$PROJECT_DIR$/SimpleSocialNetworkBack/Controllers/UserController.cs" />
+        <option value="$PROJECT_DIR$/Business/Models/Requests/ChangeUserInfo.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/Entities/ApplicationUser.cs" />
+        <option value="$PROJECT_DIR$/DataAccess/SocialDbContext.cs" />
       </list>
     </option>
   </component>
@@ -163,7 +205,8 @@
       <workItem from="1605454608396" duration="6867000" />
       <workItem from="1605470759120" duration="4801000" />
       <workItem from="1605523757546" duration="16967000" />
-      <workItem from="1605608460955" duration="6461000" />
+      <workItem from="1605608460955" duration="6518000" />
+      <workItem from="1605688630304" duration="12731000" />
     </task>
     <servers />
   </component>
@@ -217,86 +260,86 @@
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
     <state x="748" y="276" key="FileChooserDialogImpl/0.0.1920.1035@0.0.1920.1035" timestamp="1605201335096" />
-    <state width="1874" height="264" key="GridCell.Tab.0.bottom" timestamp="1605633543309">
+    <state width="1874" height="211" key="GridCell.Tab.0.bottom" timestamp="1605712876589">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="264" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1605633543309" />
-    <state width="1874" height="264" key="GridCell.Tab.0.center" timestamp="1605633543309">
+    <state width="1874" height="211" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1605712876589" />
+    <state width="1874" height="211" key="GridCell.Tab.0.center" timestamp="1605712876589">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="264" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1605633543309" />
-    <state width="1874" height="264" key="GridCell.Tab.0.left" timestamp="1605633543308">
+    <state width="1874" height="211" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1605712876589" />
+    <state width="1874" height="211" key="GridCell.Tab.0.left" timestamp="1605712876588">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="264" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1605633543308" />
-    <state width="1874" height="264" key="GridCell.Tab.0.right" timestamp="1605633543309">
+    <state width="1874" height="211" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1605712876588" />
+    <state width="1874" height="211" key="GridCell.Tab.0.right" timestamp="1605712876589">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="264" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1605633543309" />
-    <state width="1874" height="353" key="GridCell.Tab.1.bottom" timestamp="1605564777564">
+    <state width="1874" height="211" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1605712876589" />
+    <state width="1874" height="353" key="GridCell.Tab.1.bottom" timestamp="1605711822472">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="353" key="GridCell.Tab.1.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1605564777564" />
-    <state width="1874" height="353" key="GridCell.Tab.1.center" timestamp="1605564777563">
+    <state width="1874" height="353" key="GridCell.Tab.1.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1605711822472" />
+    <state width="1874" height="353" key="GridCell.Tab.1.center" timestamp="1605711822471">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="353" key="GridCell.Tab.1.center/0.0.1920.1035@0.0.1920.1035" timestamp="1605564777563" />
-    <state width="1874" height="353" key="GridCell.Tab.1.left" timestamp="1605564777563">
+    <state width="1874" height="353" key="GridCell.Tab.1.center/0.0.1920.1035@0.0.1920.1035" timestamp="1605711822471" />
+    <state width="1874" height="353" key="GridCell.Tab.1.left" timestamp="1605711822470">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="353" key="GridCell.Tab.1.left/0.0.1920.1035@0.0.1920.1035" timestamp="1605564777563" />
-    <state width="1874" height="353" key="GridCell.Tab.1.right" timestamp="1605564777564">
+    <state width="1874" height="353" key="GridCell.Tab.1.left/0.0.1920.1035@0.0.1920.1035" timestamp="1605711822470" />
+    <state width="1874" height="353" key="GridCell.Tab.1.right" timestamp="1605711822472">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="353" key="GridCell.Tab.1.right/0.0.1920.1035@0.0.1920.1035" timestamp="1605564777564" />
-    <state width="1874" height="353" key="GridCell.Tab.2.bottom" timestamp="1605564777567">
+    <state width="1874" height="353" key="GridCell.Tab.1.right/0.0.1920.1035@0.0.1920.1035" timestamp="1605711822472" />
+    <state width="1874" height="353" key="GridCell.Tab.2.bottom" timestamp="1605711822475">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="353" key="GridCell.Tab.2.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1605564777567" />
-    <state width="1874" height="353" key="GridCell.Tab.2.center" timestamp="1605564777566">
+    <state width="1874" height="353" key="GridCell.Tab.2.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1605711822475" />
+    <state width="1874" height="353" key="GridCell.Tab.2.center" timestamp="1605711822474">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="353" key="GridCell.Tab.2.center/0.0.1920.1035@0.0.1920.1035" timestamp="1605564777566" />
-    <state width="1874" height="353" key="GridCell.Tab.2.left" timestamp="1605564777565">
+    <state width="1874" height="353" key="GridCell.Tab.2.center/0.0.1920.1035@0.0.1920.1035" timestamp="1605711822474" />
+    <state width="1874" height="353" key="GridCell.Tab.2.left" timestamp="1605711822473">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="353" key="GridCell.Tab.2.left/0.0.1920.1035@0.0.1920.1035" timestamp="1605564777565" />
-    <state width="1874" height="353" key="GridCell.Tab.2.right" timestamp="1605564777566">
+    <state width="1874" height="353" key="GridCell.Tab.2.left/0.0.1920.1035@0.0.1920.1035" timestamp="1605711822473" />
+    <state width="1874" height="353" key="GridCell.Tab.2.right" timestamp="1605711822475">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="353" key="GridCell.Tab.2.right/0.0.1920.1035@0.0.1920.1035" timestamp="1605564777566" />
-    <state width="1874" height="353" key="GridCell.Tab.3.bottom" timestamp="1605564777569">
+    <state width="1874" height="353" key="GridCell.Tab.2.right/0.0.1920.1035@0.0.1920.1035" timestamp="1605711822475" />
+    <state width="1874" height="353" key="GridCell.Tab.3.bottom" timestamp="1605711822478">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="353" key="GridCell.Tab.3.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1605564777569" />
-    <state width="1874" height="353" key="GridCell.Tab.3.center" timestamp="1605564777568">
+    <state width="1874" height="353" key="GridCell.Tab.3.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1605711822478" />
+    <state width="1874" height="353" key="GridCell.Tab.3.center" timestamp="1605711822476">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="353" key="GridCell.Tab.3.center/0.0.1920.1035@0.0.1920.1035" timestamp="1605564777568" />
-    <state width="1874" height="353" key="GridCell.Tab.3.left" timestamp="1605564777567">
+    <state width="1874" height="353" key="GridCell.Tab.3.center/0.0.1920.1035@0.0.1920.1035" timestamp="1605711822476" />
+    <state width="1874" height="353" key="GridCell.Tab.3.left" timestamp="1605711822476">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="353" key="GridCell.Tab.3.left/0.0.1920.1035@0.0.1920.1035" timestamp="1605564777567" />
-    <state width="1874" height="353" key="GridCell.Tab.3.right" timestamp="1605564777569">
+    <state width="1874" height="353" key="GridCell.Tab.3.left/0.0.1920.1035@0.0.1920.1035" timestamp="1605711822476" />
+    <state width="1874" height="353" key="GridCell.Tab.3.right" timestamp="1605711822477">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="353" key="GridCell.Tab.3.right/0.0.1920.1035@0.0.1920.1035" timestamp="1605564777569" />
-    <state width="1874" height="353" key="GridCell.Tab.4.bottom" timestamp="1605564777573">
+    <state width="1874" height="353" key="GridCell.Tab.3.right/0.0.1920.1035@0.0.1920.1035" timestamp="1605711822477" />
+    <state width="1874" height="353" key="GridCell.Tab.4.bottom" timestamp="1605711822480">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="353" key="GridCell.Tab.4.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1605564777573" />
-    <state width="1874" height="353" key="GridCell.Tab.4.center" timestamp="1605564777571">
+    <state width="1874" height="353" key="GridCell.Tab.4.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1605711822480" />
+    <state width="1874" height="353" key="GridCell.Tab.4.center" timestamp="1605711822479">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="353" key="GridCell.Tab.4.center/0.0.1920.1035@0.0.1920.1035" timestamp="1605564777571" />
-    <state width="1874" height="353" key="GridCell.Tab.4.left" timestamp="1605564777570">
+    <state width="1874" height="353" key="GridCell.Tab.4.center/0.0.1920.1035@0.0.1920.1035" timestamp="1605711822479" />
+    <state width="1874" height="353" key="GridCell.Tab.4.left" timestamp="1605711822479">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="353" key="GridCell.Tab.4.left/0.0.1920.1035@0.0.1920.1035" timestamp="1605564777570" />
-    <state width="1874" height="353" key="GridCell.Tab.4.right" timestamp="1605564777572">
+    <state width="1874" height="353" key="GridCell.Tab.4.left/0.0.1920.1035@0.0.1920.1035" timestamp="1605711822479" />
+    <state width="1874" height="353" key="GridCell.Tab.4.right" timestamp="1605711822480">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="1874" height="353" key="GridCell.Tab.4.right/0.0.1920.1035@0.0.1920.1035" timestamp="1605564777572" />
+    <state width="1874" height="353" key="GridCell.Tab.4.right/0.0.1920.1035@0.0.1920.1035" timestamp="1605711822480" />
     <state x="560" y="253" key="Rider.ProjectTemplateDialog.Size" timestamp="1605205443346">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
@@ -313,10 +356,10 @@
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
     <state x="444" y="0" width="1476" height="963" key="dock-window-1/0.0.1920.1035@0.0.1920.1035" timestamp="1605562351191" />
-    <state width="349" height="317" key="javadoc.popup.new" timestamp="1605631789674">
+    <state width="349" height="317" key="javadoc.popup.new" timestamp="1605711807773">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state width="349" height="317" key="javadoc.popup.new/0.0.1920.1035@0.0.1920.1035" timestamp="1605631789674" />
+    <state width="349" height="317" key="javadoc.popup.new/0.0.1920.1035@0.0.1920.1035" timestamp="1605711807773" />
     <state x="624" y="236" key="run.anything.popup" timestamp="1605131913666">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>

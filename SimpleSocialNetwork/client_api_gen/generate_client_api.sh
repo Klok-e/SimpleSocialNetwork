@@ -5,4 +5,4 @@ openapi-generator generate \
   -i client_api_gen/swagger_api.json \
   -g typescript-angular \
   -o src/backend_api_client/ \
-  -p taggedUnions=true,stringEnums=true
+  -p taggedUnions=true,stringEnums=true,serviceFileSuffix=-api.service,serviceSuffix=ApiService

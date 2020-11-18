@@ -30,7 +30,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class OpMessageService {
+export class OpMessageApiService {
 
     protected basePath = 'http://localhost';
     public defaultHeaders = new HttpHeaders();

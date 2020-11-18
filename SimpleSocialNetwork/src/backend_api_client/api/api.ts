@@ -1,9 +1,9 @@
-export * from './auth.service';
-import { AuthService } from './auth.service';
-export * from './comment.service';
-import { CommentService } from './comment.service';
-export * from './opMessage.service';
-import { OpMessageService } from './opMessage.service';
-export * from './user.service';
-import { UserService } from './user.service';
-export const APIS = [AuthService, CommentService, OpMessageService, UserService];
+export * from './auth-api.service';
+import { AuthApiService } from './auth-api.service';
+export * from './comment-api.service';
+import { CommentApiService } from './comment-api.service';
+export * from './opMessage-api.service';
+import { OpMessageApiService } from './opMessage-api.service';
+export * from './user-api.service';
+import { UserApiService } from './user-api.service';
+export const APIS = [AuthApiService, CommentApiService, OpMessageApiService, UserApiService];

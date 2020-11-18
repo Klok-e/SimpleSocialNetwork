@@ -3,10 +3,10 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 
-import { AuthService } from './api/auth.service';
-import { CommentService } from './api/comment.service';
-import { OpMessageService } from './api/opMessage.service';
-import { UserService } from './api/user.service';
+import { AuthApiService } from './api/auth-api.service';
+import { CommentApiService } from './api/comment-api.service';
+import { OpMessageApiService } from './api/opMessage-api.service';
+import { UserApiService } from './api/user-api.service';
 
 @NgModule({
   imports:      [],

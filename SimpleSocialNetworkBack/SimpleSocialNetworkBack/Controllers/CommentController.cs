@@ -25,8 +25,7 @@ namespace SimpleSocialNetworkBack.Controllers
         [Authorize]
         public async Task<ActionResult> CreateComment([Required] [FromBody] CreateCommentModel comment)
         {
-            var username = User.Identity.Name!;
-            await _commentService.CreateComment(username, comment);
+            await _commentService.CreateComment(comment);
             return Ok();
         }
 

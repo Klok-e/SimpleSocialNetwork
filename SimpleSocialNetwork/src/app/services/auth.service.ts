@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CredentialsModel, LoggedInUser, UserModel, AuthService as GenAuthService, UserService} from '../../backend_api_client';
+import {CredentialsModel, LoggedInUser, UserModel, AuthApiService, UserApiService} from '../../backend_api_client';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {Router} from '@angular/router';
@@ -11,7 +11,7 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<LoggedInUser | null>;
   public currentUser: Observable<LoggedInUser | null>;
 
-  constructor(private auth: GenAuthService) {
+  constructor(private auth: AuthApiService) {
     this.currentUserSubject = new BehaviorSubject<LoggedInUser | null>(JSON.parse(localStorage.getItem('currentUser') as string));
     this.currentUser = this.currentUserSubject.asObservable();
   }

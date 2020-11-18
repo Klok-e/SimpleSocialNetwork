@@ -30,9 +30,7 @@ namespace SimpleSocialNetworkBack.Controllers
         [Authorize]
         public async Task<ActionResult<int>> CreateOpMessage([Required] [FromBody] CreateOpMessageModel opMessage)
         {
-            var username = User.Identity.Name!;
-
-            var post = await _opMessageService.MakeAPost(username, opMessage);
+            var post = await _opMessageService.MakeAPost(opMessage);
             return Ok(post);
         }
 

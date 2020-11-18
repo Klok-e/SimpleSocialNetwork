@@ -17,6 +17,9 @@ namespace SimpleSocialNetworkBack.Misc
                 case BadCredentialsException _:
                     context.Result = new UnauthorizedResult();
                     break;
+                case ForbiddenException _:
+                    context.Result = new ForbidResult();
+                    break;
             }
         }
     }

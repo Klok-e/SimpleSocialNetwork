@@ -29,7 +29,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthApiService {
 
     protected basePath = 'http://localhost';
     public defaultHeaders = new HttpHeaders();

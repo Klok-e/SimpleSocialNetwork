@@ -10,7 +10,7 @@ namespace Business.Services
     {
         Task<IEnumerable<OpMessageModel>> GetAll();
 
-        Task<int> MakeAPost(string user, CreateOpMessageModel model);
+        Task<int> MakeAPost(CreateOpMessageModel model);
 
         Task<OpMessageModel> GetById(int id);
 

@@ -1,0 +1,21 @@
+<div class="vertical_container">
+  <nav>
+    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
+       routerLink="./subs">Subscriptions</a>
+    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
+       routerLink="./change-info">Change info</a>
+  </nav>
+
+  <router-outlet></router-outlet>
+</div>
+<aside *ngIf="user !== null">
+  <div class="info">
+    <div class="item">User: {{user.login}}</div>
+    <div *ngIf="user.about" class="item">About: {{user.about}}</div>
+    <div *ngIf="getUserModel?.dateBirth !== null" class="item">
+      Date of birth: {{getUserModel?.dateBirth | date: 'yyyy-MM-dd'}}
+    </div>
+    <button class="item">Subscribe</button>
+    <button class="item">Ban user</button>
+  </div>
+</aside>
