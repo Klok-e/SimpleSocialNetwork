@@ -23,9 +23,18 @@ export class CurrentUserService {
     return this.userSubject.value;
   }
 
-  public getUser(userName: string): void {
+  get isCurrentSelf(): boolean {
+    return this.auth.getCurrentUserValue()?.login === this.currentUser?.login;
+  }
+
+  public changeUserTo(userName: string): void {
+    // TODO: somehow do this, but currently it breaks profile info updates
+    // if (this.currentUser !== null && this.currentUser.login === userName) {
+    //   return;
+    // }
+
     const isMyProfile = this.auth.getCurrentUserValue()?.login === userName;
-    (() => {
+    ((): Observable<UserModel | LimitedUserModel> => {
       if (isMyProfile) {
         return this.userService.apiUserGet(userName);
       } else {

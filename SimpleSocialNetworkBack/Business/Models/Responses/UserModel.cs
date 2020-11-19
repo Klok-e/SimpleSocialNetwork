@@ -6,7 +6,7 @@ namespace Business.Models.Responses
     public class UserModel : IEquatable<UserModel>
     {
         [Required] public string Login { get; set; } = null!;
-        [Required] public string About { get; set; } = null!;
+        public string? About { get; set; }
 
         public DateTime? DateBirth { get; set; }
         [Required] public bool IsDeleted { get; set; }

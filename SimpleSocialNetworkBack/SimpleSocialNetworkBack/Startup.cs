@@ -65,6 +65,7 @@ namespace SimpleSocialNetworkBack
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IOpMessageService, OpMessageService>();
+            services.AddScoped<ISubscriptionService, SubscriptionService>();
 
             services.AddHttpContextAccessor();
             services.AddTransient(opt => new TypedClaimsPrincipal(

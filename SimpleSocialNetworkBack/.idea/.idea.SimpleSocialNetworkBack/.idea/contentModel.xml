@@ -33,6 +33,7 @@
             <e p="LimitedUserModel.cs" t="Include" />
             <e p="LoggedInUser.cs" t="Include" />
             <e p="OpMessageModel.cs" t="Include" />
+            <e p="SubscriptionModel.cs" t="Include" />
             <e p="UserModel.cs" t="Include" />
           </e>
         </e>
@@ -41,11 +42,13 @@
           <e p="ICommentService.cs" t="Include" />
           <e p="ICrud.cs" t="Include" />
           <e p="IOpMessageService.cs" t="Include" />
+          <e p="ISubscriptionService.cs" t="Include" />
           <e p="IUserService.cs" t="Include" />
           <e p="Implementations" t="Include">
             <e p="AuthService.cs" t="Include" />
             <e p="CommentService.cs" t="Include" />
             <e p="OpMessageService.cs" t="Include" />
+            <e p="SubscriptionService.cs" t="Include" />
             <e p="UserService.cs" t="Include" />
           </e>
         </e>
@@ -83,6 +86,8 @@
           <e p="20201116213412_RequiredStuff.cs" t="Include" />
           <e p="20201118152101_AllowNullInAbout.Designer.cs" t="Include" />
           <e p="20201118152101_AllowNullInAbout.cs" t="Include" />
+          <e p="20201119181731_RenameSubscriptionIsActive.Designer.cs" t="Include" />
+          <e p="20201119181731_RenameSubscriptionIsActive.cs" t="Include" />
           <e p="SocialDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="SocialDbContext.cs" t="Include" />
@@ -100,6 +105,7 @@
           <e p="AuthController.cs" t="Include" />
           <e p="CommentController.cs" t="Include" />
           <e p="OpMessageController.cs" t="Include" />
+          <e p="SubscriptionController.cs" t="Include" />
           <e p="UserController.cs" t="Include" />
         </e>
         <e p="Misc" t="Include">

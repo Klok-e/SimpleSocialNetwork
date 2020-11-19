@@ -11,11 +11,11 @@
  */
 
 
-export interface UserModel { 
-    login: string;
-    about?: string | null;
-    dateBirth?: string | null;
-    isDeleted: boolean;
+export interface SubscriptionModel { 
+    id: number;
+    subscriberId?: string | null;
+    targetId?: string | null;
+    isActive: boolean;
 }
 
 

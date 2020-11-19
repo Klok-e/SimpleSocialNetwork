@@ -11,7 +11,7 @@ namespace DataAccess.Entities
         public string? SubscriberId { get; set; }
         public string? TargetId { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool IsNotActive { get; set; }
 
         public virtual ApplicationUser? Subscriber { get; set; }
 

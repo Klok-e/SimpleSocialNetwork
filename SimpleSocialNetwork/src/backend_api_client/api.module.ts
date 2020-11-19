@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthApiService } from './api/auth-api.service';
 import { CommentApiService } from './api/comment-api.service';
 import { OpMessageApiService } from './api/opMessage-api.service';
+import { SubscriptionApiService } from './api/subscription-api.service';
 import { UserApiService } from './api/user-api.service';
 
 @NgModule({

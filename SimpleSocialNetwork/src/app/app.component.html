@@ -10,7 +10,7 @@
     <a *ngIf="loggedIn()" routerLink="/create-post" routerLinkActive="active"
        [routerLinkActiveOptions]="{exact:true}" class="bttn">CreatePost</a>
     <a *ngIf="loggedIn()" routerLink="/u/{{auth.getCurrentUserValue()?.login}}" routerLinkActive="active"
-       [routerLinkActiveOptions]="{exact:true}" class="bttn">Profile</a>
+       [routerLinkActiveOptions]="{exact:false}" class="bttn">Profile</a>
     <a *ngIf="loggedIn()" routerLink="" (click)="logout()"
        class="bttn">Logout</a>
     <a *ngIf="!loggedIn()" routerLink="/login" routerLinkActive="active"

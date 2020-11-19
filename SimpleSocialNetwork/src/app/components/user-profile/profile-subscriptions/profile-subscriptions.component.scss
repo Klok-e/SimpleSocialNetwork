@@ -1,0 +1,20 @@
+@import "../../../../css/base";
+
+:host {
+
+}
+
+.sub_list {
+  display: flex;
+  flex-direction: column;
+
+  .sub_item {
+    margin: 5pt 5pt 5pt 5pt;
+    padding: 5pt 5pt 5pt 5pt;
+    background-color: $blue2;
+    display: inline;
+    a {
+      color: $text_color;
+    }
+  }
+}

@@ -6,6 +6,7 @@ export * from './credentialsModel';
 export * from './limitedUserModel';
 export * from './loggedInUser';
 export * from './opMessageModel';
+export * from './subscriptionModel';
 export * from './userModel';
 export * from './voteComment';
 export * from './votePost';

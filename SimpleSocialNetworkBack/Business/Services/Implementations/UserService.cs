@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Common;
@@ -60,7 +61,7 @@ namespace Business.Services.Implementations
 
             user.About = changeInfo.About;
             user.DateBirth = changeInfo.DateBirth;
-            
+
             await _context.SaveChangesAsync();
         }
     }

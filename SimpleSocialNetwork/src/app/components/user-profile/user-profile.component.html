@@ -15,7 +15,16 @@
     <div *ngIf="getUserModel?.dateBirth !== null" class="item">
       Date of birth: {{getUserModel?.dateBirth | date: 'yyyy-MM-dd'}}
     </div>
-    <button class="item">Subscribe</button>
-    <button class="item">Ban user</button>
+    <button *ngIf="auth.isLoggedIn && !isViewingSelf && subscribedToCurrent === false" (click)="subscribeToCurrent()"
+            class="item">
+      Subscribe
+    </button>
+    <button *ngIf="auth.isLoggedIn && !isViewingSelf && subscribedToCurrent === true" (click)="unsubFromCurrent()"
+            class="item">
+      Unsubscribe
+    </button>
+    <button *ngIf="auth.isLoggedIn"
+            class="item">Ban user
+    </button>
   </div>
 </aside>

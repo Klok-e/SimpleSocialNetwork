@@ -1,16 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CurrentUserService} from '../../../services/current-user.service';
 import {LimitedUserModel, UserApiService, UserModel} from '../../../../backend_api_client';
 import {HttpErrorResponse} from '@angular/common/http';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {DatePipe} from '@angular/common';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-change-info',
   templateUrl: './change-info.component.html',
   styleUrls: ['./change-info.component.scss']
 })
-export class ChangeInfoComponent implements OnInit {
+export class ChangeInfoComponent implements OnInit, OnDestroy {
+  subs: Subscription = new Subscription();
+
   changeInfoForm: FormGroup;
 
   constructor(private userService: CurrentUserService,
@@ -28,7 +31,7 @@ export class ChangeInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.user.subscribe(u => {
+    this.subs.add(this.userService.user.subscribe(u => {
       if (u === null) {
         return;
       }
@@ -38,7 +41,11 @@ export class ChangeInfoComponent implements OnInit {
           about: u?.about,
         });
       }
-    });
+    }));
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 
   onSave(): void {
@@ -50,7 +57,7 @@ export class ChangeInfoComponent implements OnInit {
       dateBirth: dbo,
     }).subscribe(_ => {
       if (this.user?.login !== null && this.user?.login !== undefined) {
-        this.userService.getUser(this.user?.login);
+        this.userService.changeUserTo(this.user?.login);
       }
     });
   }

@@ -20,6 +20,10 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  get isLoggedIn(): boolean {
+    return this.getCurrentUserValue() !== null;
+  }
+
   public register(userRegister: CredentialsModel): Observable<UserModel> {
     return this.auth.apiAuthRegisterPost(userRegister, 'body');
   }

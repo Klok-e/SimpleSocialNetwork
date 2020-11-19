@@ -21,7 +21,7 @@ const routes: Routes = [
     children: [
       {path: '', redirectTo: 'subs', pathMatch: 'full'},
       {path: 'subs', component: ProfileSubscriptionsComponent},
-      {path: 'change-info', component: ChangeInfoComponent},
+      {path: 'change-info', component: ChangeInfoComponent, canActivate: [AuthGuard]},
     ]
   },
   {path: 'login', component: LoginComponent},

@@ -23,6 +23,9 @@ namespace Business
 
             CreateMap<OpMessage, OpMessageModel>()
                 .ReverseMap();
+
+            CreateMap<Subscription, SubscriptionModel>()
+                .ReverseMap();
         }
     }
 }

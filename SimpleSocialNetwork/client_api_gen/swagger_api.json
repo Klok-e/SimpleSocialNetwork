@@ -332,6 +332,111 @@
         }
       }
     },
+    "/api/Subscription/subscribed_to": {
+      "get": {
+        "tags": [
+          "Subscription"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SubscriptionModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Subscription/is_subscribed_to": {
+      "get": {
+        "tags": [
+          "Subscription"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Subscription/sub": {
+      "post": {
+        "tags": [
+          "Subscription"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Subscription/unsub": {
+      "post": {
+        "tags": [
+          "Subscription"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/User/exists": {
       "get": {
         "tags": [
@@ -472,7 +577,6 @@
       },
       "UserModel": {
         "required": [
-          "about",
           "isDeleted",
           "login"
         ],
@@ -482,7 +586,8 @@
             "type": "string"
           },
           "about": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "dateBirth": {
             "type": "string",
@@ -673,6 +778,31 @@
           },
           "voteType": {
             "$ref": "#/components/schemas/VoteType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SubscriptionModel": {
+        "required": [
+          "id",
+          "isActive"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "subscriberId": {
+            "type": "string",
+            "nullable": true
+          },
+          "targetId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
