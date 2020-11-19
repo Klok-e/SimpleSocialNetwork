@@ -48,6 +48,14 @@ namespace SimpleSocialNetworkBack.Controllers
             return Ok(await _opMessageService.GetAll());
         }
 
+        [HttpGet("from_user")]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<OpMessageModel>>> GetOpMessagesFromUser([Required] string login)
+        {
+            var posts = await _opMessageService.PostsFromUser(login);
+            return Ok(posts);
+        }
+
         [HttpGet("comments/{postId}")]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<CommentModel>>> GetComments(int postId)
@@ -59,7 +67,8 @@ namespace SimpleSocialNetworkBack.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<bool>> PostExists(int postId)
         {
-            return Ok(await _opMessageService.PostExists(postId));
+            var exists = await _opMessageService.PostExists(postId);
+            return Ok(exists);
         }
 
         [HttpPost("vote")]

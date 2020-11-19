@@ -237,6 +237,38 @@
         }
       }
     },
+    "/api/OpMessage/from_user": {
+      "get": {
+        "tags": [
+          "OpMessage"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OpMessageModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/OpMessage/comments/{postId}": {
       "get": {
         "tags": [

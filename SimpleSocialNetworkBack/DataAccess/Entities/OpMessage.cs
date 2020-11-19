@@ -9,8 +9,6 @@ namespace DataAccess.Entities
     {
         [Key] public int Id { get; set; }
 
-        [ForeignKey(nameof(Poster))] public string? PosterId { get; set; }
-
         [Required] public string Title { get; set; } = null!;
         [Required] public string Content { get; set; } = null!;
 

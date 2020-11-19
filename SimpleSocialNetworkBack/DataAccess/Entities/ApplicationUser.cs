@@ -21,5 +21,7 @@ namespace DataAccess.Entities
         public virtual ICollection<Subscription> Subscribers { get; set; } = null!;
 
         public virtual ICollection<Message> Messages { get; set; } = null!;
+
+        public virtual ICollection<OpMessage> Posts { get; set; } = null!;
     }
 }

@@ -11,21 +11,20 @@ namespace Business
     {
         public MapperProfile()
         {
-            CreateMap<ApplicationUser, UserModel>()
-                .ReverseMap();
-            CreateMap<ApplicationUser, LimitedUserModel>()
-                .ReverseMap();
+            CreateMap<ApplicationUser, UserModel>();
+            CreateMap<ApplicationUser, LimitedUserModel>();
 
             CreateMap<Message, CommentModel>()
                 .ForMember(dest => dest.PosterId,
-                    opt => opt.MapFrom(src => src.Poster.Login))
-                .ReverseMap();
+                    opt => 
+                        opt.MapFrom(src => src.Poster.Login));
 
             CreateMap<OpMessage, OpMessageModel>()
-                .ReverseMap();
+                .ForMember(dest => dest.PosterId,
+                    opt =>
+                        opt.MapFrom(src => src.Poster!.Login));
 
-            CreateMap<Subscription, SubscriptionModel>()
-                .ReverseMap();
+            CreateMap<Subscription, SubscriptionModel>();
         }
     }
 }

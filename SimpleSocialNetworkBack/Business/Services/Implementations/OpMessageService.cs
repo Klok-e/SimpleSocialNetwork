@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using Business.Models.Responses;
 using Business.Validation;
 using DataAccess;
 using DataAccess.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Services.Implementations
 {
@@ -32,9 +34,22 @@ namespace Business.Services.Implementations
         public Task<IEnumerable<OpMessageModel>> GetAll()
         {
             return Task.FromResult(_context.OpMessages
+                // include to prevent "There is already an open DataReader associated with this Connection which must be closed first."
+                // error by preloading poster
+                .Include(x => x.Poster)
                 .OrderByDescending(x => x.SendDate)
                 .Select(x => _mapper.Map<OpMessage, OpMessageModel>(x))
                 .AsEnumerable());
+        }
+
+        public async Task<IEnumerable<OpMessageModel>> PostsFromUser(string login)
+        {
+            var user = await _context.Users.FindAsync(login);
+            if (user == null)
+                throw new ValidationException("Nonexistent user");
+
+            return user.Posts
+                .Select(x => _mapper.Map<OpMessage, OpMessageModel>(x));
         }
 
         public async Task<int> MakeAPost(CreateOpMessageModel model)

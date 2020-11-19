@@ -88,6 +88,8 @@
           <e p="20201118152101_AllowNullInAbout.cs" t="Include" />
           <e p="20201119181731_RenameSubscriptionIsActive.Designer.cs" t="Include" />
           <e p="20201119181731_RenameSubscriptionIsActive.cs" t="Include" />
+          <e p="20201119214612_OpMessageNavProp.Designer.cs" t="Include" />
+          <e p="20201119214612_OpMessageNavProp.cs" t="Include" />
           <e p="SocialDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="SocialDbContext.cs" t="Include" />

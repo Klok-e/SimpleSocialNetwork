@@ -43,6 +43,10 @@ namespace DataAccess
                 .WithMany(x => x!.Messages)
                 .IsRequired();
 
+            modelBuilder.Entity<OpMessage>()
+                .HasOne(x => x.Poster)
+                .WithMany(x => x!.Posts);
+
             modelBuilder.Entity<OpMessageTag>()
                 .HasKey(x => new {x.TagId, x.OpId});
 

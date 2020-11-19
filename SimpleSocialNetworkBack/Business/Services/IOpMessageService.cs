@@ -19,5 +19,7 @@ namespace Business.Services
         Task<bool> PostExists(int postId);
 
         Task VotePost(VotePost votePost);
+
+        Task<IEnumerable<OpMessageModel>> PostsFromUser(string login);
     }
 }

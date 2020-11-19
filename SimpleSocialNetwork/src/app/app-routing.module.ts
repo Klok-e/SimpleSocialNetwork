@@ -10,6 +10,7 @@ import {ReadPostComponent} from './components/read-post/read-post.component';
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
 import {ProfileSubscriptionsComponent} from './components/user-profile/profile-subscriptions/profile-subscriptions.component';
 import {ChangeInfoComponent} from './components/user-profile/change-info/change-info.component';
+import {ProfileUserPostsComponent} from './components/user-profile/profile-user-posts/profile-user-posts.component';
 
 const routes: Routes = [
   {path: '', component: PostsComponent, pathMatch: 'full'},
@@ -19,7 +20,8 @@ const routes: Routes = [
     path: 'u/:userName',
     component: UserProfileComponent,
     children: [
-      {path: '', redirectTo: 'subs', pathMatch: 'full'},
+      {path: '', redirectTo: 'posts', pathMatch: 'full'},
+      {path: 'posts', component: ProfileUserPostsComponent},
       {path: 'subs', component: ProfileSubscriptionsComponent},
       {path: 'change-info', component: ChangeInfoComponent, canActivate: [AuthGuard]},
     ]

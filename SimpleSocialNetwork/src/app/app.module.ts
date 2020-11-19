@@ -14,9 +14,10 @@ import {ReadPostComponent} from './components/read-post/read-post.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {JwtAuthInterceptor} from './interceptors/jwt-auth.interceptor';
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
-import { ProfileSubscriptionsComponent } from './components/user-profile/profile-subscriptions/profile-subscriptions.component';
-import { ChangeInfoComponent } from './components/user-profile/change-info/change-info.component';
+import {ProfileSubscriptionsComponent} from './components/user-profile/profile-subscriptions/profile-subscriptions.component';
+import {ChangeInfoComponent} from './components/user-profile/change-info/change-info.component';
 import {DatePipe} from '@angular/common';
+import {ProfileUserPostsComponent} from './components/user-profile/profile-user-posts/profile-user-posts.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {DatePipe} from '@angular/common';
     ReadPostComponent,
     UserProfileComponent,
     ProfileSubscriptionsComponent,
-    ChangeInfoComponent
+    ChangeInfoComponent,
+    ProfileUserPostsComponent
   ],
   imports: [
     BrowserModule,
