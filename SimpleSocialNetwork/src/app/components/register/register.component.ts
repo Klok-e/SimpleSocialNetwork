@@ -70,7 +70,7 @@ export class RegisterComponent implements OnInit {
   public userDoesntExistValidator(): AsyncValidatorFn {
     return async (control: AbstractControl): Promise<ValidationErrors | null> => {
       const login: string = control.value;
-      return login && await this.users.apiUserGet(login).toPromise() ? {userWithLoginExists: true} : null;
+      return login && await this.users.apiUserExistsGet(login).toPromise() ? {userWithLoginExists: true} : null;
     };
   }
 }
