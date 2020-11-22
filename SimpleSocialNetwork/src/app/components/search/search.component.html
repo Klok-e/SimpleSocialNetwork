@@ -1,0 +1,27 @@
+<div class="criteria">
+  <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+    <div>
+      <label for="name">Name</label>
+      <div class="break"></div>
+      <input id="name" formControlName="name" type="text"/>
+    </div>
+    <div>
+      <label for="about">About</label>
+      <div class="break"></div>
+      <input id="about" formControlName="about" type="text"/>
+    </div>
+    <div>
+      <button type="submit" class="bttn">Search</button>
+    </div>
+  </form>
+</div>
+
+<div class="users">
+  <div *ngFor="let user of matchedUsers" class="user">
+    <a routerLink="/u/{{user.login}}">/u/{{user.login}}</a>
+    <div class="break"></div>
+    <span class="about">
+      {{user.about}}
+    </span>
+  </div>
+</div>

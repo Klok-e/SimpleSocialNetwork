@@ -1,6 +1,6 @@
 <div *ngIf="subscriptions !== null" class="sub_list">
   <div *ngFor="let sub of subscriptions"
        class="sub_item">
-    <a href="/u/{{sub.targetId}}">/u/{{sub.targetId}}</a>
+    <a routerLink="/u/{{sub.targetId}}">/u/{{sub.targetId}}</a>
   </div>
 </div>

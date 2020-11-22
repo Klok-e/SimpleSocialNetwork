@@ -11,6 +11,7 @@ import {UserProfileComponent} from './components/user-profile/user-profile.compo
 import {ProfileSubscriptionsComponent} from './components/user-profile/profile-subscriptions/profile-subscriptions.component';
 import {ChangeInfoComponent} from './components/user-profile/change-info/change-info.component';
 import {ProfileUserPostsComponent} from './components/user-profile/profile-user-posts/profile-user-posts.component';
+import {SearchComponent} from './components/search/search.component';
 
 const routes: Routes = [
   {path: '', component: PostsComponent, pathMatch: 'full'},
@@ -28,6 +29,7 @@ const routes: Routes = [
   },
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'search', component: SearchComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

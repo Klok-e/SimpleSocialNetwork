@@ -18,6 +18,7 @@ import {ProfileSubscriptionsComponent} from './components/user-profile/profile-s
 import {ChangeInfoComponent} from './components/user-profile/change-info/change-info.component';
 import {DatePipe} from '@angular/common';
 import {ProfileUserPostsComponent} from './components/user-profile/profile-user-posts/profile-user-posts.component';
+import {SearchComponent} from './components/search/search.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {ProfileUserPostsComponent} from './components/user-profile/profile-user-
     UserProfileComponent,
     ProfileSubscriptionsComponent,
     ChangeInfoComponent,
-    ProfileUserPostsComponent
+    ProfileUserPostsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,55 @@
+@import '~src/css/base';
+
+:host {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .criteria {
+    display: flex;
+
+    form {
+      padding: 30pt 15pt 30pt 15pt;
+      background-color: $blue1-5;
+      width: 200pt;
+
+      > div {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: left;
+        margin: 10pt 5pt 5pt 5pt;
+
+
+        button {
+          padding: 5pt 10pt 5pt 10pt;
+        }
+      }
+    }
+  }
+
+  .users {
+    background-color: $blue1-5;
+    margin: 0 10pt 0 10pt;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    .user {
+      margin: 5pt 5pt 5pt 5pt;
+      padding: 5pt 5pt 5pt 5pt;
+      background-color: $blue2;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      a {
+        color: $text_color;
+      }
+
+      .about {
+        display: inline;
+      }
+    }
+  }
+}
