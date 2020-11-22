@@ -25,31 +25,35 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscriptions.add(this.route.paramMap.subscribe(params => {
-      const userName = params.get('userName');
-      if (userName === null) {
-        this.navigateTo404();
-        return;
-      }
-
-      this.userService.changeUserTo(userName);
-    }));
-
-    this.subscriptions.add(this.userService.user
-      .subscribe({
-        next: user => {
-          if (user === null) {
-            return;
-          }
-
-          this.updateIsSubscribed(user);
-        },
-        error: (e: HttpErrorResponse) => {
-          if (e.status === 400 || e.status === 401 || e.status === 403) {
-            this.navigateTo404();
-          }
+    this.subscriptions.add(
+      this.route.paramMap.subscribe(params => {
+        const userName = params.get('userName');
+        if (userName === null) {
+          this.navigateTo404();
+          return;
         }
-      }));
+
+        this.userService.changeUserTo(userName);
+      })
+    );
+
+    this.subscriptions.add(
+      this.userService.user
+        .subscribe({
+          next: user => {
+            if (user === null) {
+              return;
+            }
+
+            this.updateIsSubscribed(user);
+          },
+          error: (e: HttpErrorResponse) => {
+            if (e.status === 400 || e.status === 401 || e.status === 403) {
+              this.navigateTo404();
+            }
+          }
+        })
+    );
   }
 
   ngOnDestroy(): void {

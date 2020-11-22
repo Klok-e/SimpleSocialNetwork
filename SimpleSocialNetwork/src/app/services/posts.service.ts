@@ -30,7 +30,7 @@ export class PostsService {
     return this.posts.apiOpMessageExistsPostIdGet(postId);
   }
 
-  public votePost(votePost: VotePost): Observable<any> {
+  public votePost(votePost: VotePost): Observable<void> {
     return this.posts.apiOpMessageVotePost(votePost);
   }
 }

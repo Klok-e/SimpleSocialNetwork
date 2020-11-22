@@ -31,17 +31,19 @@ export class ChangeInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subs.add(this.userService.user.subscribe(u => {
-      if (u === null) {
-        return;
-      }
-      if (this.getUserModel(u) !== null) {
-        this.changeInfoForm.setValue({
-          dateOfBirth: this.datePipe.transform(this.getUserModel(u)?.dateBirth, 'yyyy-MM-dd'),
-          about: u?.about,
-        });
-      }
-    }));
+    this.subs.add(
+      this.userService.user.subscribe(u => {
+        if (u === null) {
+          return;
+        }
+        if (this.getUserModel(u) !== null) {
+          this.changeInfoForm.setValue({
+            dateOfBirth: this.datePipe.transform(this.getUserModel(u)?.dateBirth, 'yyyy-MM-dd'),
+            about: u?.about,
+          });
+        }
+      })
+    );
   }
 
   ngOnDestroy(): void {

@@ -1,14 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LimitedUserModel, UserApiService, UserModel} from '../../../backend_api_client';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
+  subs: Subscription = new Subscription();
+
   matchedUsers: LimitedUserModel[] = [];
 
   searchForm: FormGroup;
@@ -23,21 +26,27 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.route.queryParamMap.subscribe(param => {
-      const name = param.get('name') ?? undefined;
-      const about = param.get('about') ?? undefined;
-      // console.log('search', name, about);
-      this.users.apiUserSearchGet(name, about)
-        .subscribe(users => {
-          this.matchedUsers = users;
-        });
 
-      this.searchForm.setValue({
-        name: name ?? '',
-        about: about ?? '',
-      });
-    });
+  ngOnInit(): void {
+    this.subs.add(
+      this.route.queryParamMap.subscribe(param => {
+        const name = param.get('name') ?? undefined;
+        const about = param.get('about') ?? undefined;
+        console.log('search', name, about);
+        this.users.apiUserSearchGet(name, about)
+          .subscribe(users => {
+            this.matchedUsers = users;
+          });
+
+        this.searchForm.setValue({
+          name: name ?? '',
+          about: about ?? '',
+        });
+      }));
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 
   onSearch(): void {

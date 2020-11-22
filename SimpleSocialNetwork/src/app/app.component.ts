@@ -18,8 +18,8 @@ export class AppComponent {
     return this.auth.getCurrentUserValue() !== null;
   }
 
-  public async logout(): Promise<void> {
-    await this.auth.logout();
-    await this.route.navigate(['']);
+  public logout(): void {
+    this.auth.logout();
+    this.route.navigate(['']);
   }
 }

@@ -18,15 +18,17 @@ export class ProfileSubscriptionsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscriptionsObserv.add(this.currentUser.user.subscribe(user => {
-      if (user === null) {
-        return;
-      }
-      this.subscriptionsApi.apiSubscriptionSubscribedToGet(user.login)
-        .subscribe(subs => {
-          this.subscriptions = subs;
-        });
-    }));
+    this.subscriptionsObserv.add(
+      this.currentUser.user.subscribe(user => {
+        if (user === null) {
+          return;
+        }
+        this.subscriptionsApi.apiSubscriptionSubscribedToGet(user.login)
+          .subscribe(subs => {
+            this.subscriptions = subs;
+          });
+      })
+    );
   }
 
   ngOnDestroy(): void {

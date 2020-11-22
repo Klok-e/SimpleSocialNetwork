@@ -19,16 +19,18 @@ export class ProfileUserPostsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subs.add(this.currentUser.user
-      .subscribe(u => {
-        if (u === null) {
-          return;
-        }
-        this.postsApi.apiOpMessageFromUserGet(u.login)
-          .subscribe(p => {
-            this.opMessages = p;
-          });
-      }));
+    this.subs.add(
+      this.currentUser.user
+        .subscribe(u => {
+          if (u === null) {
+            return;
+          }
+          this.postsApi.apiOpMessageFromUserGet(u.login)
+            .subscribe(p => {
+              this.opMessages = p;
+            });
+        })
+    );
   }
 
   ngOnDestroy(): void {

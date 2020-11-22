@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -27,20 +28,22 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public async onSubmit(): Promise<void> {
+  public onSubmit(): void {
     if (!this.loginForm.valid) {
       this.loginForm.markAllAsTouched();
       return;
     }
 
-    try {
-      const _ = await this.auth.login({
-        login: this.loginForm.value.login,
-        password: this.loginForm.value.password,
-      }).toPromise();
-      await this.router.navigate(['/']);
-    } catch (e) {
-      this.incorrectCredentials = true;
-    }
+    this.auth.login({
+      login: this.loginForm.value.login,
+      password: this.loginForm.value.password,
+    }).subscribe({
+      next: _ => {
+        this.router.navigate(['/']);
+      },
+      error: _ => {
+        this.incorrectCredentials = true;
+      }
+    });
   }
 }

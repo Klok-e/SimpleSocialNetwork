@@ -38,7 +38,7 @@ export class AuthService {
     );
   }
 
-  public async logout(): Promise<void> {
+  public logout(): void {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }

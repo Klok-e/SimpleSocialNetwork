@@ -13,7 +13,7 @@ import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {UserApiService} from '../../../backend_api_client';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public async onSubmit(): Promise<void> {
+  public onSubmit(): void {
     if (!this.loginForm.valid) {
       this.loginForm.markAllAsTouched();
       return;
@@ -57,10 +57,14 @@ export class RegisterComponent implements OnInit {
       login: this.loginForm.value.login,
       password: this.loginForm.value.password,
     };
-    await this.auth.register(cred).toPromise();
-    await this.auth.login(cred).toPromise();
-
-    await this.router.navigate(['/']);
+    this.auth.register(cred).pipe(
+      mergeMap(_ => {
+        return this.auth.login(cred);
+      }),
+      mergeMap(_ => {
+        return this.router.navigate(['/']);
+      })
+    ).subscribe();
   }
 
   public userDoesntExistValidator(): AsyncValidatorFn {

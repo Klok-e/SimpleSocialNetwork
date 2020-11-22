@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import {Observable, of, throwError} from 'rxjs';
 import {AuthService} from '../services/auth.service';
-import {catchError, finalize, map, mergeMap} from 'rxjs/operators';
+import {catchError, finalize, map, mergeMap, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {fromPromise} from 'rxjs/internal-compatibility';
 
@@ -40,8 +40,8 @@ export class JwtAuthInterceptor implements HttpInterceptor {
       console.log('observe1', err);
 
       return fromPromise(this.router.navigate([''])).pipe(
-        mergeMap(_ => {
-          return this.auth.logout();
+        tap(_ => {
+          this.auth.logout();
         }),
         map(_ => {
           return err.message;

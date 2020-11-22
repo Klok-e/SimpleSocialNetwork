@@ -26,7 +26,7 @@ export class CreatePostComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public async onSubmit(): Promise<void> {
+  public onSubmit(): void {
     if (!this.createPostForm.valid) {
       this.createPostForm.markAllAsTouched();
       return;
