@@ -295,4 +295,57 @@ export class UserApiService {
         );
     }
 
+    /**
+     * @param namePattern 
+     * @param aboutPattern 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public apiUserSearchGet(namePattern?: string, aboutPattern?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<LimitedUserModel>>;
+    public apiUserSearchGet(namePattern?: string, aboutPattern?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<LimitedUserModel>>>;
+    public apiUserSearchGet(namePattern?: string, aboutPattern?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<LimitedUserModel>>>;
+    public apiUserSearchGet(namePattern?: string, aboutPattern?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+
+        let queryParameters = new HttpParams({encoder: this.encoder});
+        if (namePattern !== undefined && namePattern !== null) {
+          queryParameters = this.addToHttpParams(queryParameters,
+            <any>namePattern, 'NamePattern');
+        }
+        if (aboutPattern !== undefined && aboutPattern !== null) {
+          queryParameters = this.addToHttpParams(queryParameters,
+            <any>aboutPattern, 'AboutPattern');
+        }
+
+        let headers = this.defaultHeaders;
+
+        let httpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (httpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            httpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (httpHeaderAcceptSelected !== undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+
+        let responseType: 'text' | 'json' = 'json';
+        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+            responseType = 'text';
+        }
+
+        return this.httpClient.get<Array<LimitedUserModel>>(`${this.configuration.basePath}/api/User/search`,
+            {
+                params: queryParameters,
+                responseType: <any>responseType,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
 }

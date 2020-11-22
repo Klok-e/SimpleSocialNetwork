@@ -55,5 +55,13 @@ namespace SimpleSocialNetworkBack.Controllers
             var user = await _userService.GetUserLimited(login);
             return Ok(user);
         }
+
+        [HttpGet("search")]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<LimitedUserModel>>> SearchUsers([FromQuery] SearchUsersModel search)
+        {
+            var users = await _userService.SearchUsers(search);
+            return Ok(users);
+        }
     }
 }

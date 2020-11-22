@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {LimitedUserModel, UserModel} from '../../../backend_api_client';
+import {LimitedUserModel, UserApiService, UserModel} from '../../../backend_api_client';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -8,11 +9,14 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  matchedUsers: LimitedUserModel[] | null = null;
+  matchedUsers: LimitedUserModel[] = [];
 
   searchForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private users: UserApiService,
+              private route: ActivatedRoute,
+              private router: Router) {
     this.searchForm = formBuilder.group({
       name: new FormControl(''),
       about: new FormControl(''),
@@ -20,14 +24,30 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.matchedUsers = [
-      {login: 'abcde', isDeleted: false, about: '123456789'},
-      {login: 'karl_marx', isDeleted: false, about: 'workers of the world unite'},
-      {login: 'engels', isDeleted: false, about: '123456789sdv ter er eger egeger'},
-    ];
+    this.route.queryParamMap.subscribe(param => {
+      const name = param.get('name') ?? undefined;
+      const about = param.get('about') ?? undefined;
+      // console.log('search', name, about);
+      this.users.apiUserSearchGet(name, about)
+        .subscribe(users => {
+          this.matchedUsers = users;
+        });
+
+      this.searchForm.setValue({
+        name: name ?? '',
+        about: about ?? '',
+      });
+    });
   }
 
   onSearch(): void {
-    console.log('search');
+    const name = this.searchForm.value.name;
+    const about = this.searchForm.value.about;
+    this.router.navigate([], {
+      queryParams: {
+        name: name === '' ? undefined : name,
+        about: about === '' ? undefined : about
+      }
+    });
   }
 }

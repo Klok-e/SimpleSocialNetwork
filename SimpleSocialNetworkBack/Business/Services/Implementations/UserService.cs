@@ -64,5 +64,28 @@ namespace Business.Services.Implementations
 
             await _context.SaveChangesAsync();
         }
+
+        public Task<IEnumerable<LimitedUserModel>> SearchUsers(SearchUsersModel search)
+        {
+            return Task.FromResult(
+                _context.Users
+                    .AsEnumerable()
+                    .Where(u =>
+                    {
+                        var name = true;
+                        if (!string.IsNullOrEmpty(search.NamePattern))
+                            name = FuzzySearch.FuzzyMatch(u.Login, search.NamePattern);
+
+                        var about = true;
+                        if (u.About == null)
+                            about = false;
+                        else if (!string.IsNullOrEmpty(search.AboutPattern))
+                            about = FuzzySearch.FuzzyMatch(u.About, search.AboutPattern);
+
+                        return name && about;
+                    })
+                    .Select(x => _mapper.Map<ApplicationUser, LimitedUserModel>(x))
+            );
+        }
     }
 }

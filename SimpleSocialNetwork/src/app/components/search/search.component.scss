@@ -3,7 +3,7 @@
 :host {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
 
   .criteria {
     display: flex;
@@ -11,7 +11,7 @@
     form {
       padding: 30pt 15pt 30pt 15pt;
       background-color: $blue1-5;
-      width: 200pt;
+      width: 160pt;
 
       > div {
         display: flex;

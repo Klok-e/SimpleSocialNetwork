@@ -15,5 +15,7 @@ namespace Business.Services
         Task<bool> UserExists(string login);
 
         Task ChangeUserInfo(ChangeUserInfo changeInfo);
+        
+        Task<IEnumerable<LimitedUserModel>> SearchUsers(SearchUsersModel search);
     }
 }
