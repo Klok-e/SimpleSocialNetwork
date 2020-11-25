@@ -8,7 +8,11 @@
       </div>
       <div class="cred_title">
         <div class="credits">
-          <div>Posted by: <a routerLink="/u/{{post.posterId}}">/u/{{post.posterId}}</a></div>
+          <div>Posted by:
+            <a routerLink="/u/{{post.posterId}}">
+              /u/{{post.posterId}}<span *ngIf="post.posterIsDeleted">[deleted]</span>
+            </a>
+          </div>
           <div>At {{post.sendDate | date:'d/M/yy, h:mm a'}}</div>
         </div>
         <div class="title">

@@ -66,6 +66,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           },
           error: (e: HttpErrorResponse) => {
             if (e.status === 400 || e.status === 401 || e.status === 403) {
+              console.log('previous error was handled');
               this.navigateTo404();
             }
           }
@@ -184,6 +185,21 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       return;
     }
     this.userApiService.apiUserElevatePut(this.user.login)
+      .subscribe({
+        next: _ => {
+          if (this.user === null) {
+            return;
+          }
+          this.currentUser.changeUserTo(this.user.login);
+        }
+      });
+  }
+
+  deleteUser(): void {
+    if (this.user === null) {
+      return;
+    }
+    this.userApiService.apiUserDelete(this.user.login)
       .subscribe({
         next: _ => {
           if (this.user === null) {

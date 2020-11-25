@@ -117,6 +117,15 @@ namespace Business.Services.Implementations
             await _context.SaveChangesAsync();
         }
 
+        public async Task<bool> UserDeleted(string login)
+        {
+            var user = await _context.Users.FindAsync(login);
+            if (user == null)
+                throw new ValidationException("Nonexistent user");
+
+            return user.IsDeleted;
+        }
+
         public async Task ElevateUser(string login)
         {
             var (_, user) = await AdminAndTarget(_principal, login);

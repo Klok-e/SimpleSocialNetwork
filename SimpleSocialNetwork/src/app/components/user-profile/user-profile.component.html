@@ -38,5 +38,8 @@
     <button *ngIf="!isViewingSelf && auth.isAdmin && !getUserModel(user)?.isAdmin" (click)="elevateUser()"
             class="item admin_item">Elevate to admin
     </button>
+    <button *ngIf="!isViewingSelf && auth.isAdmin && !getUserModel(user)?.isAdmin" (click)="deleteUser()"
+            class="item admin_item">Delete user
+    </button>
   </div>
 </aside>

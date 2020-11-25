@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {PostsService} from '../../services/posts.service';
-import {OpMessageModel, VoteType} from '../../../backend_api_client';
+import {OpMessageModel, UserApiService, VoteType} from '../../../backend_api_client';
+
+
+type OpMessageUserDeleted = OpMessageModel & { posterIsDeleted: boolean };
+
 
 @Component({
   selector: 'app-posts',
@@ -8,9 +12,10 @@ import {OpMessageModel, VoteType} from '../../../backend_api_client';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
-  opMessages: OpMessageModel[] | null = null;
+  opMessages: OpMessageUserDeleted[] | null = null;
 
-  constructor(private posts: PostsService) {
+  constructor(private posts: PostsService,
+              private usersApi: UserApiService) {
   }
 
   ngOnInit(): void {
@@ -19,7 +24,19 @@ export class PostsComponent implements OnInit {
 
   public updatePostList(): void {
     this.posts.getAllPosts().subscribe((next) => {
-      this.opMessages = next;
+      this.opMessages = next.map(x => {
+        const post = x as OpMessageUserDeleted;
+        post.posterIsDeleted = false;
+        if (post.posterId !== null && post.posterId !== undefined) {
+          this.usersApi.apiUserDeletedGet(post.posterId)
+            .subscribe({
+              next: deleted => {
+                post.posterIsDeleted = deleted;
+              }
+            });
+        }
+        return post;
+      });
     });
   }
 

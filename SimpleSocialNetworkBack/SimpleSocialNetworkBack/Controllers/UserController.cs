@@ -30,6 +30,14 @@ namespace SimpleSocialNetworkBack.Controllers
             var exists = await _userService.UserExists(login);
             return Ok(exists);
         }
+        
+        [HttpGet("deleted")]
+        [AllowAnonymous]
+        public async Task<ActionResult<bool>> UserDeleted([Required] string login)
+        {
+            var exists = await _userService.UserDeleted(login);
+            return Ok(exists);
+        }
 
         [HttpGet]
         [Authorize]
@@ -88,13 +96,13 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        ///     Soft delete user
+        ///     Soft delete user;
         ///     Authorized: either user themselves or an admin
         /// </summary>
         /// <param name="login"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Authorize]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<ActionResult> DeleteUser([Required] string login)
         {
             await _userService.DeleteUserSoft(login);

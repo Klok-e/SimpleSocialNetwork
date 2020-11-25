@@ -498,6 +498,35 @@
         }
       }
     },
+    "/api/User/deleted": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/User": {
       "get": {
         "tags": [
@@ -530,7 +559,7 @@
         "tags": [
           "User"
         ],
-        "summary": "Soft delete user\r\nAuthorized: either user themselves or an admin",
+        "summary": "Soft delete user;\r\nAuthorized: either user themselves or an admin",
         "parameters": [
           {
             "name": "login",

@@ -57,8 +57,13 @@ export class CurrentUserService {
           })
         );
       }
-    })().subscribe(u => {
-      this.userSubject.next(u);
+    })().subscribe({
+      next: u => {
+        this.userSubject.next(u);
+      },
+      error: e => {
+        this.userSubject.error(e);
+      }
     });
   }
 }
