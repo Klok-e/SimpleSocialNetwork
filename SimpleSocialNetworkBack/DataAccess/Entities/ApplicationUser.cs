@@ -14,6 +14,8 @@ namespace DataAccess.Entities
 
         public bool IsDeleted { get; set; }
 
+        public bool IsAdmin { get; set; }
+
         public virtual SecurePassword? Password { get; set; }
 
         public virtual ICollection<Subscription> Subscriptions { get; set; } = null!;
@@ -23,5 +25,11 @@ namespace DataAccess.Entities
         public virtual ICollection<Message> Messages { get; set; } = null!;
 
         public virtual ICollection<OpMessage> Posts { get; set; } = null!;
+
+        public virtual ICollection<TagBan> BansReceived { get; set; } = null!;
+
+        public virtual ICollection<TagBan> BansIssued { get; set; } = null!;
+
+        public virtual ICollection<TagModerator> ModeratorOfTags { get; set; } = null!;
     }
 }

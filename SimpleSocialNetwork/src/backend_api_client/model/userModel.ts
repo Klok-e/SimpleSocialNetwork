@@ -16,6 +16,7 @@ export interface UserModel {
     about?: string | null;
     dateBirth?: string | null;
     isDeleted: boolean;
+    isAdmin: boolean;
 }
 
 

@@ -37,6 +37,7 @@ namespace Business.Services.Implementations
                 // include to prevent "There is already an open DataReader associated with this Connection which must be closed first."
                 // error by preloading poster
                 .Include(x => x.Poster)
+                .Where(x => !x.IsDeleted)
                 .OrderByDescending(x => x.SendDate)
                 .Select(x => _mapper.Map<OpMessage, OpMessageModel>(x))
                 .AsEnumerable());
@@ -49,6 +50,7 @@ namespace Business.Services.Implementations
                 throw new ValidationException("Nonexistent user");
 
             return user.Posts
+                .Where(x => !x.IsDeleted)
                 .Select(x => _mapper.Map<OpMessage, OpMessageModel>(x));
         }
 
@@ -57,13 +59,16 @@ namespace Business.Services.Implementations
             var appUser = await _context.Users.FindAsync(_principal.Name);
             if (appUser == null)
                 throw new BadCredentialsException("Nonexistent user");
+
+            var superTag = await _context.Tags.FindAsync("") ?? new Tag {Name = ""};
+
             var op = new OpMessage
             {
                 Content = model.Content,
                 Title = model.Title,
                 SendDate = DateTime.UtcNow,
                 Poster = appUser,
-                Tags = new List<OpMessageTag>()
+                Tags = new[] {new OpMessageTag {Tag = superTag}},
             };
             await _context.OpMessages.AddAsync(op);
 
@@ -75,6 +80,8 @@ namespace Business.Services.Implementations
         public async Task<OpMessageModel> GetById(int id)
         {
             var opMessage = await _context.OpMessages.FindAsync(id);
+            if (opMessage.IsDeleted)
+                throw new ValidationException("Post was deleted");
             return _mapper.Map<OpMessage, OpMessageModel>(opMessage);
         }
 
@@ -83,14 +90,19 @@ namespace Business.Services.Implementations
             var op = await _context.OpMessages.FindAsync(postId);
             if (op == null)
                 throw new ValidationException("Nonexistent postId");
+            if (op.IsDeleted)
+                throw new ValidationException("Post was deleted");
+
             return op.Messages
+                .Where(x => !x.IsDeleted)
                 .OrderByDescending(x => x.SendDate)
                 .Select(x => _mapper.Map<Message, CommentModel>(x));
         }
 
         public async Task<bool> PostExists(int postId)
         {
-            return await _context.OpMessages.FindAsync(postId) != null;
+            var post = await _context.OpMessages.FindAsync(postId);
+            return post != null && !post.IsDeleted;
         }
 
         public async Task VotePost(VotePost votePost)
@@ -98,6 +110,8 @@ namespace Business.Services.Implementations
             var post = await _context.OpMessages.FindAsync(votePost.PostId);
             if (post == null)
                 throw new ValidationException("Nonexistent post");
+            if (post.IsDeleted)
+                throw new ValidationException("Post was deleted");
 
             post.Points += votePost.VoteType switch
             {

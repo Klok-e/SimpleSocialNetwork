@@ -7,12 +7,13 @@ namespace Business.Models.Responses
     {
         [Required] public string Login { get; set; } = null!;
         [Required] public string Token { get; set; } = null!;
+        [Required] public string Role { get; set; } = null!;
 
         public bool Equals(LoggedInUser? other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Login == other.Login && Token == other.Token;
+            return Login == other.Login && Token == other.Token && Role == other.Role;
         }
 
         public override bool Equals(object? obj)
@@ -25,7 +26,7 @@ namespace Business.Models.Responses
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Login, Token);
+            return HashCode.Combine(Login, Token, Role);
         }
     }
 }

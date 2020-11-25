@@ -6,20 +6,11 @@ namespace DataAccess.Entities
 {
     public class OpMessageTag
     {
-        /// <summary>
-        /// Key
-        /// </summary>
-        [ForeignKey(nameof(Tag))]
         public string TagId { get; set; } = null!;
-
-        /// <summary>
-        /// Key
-        /// </summary>
-        [ForeignKey(nameof(OpMessage))]
         public int OpId { get; set; }
 
-        public virtual Tag? Tag { get; set; }
+        public virtual Tag Tag { get; set; } = null!;
 
-        public virtual OpMessage? OpMessage { get; set; }
+        public virtual OpMessage OpMessage { get; set; } = null!;
     }
 }

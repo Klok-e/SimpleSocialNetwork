@@ -11,10 +11,9 @@
  */
 
 
-export interface LoggedInUser { 
+export interface BanUserModel { 
     login: string;
-    token: string;
-    role: string;
+    expirationDate: string;
 }
 
 

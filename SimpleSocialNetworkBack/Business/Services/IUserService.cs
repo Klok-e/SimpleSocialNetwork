@@ -15,7 +15,11 @@ namespace Business.Services
         Task<bool> UserExists(string login);
 
         Task ChangeUserInfo(ChangeUserInfo changeInfo);
-        
+
         Task<IEnumerable<LimitedUserModel>> SearchUsers(SearchUsersModel search);
+        Task BanUser(BanUserModel ban);
+        Task ElevateUser(string login);
+        Task DeleteUserSoft(string login);
+        Task<bool> UserBanned(string login);
     }
 }

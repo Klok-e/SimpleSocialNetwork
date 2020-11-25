@@ -49,6 +49,14 @@ namespace DataAccess
 
             modelBuilder.Entity<OpMessageTag>()
                 .HasKey(x => new {x.TagId, x.OpId});
+            modelBuilder.Entity<OpMessageTag>()
+                .HasOne(x => x.Tag)
+                .WithMany(x => x.OpMessages)
+                .HasForeignKey(x => x.TagId);
+            modelBuilder.Entity<OpMessageTag>()
+                .HasOne(x => x.OpMessage)
+                .WithMany(x => x.Tags)
+                .HasForeignKey(x => x.OpId);
 
             modelBuilder.Entity<Subscription>()
                 .HasOne(x => x.Subscriber)
@@ -59,8 +67,26 @@ namespace DataAccess
                 .WithMany(x => x!.Subscribers)
                 .HasForeignKey(x => x.TargetId);
 
+            modelBuilder.Entity<TagBan>()
+                .HasOne(x => x.Tag)
+                .WithMany(x => x!.Bans);
+            modelBuilder.Entity<TagBan>()
+                .HasOne(x => x.User)
+                .WithMany(x => x!.BansReceived);
+            modelBuilder.Entity<TagBan>()
+                .HasOne(x => x.Moderator)
+                .WithMany(x => x!.BansIssued);
+
             modelBuilder.Entity<TagModerator>()
                 .HasKey(x => new {x.TagId, x.UserId});
+            modelBuilder.Entity<TagModerator>()
+                .HasOne(x => x.Tag)
+                .WithMany(x => x!.Moderators)
+                .HasForeignKey(x => x.TagId);
+            modelBuilder.Entity<TagModerator>()
+                .HasOne(x => x.User)
+                .WithMany(x => x!.ModeratorOfTags)
+                .HasForeignKey(x => x.UserId);
         }
     }
 }

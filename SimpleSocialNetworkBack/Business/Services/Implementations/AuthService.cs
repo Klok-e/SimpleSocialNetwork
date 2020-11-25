@@ -1,5 +1,6 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -37,11 +38,17 @@ namespace Business.Services.Implementations
             if (exists != null)
                 throw new ValidationException("Login is already taken");
 
-            var user = new ApplicationUser {Login = login};
+            // if first user ever, make admin
+            var isAdmin = !_context.Users.Any();
+
+            var user = new ApplicationUser
+            {
+                Login = login,
+                Password = HashPassword(password),
+                IsAdmin = isAdmin,
+            };
+
             await _context.Users!.AddAsync(user);
-
-            user.Password = HashPassword(password);
-
             await _context.SaveChangesAsync();
 
             return _mapper.Map<ApplicationUser, UserModel>(user);
@@ -57,6 +64,8 @@ namespace Business.Services.Implementations
             if (!CheckPasswordHash(user.Password!.Salt, user.Password!.Hashed, password))
                 throw new ValidationException("Wrong password");
 
+            var role = user.IsAdmin ? Roles.Admin : Roles.User;
+
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
@@ -65,6 +74,7 @@ namespace Business.Services.Implementations
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, user.Login),
+                    new Claim(ClaimTypes.Role, role),
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
@@ -76,7 +86,8 @@ namespace Business.Services.Implementations
             return new LoggedInUser
             {
                 Login = user.Login,
-                Token = tokenStr
+                Token = tokenStr,
+                Role = role,
             };
         }
 

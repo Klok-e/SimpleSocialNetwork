@@ -46,6 +46,8 @@ namespace Business.Services.Implementations
             var message = await _context.Messages.FindAsync(vote.OpId, vote.MessageId);
             if (message == null)
                 throw new ValidationException("Nonexistent comment");
+            if (message.IsDeleted)
+                throw new ValidationException("Comment was deleted");
 
             message.Points += vote.VoteType switch
             {

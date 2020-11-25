@@ -4,7 +4,7 @@
        routerLink="./posts">Posts</a>
     <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
        routerLink="./subs">Subscriptions</a>
-    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" *ngIf="pageBelongsToCurrentUser"
+    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" *ngIf="isViewingSelf"
        routerLink="./change-info">Change info</a>
   </nav>
 
@@ -14,8 +14,8 @@
   <div class="info">
     <div class="item">User: {{user.login}}</div>
     <div *ngIf="user.about" class="item">About: {{user.about}}</div>
-    <div *ngIf="getUserModel?.dateBirth !== null" class="item">
-      Date of birth: {{getUserModel?.dateBirth | date: 'yyyy-MM-dd'}}
+    <div *ngIf="getUserModel(user)?.dateBirth !== null" class="item">
+      Date of birth: {{getUserModel(user)?.dateBirth | date: 'yyyy-MM-dd'}}
     </div>
     <button *ngIf="auth.isLoggedIn && !isViewingSelf && subscribedToCurrent === false" (click)="subscribeToCurrent()"
             class="item">
@@ -25,8 +25,18 @@
             class="item">
       Unsubscribe
     </button>
-    <button *ngIf="auth.isLoggedIn"
-            class="item">Ban user
+    <button *ngIf="!isViewingSelf && auth.isAdmin" (click)="banUser(banExpirationDate)"
+            class="item admin_item">Ban user
+    </button>
+    <div class="item" *ngIf="!isViewingSelf && auth.isAdmin">
+      <label for="expirationDate">Ban for:</label>
+      <input id="expirationDate" [(ngModel)]="banExpirationDate" type="date"/>
+    </div>
+    <button *ngIf="!isViewingSelf && auth.isAdmin" (click)="liftBan()"
+            class="item admin_item">Lift ban
+    </button>
+    <button *ngIf="!isViewingSelf && auth.isAdmin"
+            class="item admin_item">Elevate to admin
     </button>
   </div>
 </aside>

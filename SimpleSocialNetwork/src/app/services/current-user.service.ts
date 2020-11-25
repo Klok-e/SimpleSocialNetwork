@@ -3,6 +3,8 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {LimitedUserModel, UserModel, UserApiService} from '../../backend_api_client';
 import {HttpErrorResponse} from '@angular/common/http';
 import {AuthService} from './auth.service';
+import {UnionUserModel} from '../models/UnionUserModel';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +14,14 @@ export class CurrentUserService {
 
   constructor(private userService: UserApiService,
               private auth: AuthService) {
-    this.userSubject = new BehaviorSubject<UserModel | LimitedUserModel | null>(null);
+    this.userSubject = new BehaviorSubject<UnionUserModel | null>(null);
     this.user = this.userSubject.asObservable();
   }
 
-  private userSubject: BehaviorSubject<UserModel | LimitedUserModel | null>;
-  public user: Observable<UserModel | LimitedUserModel | null>;
+  private userSubject: BehaviorSubject<UnionUserModel | null>;
+  public user: Observable<UnionUserModel | null>;
 
-  get currentUser(): UserModel | LimitedUserModel | null {
+  get currentUser(): UnionUserModel | null {
     return this.userSubject.value;
   }
 
@@ -29,11 +31,31 @@ export class CurrentUserService {
 
   public changeUserTo(userName: string): void {
     const isMyProfile = this.auth.getCurrentUserValue()?.login === userName;
-    ((): Observable<UserModel | LimitedUserModel> => {
-      if (isMyProfile) {
-        return this.userService.apiUserGet(userName);
+    ((): Observable<UnionUserModel> => {
+      if (isMyProfile || this.auth.isAdmin) {
+        return this.userService.apiUserGet(userName).pipe(
+          map(us => {
+            return {
+              modelType: 'full',
+              about: us.about,
+              login: us.login,
+              dateBirth: us.dateBirth,
+              isAdmin: us.isAdmin,
+              isDeleted: us.isDeleted,
+            };
+          })
+        );
       } else {
-        return this.userService.apiUserLimitedGet(userName);
+        return this.userService.apiUserLimitedGet(userName).pipe(
+          map(us => {
+            return {
+              modelType: 'limited',
+              about: us.about,
+              login: us.login,
+              isDeleted: us.isDeleted,
+            };
+          })
+        );
       }
     })().subscribe(u => {
       this.userSubject.next(u);

@@ -8,11 +8,6 @@ namespace DataAccess.Entities
     {
         [Key] public int Id { get; set; }
 
-        [ForeignKey(nameof(Tag))] public string? TagId { get; set; }
-        [ForeignKey(nameof(User))] public string? UserId { get; set; }
-
-        [ForeignKey(nameof(Moderator))] public string? ModeratorId { get; set; }
-
         public DateTime ExpirationDate { get; set; }
         public DateTime BanIssuedDate { get; set; }
 

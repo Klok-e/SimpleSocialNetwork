@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using Business.Common;
 using Business.Models.Requests;
 using Business.Models.Responses;
 using Business.Services;
@@ -62,6 +64,44 @@ namespace SimpleSocialNetworkBack.Controllers
         {
             var users = await _userService.SearchUsers(search);
             return Ok(users);
+        }
+
+        [HttpPut("elevate")]
+        [Authorize(Roles = Roles.Admin)]
+        public async Task<ActionResult> ElevateUser([Required] string login)
+        {
+            await _userService.ElevateUser(login);
+            return Ok();
+        }
+
+        [HttpPost("ban")]
+        [Authorize(Roles = Roles.Admin)]
+        public async Task<ActionResult> BanUser([Required] BanUserModel ban)
+        {
+            await _userService.BanUser(ban);
+            return Ok();
+        }
+
+        /// <summary>
+        /// Soft delete user
+        /// Authorized: either user themselves or an admin
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Authorize]
+        public async Task<ActionResult> DeleteUser([Required] string login)
+        {
+            await _userService.DeleteUserSoft(login);
+            return Ok();
+        }
+        
+        [HttpGet("banned")]
+        [Authorize]
+        public async Task<ActionResult<bool>> UserBanned([Required] string login)
+        {
+            var banned = await _userService.UserBanned(login);
+            return Ok(banned);
         }
     }
 }

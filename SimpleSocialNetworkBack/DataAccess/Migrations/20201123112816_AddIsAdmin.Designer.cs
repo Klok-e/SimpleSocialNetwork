@@ -4,14 +4,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(SocialDbContext))]
-    partial class SocialDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201123112816_AddIsAdmin")]
+    partial class AddIsAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -193,22 +195,22 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ModeratorLogin")
+                    b.Property<string>("ModeratorId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("TagName")
+                    b.Property<string>("TagId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("UserLogin")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ModeratorLogin");
+                    b.HasIndex("ModeratorId");
 
-                    b.HasIndex("TagName");
+                    b.HasIndex("TagId");
 
-                    b.HasIndex("UserLogin");
+                    b.HasIndex("UserId");
 
                     b.ToTable("TagBans");
                 });
@@ -268,7 +270,7 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("DataAccess.Entities.Tag", "Tag")
-                        .WithMany("OpMessages")
+                        .WithMany()
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -307,16 +309,16 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entities.TagBan", b =>
                 {
                     b.HasOne("DataAccess.Entities.ApplicationUser", "Moderator")
-                        .WithMany("BansIssued")
-                        .HasForeignKey("ModeratorLogin");
+                        .WithMany()
+                        .HasForeignKey("ModeratorId");
 
                     b.HasOne("DataAccess.Entities.Tag", "Tag")
-                        .WithMany("Bans")
-                        .HasForeignKey("TagName");
+                        .WithMany()
+                        .HasForeignKey("TagId");
 
                     b.HasOne("DataAccess.Entities.ApplicationUser", "User")
-                        .WithMany("BansReceived")
-                        .HasForeignKey("UserLogin");
+                        .WithMany()
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Moderator");
 
@@ -328,13 +330,13 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entities.TagModerator", b =>
                 {
                     b.HasOne("DataAccess.Entities.Tag", "Tag")
-                        .WithMany("Moderators")
+                        .WithMany()
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DataAccess.Entities.ApplicationUser", "User")
-                        .WithMany("ModeratorOfTags")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -346,13 +348,7 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.ApplicationUser", b =>
                 {
-                    b.Navigation("BansIssued");
-
-                    b.Navigation("BansReceived");
-
                     b.Navigation("Messages");
-
-                    b.Navigation("ModeratorOfTags");
 
                     b.Navigation("Password");
 
@@ -368,15 +364,6 @@ namespace DataAccess.Migrations
                     b.Navigation("Messages");
 
                     b.Navigation("Tags");
-                });
-
-            modelBuilder.Entity("DataAccess.Entities.Tag", b =>
-                {
-                    b.Navigation("Bans");
-
-                    b.Navigation("Moderators");
-
-                    b.Navigation("OpMessages");
                 });
 #pragma warning restore 612, 618
         }

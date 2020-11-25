@@ -5,6 +5,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {Subscription} from 'rxjs';
+import {UnionUserModel} from '../../../models/UnionUserModel';
 
 @Component({
   selector: 'app-change-info',
@@ -16,7 +17,7 @@ export class ChangeInfoComponent implements OnInit, OnDestroy {
 
   changeInfoForm: FormGroup;
 
-  constructor(private userService: CurrentUserService,
+  constructor(private currentUser: CurrentUserService,
               private formBuilder: FormBuilder,
               private userApiService: UserApiService,
               private datePipe: DatePipe) {
@@ -26,20 +27,20 @@ export class ChangeInfoComponent implements OnInit, OnDestroy {
     });
   }
 
-  get user(): UserModel | LimitedUserModel | null {
-    return this.userService.currentUser;
+  get user(): UnionUserModel | null {
+    return this.currentUser.currentUser;
   }
 
   ngOnInit(): void {
     this.subs.add(
-      this.userService.user.subscribe(u => {
+      this.currentUser.user.subscribe(u => {
         if (u === null) {
           return;
         }
-        if (this.getUserModel(u) !== null) {
+        if (u.modelType === 'full') {
           this.changeInfoForm.setValue({
-            dateOfBirth: this.datePipe.transform(this.getUserModel(u)?.dateBirth, 'yyyy-MM-dd'),
-            about: u?.about,
+            dateOfBirth: this.datePipe.transform(u.dateBirth, 'yyyy-MM-dd'),
+            about: u.about,
           });
         }
       })
@@ -52,25 +53,16 @@ export class ChangeInfoComponent implements OnInit, OnDestroy {
 
   onSave(): void {
     console.log(this.changeInfoForm.value);
-    const dbo = this.changeInfoForm.value.dateOfBirth === '' ? null :
-      this.changeInfoForm.value.dateOfBirth;
+    const dob = this.changeInfoForm.value.dateOfBirth === '' ? null :
+      this.changeInfoForm.value.dateOfBirth as string;
     this.userApiService.apiUserInfoPut({
       about: this.changeInfoForm.value.about,
-      dateBirth: dbo,
+      dateBirth: dob,
     }).subscribe(_ => {
-      if (this.user?.login !== null && this.user?.login !== undefined) {
-        this.userService.changeUserTo(this.user?.login);
+      if (this.user === null) {
+        return;
       }
+      this.currentUser.changeUserTo(this.user.login);
     });
-  }
-
-  getUserModel(user: UserModel | LimitedUserModel | null): UserModel | null {
-    if (user === null) {
-      return null;
-    }
-    if ((user as UserModel).dateBirth !== undefined) {
-      return user;
-    }
-    return null;
   }
 }

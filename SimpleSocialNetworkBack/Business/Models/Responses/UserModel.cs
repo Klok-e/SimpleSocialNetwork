@@ -10,13 +10,14 @@ namespace Business.Models.Responses
 
         public DateTime? DateBirth { get; set; }
         [Required] public bool IsDeleted { get; set; }
+        [Required] public bool IsAdmin { get; set; }
 
         public bool Equals(UserModel? other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
             return Login == other.Login && About == other.About && Nullable.Equals(DateBirth, other.DateBirth) &&
-                   IsDeleted == other.IsDeleted;
+                   IsDeleted == other.IsDeleted && IsAdmin == other.IsAdmin;
         }
 
         public override bool Equals(object? obj)
@@ -29,7 +30,7 @@ namespace Business.Models.Responses
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Login, About, DateBirth, IsDeleted);
+            return HashCode.Combine(Login, About, DateBirth, IsDeleted, IsAdmin);
         }
     }
 }

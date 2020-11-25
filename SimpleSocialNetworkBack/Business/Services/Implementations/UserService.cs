@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,7 +34,9 @@ namespace Business.Services.Implementations
             var user = await _context.Users.FindAsync(login);
             if (user == null)
                 throw new ValidationException("Nonexistent login");
-            if (_principal.Name != login)
+            if (user.IsDeleted)
+                throw new ValidationException("User was deleted");
+            if (_principal.Name != login && _principal.Role != Roles.Admin)
                 throw new ForbiddenException("You can't get full info about another user");
 
             return _mapper.Map<ApplicationUser, UserModel>(user);
@@ -44,13 +47,17 @@ namespace Business.Services.Implementations
             var user = await _context.Users.FindAsync(login);
             if (user == null)
                 throw new ValidationException("Nonexistent login");
+            if (user.IsDeleted)
+                throw new ValidationException("User was deleted");
 
             return _mapper.Map<ApplicationUser, LimitedUserModel>(user);
         }
 
         public async Task<bool> UserExists(string login)
         {
-            return await _context.Users.FindAsync(login) != null;
+            var user = await _context.Users.FindAsync(login);
+            // deleted users should still be regarded to as existing
+            return user != null;
         }
 
         public async Task ChangeUserInfo(ChangeUserInfo changeInfo)
@@ -58,6 +65,8 @@ namespace Business.Services.Implementations
             var user = await _context.Users.FindAsync(_principal.Name);
             if (user == null)
                 throw new BadCredentialsException("Nonexistent user");
+            if (user.IsDeleted)
+                throw new ValidationException("User was deleted");
 
             user.About = changeInfo.About;
             user.DateBirth = changeInfo.DateBirth;
@@ -69,6 +78,7 @@ namespace Business.Services.Implementations
         {
             return Task.FromResult(
                 _context.Users
+                    .Where(x => !x.IsDeleted)
                     .AsEnumerable()
                     .Where(u =>
                     {
@@ -86,6 +96,69 @@ namespace Business.Services.Implementations
                     })
                     .Select(x => _mapper.Map<ApplicationUser, LimitedUserModel>(x))
             );
+        }
+
+        public async Task BanUser(BanUserModel ban)
+        {
+            var (banInitiator, user) = await AdminAndTarget(_principal, ban.Login);
+
+            var superTag = await _context.Tags.FindAsync("") ?? new Tag {Name = ""};
+
+            await _context.TagBans.AddAsync(new TagBan
+            {
+                Moderator = banInitiator,
+                User = user,
+                Tag = superTag,
+                ExpirationDate = ban.ExpirationDate,
+                BanIssuedDate = DateTime.UtcNow
+            });
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task ElevateUser(string login)
+        {
+            var (_, user) = await AdminAndTarget(_principal, login);
+
+            user.IsAdmin = true;
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteUserSoft(string login)
+        {
+            var (_, user) = await AdminAndTarget(_principal, login);
+
+            user.IsDeleted = true;
+
+            await _context.SaveChangesAsync();
+        }
+
+        private async Task<(ApplicationUser adm, ApplicationUser target)> AdminAndTarget(TypedClaimsPrincipal adm,
+            string targLogin)
+        {
+            var admin = await _context.Users.FindAsync(adm.Name);
+            if (admin == null)
+                throw new BadCredentialsException("Nonexistent user");
+            if (adm.Role != Roles.Admin)
+                throw new ForbiddenException("No rights");
+
+            var user = await _context.Users.FindAsync(targLogin);
+            if (user == null)
+                throw new ValidationException("Nonexistent login");
+
+            return (admin, user);
+        }
+
+        public async Task<bool> UserBanned(string login)
+        {
+            var user = await _context.Users.FindAsync(login);
+            if (user == null)
+                throw new ValidationException("Nonexistent login");
+            if (_principal.Role != Roles.Admin && _principal.Name != login)
+                throw new ForbiddenException("No rights: either not an admin or not same user");
+
+            return user.BansReceived
+                .Any(ban => !ban.Cancelled && ban.ExpirationDate > DateTime.UtcNow);
         }
     }
 }

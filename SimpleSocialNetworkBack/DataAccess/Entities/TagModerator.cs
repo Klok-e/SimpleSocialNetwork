@@ -6,21 +6,13 @@ namespace DataAccess.Entities
 {
     public class TagModerator
     {
-        /// <summary>
-        /// Key
-        /// </summary>
-        [ForeignKey(nameof(Tag))]
         public string TagId { get; set; } = null!;
 
-        /// <summary>
-        /// Key
-        /// </summary>
-        [ForeignKey(nameof(User))]
         public string UserId { get; set; } = null!;
 
         public bool IsRevoked { get; set; }
 
-        public virtual Tag? Tag { get; set; }
-        public virtual ApplicationUser? User { get; set; }
+        public virtual Tag Tag { get; set; } = null!;
+        public virtual ApplicationUser User { get; set; } = null!;
     }
 }

@@ -19,6 +19,7 @@
   </nav>
   <div *ngIf="loggedIn()" class="logged_in_as">
     Logged in as: {{auth.getCurrentUserValue()?.login}}
+    <span *ngIf="auth.isAdmin">(Admin)</span>
   </div>
 </header>
 

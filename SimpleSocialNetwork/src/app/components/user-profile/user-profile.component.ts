@@ -1,10 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LimitedUserModel, UserModel, UserApiService, SubscriptionApiService} from '../../../backend_api_client';
 import {AuthService} from '../../services/auth.service';
 import {Observable, Subscription} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 import {CurrentUserService} from '../../services/current-user.service';
+import {UnionUserModel} from '../../models/UnionUserModel';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,12 +18,15 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   subscribedToCurrent = false;
 
+  isCurrentBanned = false;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private userApiService: UserApiService,
               public auth: AuthService,
-              private userService: CurrentUserService,
-              private subscribeService: SubscriptionApiService) {
+              private currentUser: CurrentUserService,
+              private subscribeService: SubscriptionApiService,
+              private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
@@ -33,12 +38,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           return;
         }
 
-        this.userService.changeUserTo(userName);
+        this.currentUser.changeUserTo(userName);
       })
     );
 
     this.subscriptions.add(
-      this.userService.user
+      this.currentUser.user
         .subscribe({
           next: user => {
             if (user === null) {
@@ -46,6 +51,15 @@ export class UserProfileComponent implements OnInit, OnDestroy {
             }
 
             this.updateIsSubscribed(user);
+
+            // update is_banned if admin
+            if (!this.auth.isAdmin) {
+              return;
+            }
+            this.userApiService.apiUserBannedGet(user.login)
+              .subscribe(banned => {
+                this.isCurrentBanned = banned;
+              });
           },
           error: (e: HttpErrorResponse) => {
             if (e.status === 400 || e.status === 401 || e.status === 403) {
@@ -60,7 +74,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  private updateIsSubscribed(user: UserModel | LimitedUserModel): void {
+  private updateIsSubscribed(user: UnionUserModel): void {
     if (!this.isViewingSelf && this.auth.isLoggedIn) {
       this.subscribeService.apiSubscriptionIsSubscribedToGet(user.login)
         .subscribe({
@@ -71,27 +85,26 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  get user(): UserModel | LimitedUserModel | null {
-    return this.userService.currentUser;
-  }
-
-  get pageBelongsToCurrentUser(): boolean {
-    return this.user?.login === this.auth.getCurrentUserValue()?.login;
+  get user(): UnionUserModel | null {
+    return this.currentUser.currentUser;
   }
 
   private navigateTo404(): void {
     this.router.navigate(['404-route-please-match-this-really-long-route'], {skipLocationChange: true});
   }
 
-  get getUserModel(): UserModel | null {
-    if ((this.user as UserModel).dateBirth !== undefined) {
-      return this.user;
+  getUserModel(user: UnionUserModel | null): UserModel | null {
+    if (user === null) {
+      return null;
+    }
+    if (user.modelType === 'full') {
+      return user;
     }
     return null;
   }
 
   get isViewingSelf(): boolean {
-    return this.userService.isCurrentSelf;
+    return this.currentUser.isCurrentSelf;
   }
 
   public subscribeToCurrent(): void {
@@ -125,5 +138,34 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           this.updateIsSubscribed(this.user);
         }
       });
+  }
+
+  @Input() banExpirationDate = this.datePipe.transform(new Date(Date.now()), 'yyyy-MM-dd') ?? '';
+
+  banUser(banExpiration: string): void {
+    if (this.user === null) {
+      return;
+    }
+    const ban = {
+      expirationDate: banExpiration,
+      login: this.user.login,
+    };
+    console.log(ban);
+    this.userApiService.apiUserBanPost(ban).subscribe();
+  }
+
+  liftBan(): void {
+    if (this.user === null) {
+      return;
+    }
+    const ban = {
+      login: this.user.login,
+    };
+    console.log(ban);
+    // this.userApiService.apiUserBanPost(ban).subscribe();
+  }
+
+  elevateUser(): void {
+
   }
 }

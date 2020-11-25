@@ -525,6 +525,29 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Soft delete user\r\nAuthorized: either user themselves or an admin",
+        "parameters": [
+          {
+            "name": "login",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
       }
     },
     "/api/User/info": {
@@ -627,6 +650,89 @@
           }
         }
       }
+    },
+    "/api/User/elevate": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/User/ban": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BanUserModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BanUserModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BanUserModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/User/banned": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -649,6 +755,7 @@
       },
       "UserModel": {
         "required": [
+          "isAdmin",
           "isDeleted",
           "login"
         ],
@@ -668,6 +775,9 @@
           },
           "isDeleted": {
             "type": "boolean"
+          },
+          "isAdmin": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -675,6 +785,7 @@
       "LoggedInUser": {
         "required": [
           "login",
+          "role",
           "token"
         ],
         "type": "object",
@@ -683,6 +794,9 @@
             "type": "string"
           },
           "token": {
+            "type": "string"
+          },
+          "role": {
             "type": "string"
           }
         },
@@ -910,6 +1024,23 @@
           },
           "isDeleted": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BanUserModel": {
+        "required": [
+          "expirationDate",
+          "login"
+        ],
+        "type": "object",
+        "properties": {
+          "login": {
+            "type": "string"
+          },
+          "expirationDate": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false

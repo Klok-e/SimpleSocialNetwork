@@ -24,6 +24,14 @@ export class AuthService {
     return this.getCurrentUserValue() !== null;
   }
 
+  get isAdmin(): boolean {
+    const user = this.getCurrentUserValue();
+    if (user === null) {
+      return false;
+    }
+    return user.role === 'admin';
+  }
+
   public register(userRegister: CredentialsModel): Observable<UserModel> {
     return this.auth.apiAuthRegisterPost(userRegister, 'body');
   }

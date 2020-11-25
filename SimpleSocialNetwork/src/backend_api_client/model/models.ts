@@ -1,3 +1,4 @@
+export * from './banUserModel';
 export * from './changeUserInfo';
 export * from './commentModel';
 export * from './createCommentModel';
