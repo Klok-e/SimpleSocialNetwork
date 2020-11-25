@@ -25,17 +25,17 @@
             class="item">
       Unsubscribe
     </button>
-    <button *ngIf="!isViewingSelf && auth.isAdmin" (click)="banUser(banExpirationDate)"
+    <button *ngIf="!isViewingSelf && auth.isAdmin  && !isCurrentBanned" (click)="banUser(banExpirationDate)"
             class="item admin_item">Ban user
     </button>
-    <div class="item" *ngIf="!isViewingSelf && auth.isAdmin">
-      <label for="expirationDate">Ban for:</label>
+    <div class="item" *ngIf="!isViewingSelf && auth.isAdmin && !isCurrentBanned">
+      <label for="expirationDate">Ban until:</label>
       <input id="expirationDate" [(ngModel)]="banExpirationDate" type="date"/>
     </div>
-    <button *ngIf="!isViewingSelf && auth.isAdmin" (click)="liftBan()"
+    <button *ngIf="!isViewingSelf && auth.isAdmin && isCurrentBanned" (click)="liftBan()"
             class="item admin_item">Lift ban
     </button>
-    <button *ngIf="!isViewingSelf && auth.isAdmin"
+    <button *ngIf="!isViewingSelf && auth.isAdmin && !getUserModel(user)?.isAdmin"
             class="item admin_item">Elevate to admin
     </button>
   </div>

@@ -14,11 +14,6 @@ import {DatePipe} from '@angular/common';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit, OnDestroy {
-  private subscriptions: Subscription = new Subscription();
-
-  subscribedToCurrent = false;
-
-  isCurrentBanned = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -28,6 +23,21 @@ export class UserProfileComponent implements OnInit, OnDestroy {
               private subscribeService: SubscriptionApiService,
               private datePipe: DatePipe) {
   }
+
+  get user(): UnionUserModel | null {
+    return this.currentUser.currentUser;
+  }
+
+  get isViewingSelf(): boolean {
+    return this.currentUser.isCurrentSelf;
+  }
+  private subscriptions: Subscription = new Subscription();
+
+  subscribedToCurrent = false;
+
+  isCurrentBanned = false;
+
+  @Input() banExpirationDate = this.datePipe.transform(new Date(Date.now()), 'yyyy-MM-dd') ?? '';
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -51,15 +61,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
             }
 
             this.updateIsSubscribed(user);
-
-            // update is_banned if admin
-            if (!this.auth.isAdmin) {
-              return;
-            }
-            this.userApiService.apiUserBannedGet(user.login)
-              .subscribe(banned => {
-                this.isCurrentBanned = banned;
-              });
+            this.updateIsBanned(user);
           },
           error: (e: HttpErrorResponse) => {
             if (e.status === 400 || e.status === 401 || e.status === 403) {
@@ -74,19 +76,25 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  private updateIsSubscribed(user: UnionUserModel): void {
+  private updateIsBanned(newUser: UnionUserModel): void {
+    if (!this.auth.isAdmin) {
+      return;
+    }
+    this.userApiService.apiUserBannedGet(newUser.login)
+      .subscribe(banned => {
+        this.isCurrentBanned = banned;
+      });
+  }
+
+  private updateIsSubscribed(newUser: UnionUserModel): void {
     if (!this.isViewingSelf && this.auth.isLoggedIn) {
-      this.subscribeService.apiSubscriptionIsSubscribedToGet(user.login)
+      this.subscribeService.apiSubscriptionIsSubscribedToGet(newUser.login)
         .subscribe({
           next: res => {
             this.subscribedToCurrent = res;
           }
         });
     }
-  }
-
-  get user(): UnionUserModel | null {
-    return this.currentUser.currentUser;
   }
 
   private navigateTo404(): void {
@@ -101,10 +109,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       return user;
     }
     return null;
-  }
-
-  get isViewingSelf(): boolean {
-    return this.currentUser.isCurrentSelf;
   }
 
   public subscribeToCurrent(): void {
@@ -140,8 +144,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       });
   }
 
-  @Input() banExpirationDate = this.datePipe.transform(new Date(Date.now()), 'yyyy-MM-dd') ?? '';
-
   banUser(banExpiration: string): void {
     if (this.user === null) {
       return;
@@ -151,18 +153,29 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       login: this.user.login,
     };
     console.log(ban);
-    this.userApiService.apiUserBanPost(ban).subscribe();
+    this.userApiService.apiUserBanPost(ban).subscribe({
+      next: _ => {
+        if (this.user === null) {
+          return;
+        }
+        this.updateIsBanned(this.user);
+      }
+    });
   }
 
   liftBan(): void {
     if (this.user === null) {
       return;
     }
-    const ban = {
-      login: this.user.login,
-    };
-    console.log(ban);
-    // this.userApiService.apiUserBanPost(ban).subscribe();
+    this.userApiService.apiUserUnbanPost(this.user.login)
+      .subscribe({
+        next: _ => {
+          if (this.user === null) {
+            return;
+          }
+          this.updateIsBanned(this.user);
+        }
+      });
   }
 
   elevateUser(): void {

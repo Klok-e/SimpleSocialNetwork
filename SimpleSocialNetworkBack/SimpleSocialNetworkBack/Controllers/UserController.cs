@@ -82,6 +82,14 @@ namespace SimpleSocialNetworkBack.Controllers
             return Ok();
         }
 
+        [HttpPost("unban")]
+        [Authorize(Roles = Roles.Admin)]
+        public async Task<ActionResult> LiftUserBan([Required] string user)
+        {
+            await _userService.LiftBanFromUser(user);
+            return Ok();
+        }
+
         /// <summary>
         /// Soft delete user
         /// Authorized: either user themselves or an admin
@@ -95,7 +103,7 @@ namespace SimpleSocialNetworkBack.Controllers
             await _userService.DeleteUserSoft(login);
             return Ok();
         }
-        
+
         [HttpGet("banned")]
         [Authorize]
         public async Task<ActionResult<bool>> UserBanned([Required] string login)

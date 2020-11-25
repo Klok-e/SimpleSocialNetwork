@@ -21,5 +21,6 @@ namespace Business.Services
         Task ElevateUser(string login);
         Task DeleteUserSoft(string login);
         Task<bool> UserBanned(string login);
+        Task LiftBanFromUser(string login);
     }
 }

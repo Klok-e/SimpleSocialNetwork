@@ -115,6 +115,20 @@ namespace Business.Services.Implementations
             await _context.SaveChangesAsync();
         }
 
+        public async Task LiftBanFromUser(string login)
+        {
+            var (_, user) = await AdminAndTarget(_principal, login);
+
+            // cancel all not cancelled and not expired bans
+            foreach (var tagBan in user.BansReceived
+                .Where(x => !x.Cancelled && x.ExpirationDate > DateTime.UtcNow))
+            {
+                tagBan.Cancelled = true;
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
         public async Task ElevateUser(string login)
         {
             var (_, user) = await AdminAndTarget(_principal, login);
