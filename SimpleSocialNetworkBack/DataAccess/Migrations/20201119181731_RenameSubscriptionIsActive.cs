@@ -7,17 +7,17 @@ namespace DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "IsActive",
-                table: "Subscriptions",
-                newName: "IsNotActive");
+                "IsActive",
+                "Subscriptions",
+                "IsNotActive");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "IsNotActive",
-                table: "Subscriptions",
-                newName: "IsActive");
+                "IsNotActive",
+                "Subscriptions",
+                "IsActive");
         }
     }
 }

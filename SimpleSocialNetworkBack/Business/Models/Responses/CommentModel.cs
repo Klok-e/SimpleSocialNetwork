@@ -1,7 +1,5 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using DataAccess.Entities;
 
 namespace Business.Models.Responses
 {
@@ -18,7 +16,7 @@ namespace Business.Models.Responses
         [Required] public bool IsDeleted { get; set; }
 
         [Required] public DateTime SendDate { get; set; }
-        
+
         [Required] public string PosterId { get; set; } = null!;
     }
 }

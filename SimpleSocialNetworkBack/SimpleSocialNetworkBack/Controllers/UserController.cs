@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
@@ -7,9 +6,7 @@ using Business.Models.Requests;
 using Business.Models.Responses;
 using Business.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ValidationException = Business.Validation.ValidationException;
 
 namespace SimpleSocialNetworkBack.Controllers
 {
@@ -91,8 +88,8 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Soft delete user
-        /// Authorized: either user themselves or an admin
+        ///     Soft delete user
+        ///     Authorized: either user themselves or an admin
         /// </summary>
         /// <param name="login"></param>
         /// <returns></returns>

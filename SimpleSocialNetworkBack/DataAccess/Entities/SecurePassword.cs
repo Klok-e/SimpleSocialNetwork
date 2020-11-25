@@ -9,6 +9,6 @@ namespace DataAccess.Entities
         [Required] public string Salt { get; set; } = null!;
         [Required] public string Hashed { get; set; } = null!;
 
-        public virtual ApplicationUser? User { get; set; }
+        public virtual ApplicationUser User { get; set; } = null!;
     }
 }

@@ -30,8 +30,7 @@ namespace Business.Services.Implementations
         public async Task<IEnumerable<SubscriptionModel>> GetUserSubscribedTo(string login)
         {
             var user = await _context.Users.FindAsync(login);
-            if (user == null)
-                throw new ValidationException("Nonexistent user");
+            ExceptionHelper.CheckEntitySoft(user, "user");
 
             return user.Subscriptions
                 .Where(x => !x.IsNotActive)
@@ -46,34 +45,16 @@ namespace Business.Services.Implementations
                 return false;
 
             var user = await _context.Users.FindAsync(subscriberLogin);
-            if (user == null)
-                throw new BadCredentialsException("Nonexistent user");
+            ExceptionHelper.CheckSelfSoft(user, "user");
 
             return user.Subscriptions
                 .Where(x => !x.IsNotActive)
-                .Any(x => x.Target!.Login == login);
-        }
-
-        private async Task<(ApplicationUser subscriber, ApplicationUser target)>
-            Users(string? subscriber, string target)
-        {
-            if (subscriber == target)
-                throw new ValidationException("Can't subscribe to self");
-
-            var user = await _context.Users.FindAsync(subscriber);
-            if (user == null)
-                throw new BadCredentialsException("Nonexistent user");
-
-            var userSubTo = await _context.Users.FindAsync(target);
-            if (userSubTo == null)
-                throw new ValidationException("Nonexistent user");
-
-            return (user, userSubTo);
+                .Any(x => x.Target != null && x.Target.Login == login);
         }
 
         public async Task SubscribeTo(string login)
         {
-            var (subscriber, target) = await Users(_principal.Name, login);
+            var (subscriber, target) = await SubscriberAndTarget(_principal.Name, login);
 
             var subs = subscriber.Subscriptions
                 .Where(x => x.Target!.Login == target.Login)
@@ -84,24 +65,20 @@ namespace Business.Services.Implementations
                 throw new NotImplementedException();
 
             if (subs.Count == 0)
-            {
                 await _context.Subscriptions.AddAsync(new Subscription
                 {
                     Subscriber = subscriber,
                     Target = target
                 });
-            }
             else
-            {
                 subs[0].IsNotActive = false;
-            }
 
             await _context.SaveChangesAsync();
         }
 
         public async Task UnsubscribeFrom(string login)
         {
-            var (subscriber, target) = await Users(_principal.Name, login);
+            var (subscriber, target) = await SubscriberAndTarget(_principal.Name, login);
 
             var subs = subscriber.Subscriptions
                 .Where(x => x.Target!.Login == target.Login)
@@ -118,6 +95,21 @@ namespace Business.Services.Implementations
             subs[0].IsNotActive = true;
 
             await _context.SaveChangesAsync();
+        }
+
+        private async Task<(ApplicationUser subscriber, ApplicationUser target)>
+            SubscriberAndTarget(string? subscriber, string target)
+        {
+            if (subscriber == target)
+                throw new ValidationException("Can't subscribe to self");
+
+            var user = await _context.Users.FindAsync(subscriber);
+            var userSubTo = await _context.Users.FindAsync(target);
+
+            ExceptionHelper.CheckSelfSoft(user, "user");
+            ExceptionHelper.CheckEntitySoft(userSubTo, "subscription target");
+
+            return (user, userSubTo);
         }
     }
 }

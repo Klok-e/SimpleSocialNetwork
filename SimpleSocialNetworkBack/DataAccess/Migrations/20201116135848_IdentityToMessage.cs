@@ -8,289 +8,283 @@ namespace DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Tags",
-                columns: table => new
+                "Tags",
+                table => new
                 {
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    Name = table.Column<string>("nvarchar(450)", nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tags", x => x.Name);
-                });
+                constraints: table => { table.PrimaryKey("PK_Tags", x => x.Name); });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
+                "Users",
+                table => new
                 {
-                    Login = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    About = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    Login = table.Column<string>("nvarchar(450)", nullable: false),
+                    About = table.Column<string>("nvarchar(max)", nullable: false),
+                    DateBirth = table.Column<DateTime>("datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>("bit", nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Login);
-                });
+                constraints: table => { table.PrimaryKey("PK_Users", x => x.Login); });
 
             migrationBuilder.CreateTable(
-                name: "OpMessages",
-                columns: table => new
+                "OpMessages",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PosterId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Points = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    SendDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    PosterId = table.Column<string>("nvarchar(450)", nullable: true),
+                    Title = table.Column<string>("nvarchar(max)", nullable: false),
+                    Content = table.Column<string>("nvarchar(max)", nullable: false),
+                    Points = table.Column<int>("int", nullable: false),
+                    IsDeleted = table.Column<bool>("bit", nullable: false),
+                    SendDate = table.Column<DateTime>("datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OpMessages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OpMessages_Users_PosterId",
-                        column: x => x.PosterId,
-                        principalTable: "Users",
-                        principalColumn: "Login",
+                        "FK_OpMessages_Users_PosterId",
+                        x => x.PosterId,
+                        "Users",
+                        "Login",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SecurePasswords",
-                columns: table => new
+                "SecurePasswords",
+                table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Salt = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hashed = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    UserId = table.Column<string>("nvarchar(450)", nullable: false),
+                    Salt = table.Column<string>("nvarchar(max)", nullable: false),
+                    Hashed = table.Column<string>("nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SecurePasswords", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_SecurePasswords_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Login",
+                        "FK_SecurePasswords_Users_UserId",
+                        x => x.UserId,
+                        "Users",
+                        "Login",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Subscriptions",
-                columns: table => new
+                "Subscriptions",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SubscriberId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    TargetId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    SubscriberId = table.Column<string>("nvarchar(450)", nullable: true),
+                    TargetId = table.Column<string>("nvarchar(450)", nullable: true),
+                    IsActive = table.Column<bool>("bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Subscriptions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Subscriptions_Users_SubscriberId",
-                        column: x => x.SubscriberId,
-                        principalTable: "Users",
-                        principalColumn: "Login",
+                        "FK_Subscriptions_Users_SubscriberId",
+                        x => x.SubscriberId,
+                        "Users",
+                        "Login",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Subscriptions_Users_TargetId",
-                        column: x => x.TargetId,
-                        principalTable: "Users",
-                        principalColumn: "Login",
+                        "FK_Subscriptions_Users_TargetId",
+                        x => x.TargetId,
+                        "Users",
+                        "Login",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TagBans",
-                columns: table => new
+                "TagBans",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TagId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ModeratorId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BanIssuedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Cancelled = table.Column<bool>(type: "bit", nullable: false)
+                    TagId = table.Column<string>("nvarchar(450)", nullable: true),
+                    UserId = table.Column<string>("nvarchar(450)", nullable: true),
+                    ModeratorId = table.Column<string>("nvarchar(450)", nullable: true),
+                    ExpirationDate = table.Column<DateTime>("datetime2", nullable: false),
+                    BanIssuedDate = table.Column<DateTime>("datetime2", nullable: false),
+                    Cancelled = table.Column<bool>("bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TagBans", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TagBans_Tags_TagId",
-                        column: x => x.TagId,
-                        principalTable: "Tags",
-                        principalColumn: "Name",
+                        "FK_TagBans_Tags_TagId",
+                        x => x.TagId,
+                        "Tags",
+                        "Name",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_TagBans_Users_ModeratorId",
-                        column: x => x.ModeratorId,
-                        principalTable: "Users",
-                        principalColumn: "Login",
+                        "FK_TagBans_Users_ModeratorId",
+                        x => x.ModeratorId,
+                        "Users",
+                        "Login",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_TagBans_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Login",
+                        "FK_TagBans_Users_UserId",
+                        x => x.UserId,
+                        "Users",
+                        "Login",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TagModerators",
-                columns: table => new
+                "TagModerators",
+                table => new
                 {
-                    TagId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    IsRevoked = table.Column<bool>(type: "bit", nullable: false)
+                    TagId = table.Column<string>("nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>("nvarchar(450)", nullable: false),
+                    IsRevoked = table.Column<bool>("bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TagModerators", x => new { x.TagId, x.UserId });
+                    table.PrimaryKey("PK_TagModerators", x => new {x.TagId, x.UserId});
                     table.ForeignKey(
-                        name: "FK_TagModerators_Tags_TagId",
-                        column: x => x.TagId,
-                        principalTable: "Tags",
-                        principalColumn: "Name",
+                        "FK_TagModerators_Tags_TagId",
+                        x => x.TagId,
+                        "Tags",
+                        "Name",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TagModerators_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Login",
+                        "FK_TagModerators_Users_UserId",
+                        x => x.UserId,
+                        "Users",
+                        "Login",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Messages",
-                columns: table => new
+                "Messages",
+                table => new
                 {
-                    OpId = table.Column<int>(type: "int", nullable: false),
-                    MessageId = table.Column<int>(type: "int", nullable: false)
+                    OpId = table.Column<int>("int", nullable: false),
+                    MessageId = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Points = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    SendDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PosterLogin = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Content = table.Column<string>("nvarchar(max)", nullable: false),
+                    Points = table.Column<int>("int", nullable: false),
+                    IsDeleted = table.Column<bool>("bit", nullable: false),
+                    SendDate = table.Column<DateTime>("datetime2", nullable: false),
+                    PosterLogin = table.Column<string>("nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Messages", x => new { x.OpId, x.MessageId });
+                    table.PrimaryKey("PK_Messages", x => new {x.OpId, x.MessageId});
                     table.ForeignKey(
-                        name: "FK_Messages_OpMessages_OpId",
-                        column: x => x.OpId,
-                        principalTable: "OpMessages",
-                        principalColumn: "Id",
+                        "FK_Messages_OpMessages_OpId",
+                        x => x.OpId,
+                        "OpMessages",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Messages_Users_PosterLogin",
-                        column: x => x.PosterLogin,
-                        principalTable: "Users",
-                        principalColumn: "Login",
+                        "FK_Messages_Users_PosterLogin",
+                        x => x.PosterLogin,
+                        "Users",
+                        "Login",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "OpMessageTags",
-                columns: table => new
+                "OpMessageTags",
+                table => new
                 {
-                    TagId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    OpId = table.Column<int>(type: "int", nullable: false)
+                    TagId = table.Column<string>("nvarchar(450)", nullable: false),
+                    OpId = table.Column<int>("int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OpMessageTags", x => new { x.TagId, x.OpId });
+                    table.PrimaryKey("PK_OpMessageTags", x => new {x.TagId, x.OpId});
                     table.ForeignKey(
-                        name: "FK_OpMessageTags_OpMessages_OpId",
-                        column: x => x.OpId,
-                        principalTable: "OpMessages",
-                        principalColumn: "Id",
+                        "FK_OpMessageTags_OpMessages_OpId",
+                        x => x.OpId,
+                        "OpMessages",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OpMessageTags_Tags_TagId",
-                        column: x => x.TagId,
-                        principalTable: "Tags",
-                        principalColumn: "Name",
+                        "FK_OpMessageTags_Tags_TagId",
+                        x => x.TagId,
+                        "Tags",
+                        "Name",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Messages_PosterLogin",
-                table: "Messages",
-                column: "PosterLogin");
+                "IX_Messages_PosterLogin",
+                "Messages",
+                "PosterLogin");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OpMessages_PosterId",
-                table: "OpMessages",
-                column: "PosterId");
+                "IX_OpMessages_PosterId",
+                "OpMessages",
+                "PosterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OpMessageTags_OpId",
-                table: "OpMessageTags",
-                column: "OpId");
+                "IX_OpMessageTags_OpId",
+                "OpMessageTags",
+                "OpId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Subscriptions_SubscriberId",
-                table: "Subscriptions",
-                column: "SubscriberId");
+                "IX_Subscriptions_SubscriberId",
+                "Subscriptions",
+                "SubscriberId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Subscriptions_TargetId",
-                table: "Subscriptions",
-                column: "TargetId");
+                "IX_Subscriptions_TargetId",
+                "Subscriptions",
+                "TargetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TagBans_ModeratorId",
-                table: "TagBans",
-                column: "ModeratorId");
+                "IX_TagBans_ModeratorId",
+                "TagBans",
+                "ModeratorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TagBans_TagId",
-                table: "TagBans",
-                column: "TagId");
+                "IX_TagBans_TagId",
+                "TagBans",
+                "TagId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TagBans_UserId",
-                table: "TagBans",
-                column: "UserId");
+                "IX_TagBans_UserId",
+                "TagBans",
+                "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TagModerators_UserId",
-                table: "TagModerators",
-                column: "UserId");
+                "IX_TagModerators_UserId",
+                "TagModerators",
+                "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Messages");
+                "Messages");
 
             migrationBuilder.DropTable(
-                name: "OpMessageTags");
+                "OpMessageTags");
 
             migrationBuilder.DropTable(
-                name: "SecurePasswords");
+                "SecurePasswords");
 
             migrationBuilder.DropTable(
-                name: "Subscriptions");
+                "Subscriptions");
 
             migrationBuilder.DropTable(
-                name: "TagBans");
+                "TagBans");
 
             migrationBuilder.DropTable(
-                name: "TagModerators");
+                "TagModerators");
 
             migrationBuilder.DropTable(
-                name: "OpMessages");
+                "OpMessages");
 
             migrationBuilder.DropTable(
-                name: "Tags");
+                "Tags");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                "Users");
         }
     }
 }

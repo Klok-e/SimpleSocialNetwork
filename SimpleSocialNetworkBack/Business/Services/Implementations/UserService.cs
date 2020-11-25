@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Common;
-using Business.Models;
 using Business.Models.Requests;
 using Business.Models.Responses;
 using Business.Validation;
@@ -32,10 +31,7 @@ namespace Business.Services.Implementations
         public async Task<UserModel> GetUser(string login)
         {
             var user = await _context.Users.FindAsync(login);
-            if (user == null)
-                throw new ValidationException("Nonexistent login");
-            if (user.IsDeleted)
-                throw new ValidationException("User was deleted");
+            ExceptionHelper.CheckEntitySoft(user, "user");
             if (_principal.Name != login && _principal.Role != Roles.Admin)
                 throw new ForbiddenException("You can't get full info about another user");
 
@@ -45,10 +41,7 @@ namespace Business.Services.Implementations
         public async Task<LimitedUserModel> GetUserLimited(string login)
         {
             var user = await _context.Users.FindAsync(login);
-            if (user == null)
-                throw new ValidationException("Nonexistent login");
-            if (user.IsDeleted)
-                throw new ValidationException("User was deleted");
+            ExceptionHelper.CheckEntitySoft(user, "user");
 
             return _mapper.Map<ApplicationUser, LimitedUserModel>(user);
         }
@@ -63,10 +56,7 @@ namespace Business.Services.Implementations
         public async Task ChangeUserInfo(ChangeUserInfo changeInfo)
         {
             var user = await _context.Users.FindAsync(_principal.Name);
-            if (user == null)
-                throw new BadCredentialsException("Nonexistent user");
-            if (user.IsDeleted)
-                throw new ValidationException("User was deleted");
+            ExceptionHelper.CheckSelfSoft(user, "user");
 
             user.About = changeInfo.About;
             user.DateBirth = changeInfo.DateBirth;
@@ -122,9 +112,7 @@ namespace Business.Services.Implementations
             // cancel all not cancelled and not expired bans
             foreach (var tagBan in user.BansReceived
                 .Where(x => !x.Cancelled && x.ExpirationDate > DateTime.UtcNow))
-            {
                 tagBan.Cancelled = true;
-            }
 
             await _context.SaveChangesAsync();
         }
@@ -147,32 +135,31 @@ namespace Business.Services.Implementations
             await _context.SaveChangesAsync();
         }
 
-        private async Task<(ApplicationUser adm, ApplicationUser target)> AdminAndTarget(TypedClaimsPrincipal adm,
-            string targLogin)
-        {
-            var admin = await _context.Users.FindAsync(adm.Name);
-            if (admin == null)
-                throw new BadCredentialsException("Nonexistent user");
-            if (adm.Role != Roles.Admin)
-                throw new ForbiddenException("No rights");
-
-            var user = await _context.Users.FindAsync(targLogin);
-            if (user == null)
-                throw new ValidationException("Nonexistent login");
-
-            return (admin, user);
-        }
-
         public async Task<bool> UserBanned(string login)
         {
             var user = await _context.Users.FindAsync(login);
-            if (user == null)
-                throw new ValidationException("Nonexistent login");
+            ExceptionHelper.CheckEntitySoft(user, "user login");
+
             if (_principal.Role != Roles.Admin && _principal.Name != login)
                 throw new ForbiddenException("No rights: either not an admin or not same user");
 
             return user.BansReceived
                 .Any(ban => !ban.Cancelled && ban.ExpirationDate > DateTime.UtcNow);
+        }
+
+        private async Task<(ApplicationUser adm, ApplicationUser target)> AdminAndTarget(TypedClaimsPrincipal adm,
+            string targLogin)
+        {
+            var admin = await _context.Users.FindAsync(adm.Name);
+            var targetUser = await _context.Users.FindAsync(targLogin);
+
+            ExceptionHelper.CheckSelfSoft(admin, "admin");
+            if (adm.Role != Roles.Admin)
+                throw new ForbiddenException("No rights");
+
+            ExceptionHelper.CheckEntitySoft(targetUser, "user");
+
+            return (admin, targetUser);
         }
     }
 }

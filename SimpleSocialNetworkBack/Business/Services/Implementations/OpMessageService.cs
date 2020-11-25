@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Common;
-using Business.Models;
 using Business.Models.Requests;
 using Business.Models.Responses;
 using Business.Validation;
@@ -46,8 +44,7 @@ namespace Business.Services.Implementations
         public async Task<IEnumerable<OpMessageModel>> PostsFromUser(string login)
         {
             var user = await _context.Users.FindAsync(login);
-            if (user == null)
-                throw new ValidationException("Nonexistent user");
+            ExceptionHelper.CheckEntitySoft(user, "user");
 
             return user.Posts
                 .Where(x => !x.IsDeleted)
@@ -57,8 +54,7 @@ namespace Business.Services.Implementations
         public async Task<int> MakeAPost(CreateOpMessageModel model)
         {
             var appUser = await _context.Users.FindAsync(_principal.Name);
-            if (appUser == null)
-                throw new BadCredentialsException("Nonexistent user");
+            ExceptionHelper.CheckSelfSoft(appUser, "user");
 
             var superTag = await _context.Tags.FindAsync("") ?? new Tag {Name = ""};
 
@@ -68,7 +64,7 @@ namespace Business.Services.Implementations
                 Title = model.Title,
                 SendDate = DateTime.UtcNow,
                 Poster = appUser,
-                Tags = new[] {new OpMessageTag {Tag = superTag}},
+                Tags = new[] {new OpMessageTag {Tag = superTag}}
             };
             await _context.OpMessages.AddAsync(op);
 
@@ -88,10 +84,7 @@ namespace Business.Services.Implementations
         public async Task<IEnumerable<CommentModel>> GetComments(int postId)
         {
             var op = await _context.OpMessages.FindAsync(postId);
-            if (op == null)
-                throw new ValidationException("Nonexistent postId");
-            if (op.IsDeleted)
-                throw new ValidationException("Post was deleted");
+            ExceptionHelper.CheckEntitySoft(op, "post");
 
             return op.Messages
                 .Where(x => !x.IsDeleted)
@@ -108,10 +101,7 @@ namespace Business.Services.Implementations
         public async Task VotePost(VotePost votePost)
         {
             var post = await _context.OpMessages.FindAsync(votePost.PostId);
-            if (post == null)
-                throw new ValidationException("Nonexistent post");
-            if (post.IsDeleted)
-                throw new ValidationException("Post was deleted");
+            ExceptionHelper.CheckEntitySoft(post, "post");
 
             post.Points += votePost.VoteType switch
             {

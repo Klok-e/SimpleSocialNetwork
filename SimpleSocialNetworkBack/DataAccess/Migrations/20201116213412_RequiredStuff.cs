@@ -7,13 +7,13 @@ namespace DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Messages_Users_PosterLogin",
-                table: "Messages");
+                "FK_Messages_Users_PosterLogin",
+                "Messages");
 
             migrationBuilder.AlterColumn<string>(
-                name: "PosterLogin",
-                table: "Messages",
-                type: "nvarchar(450)",
+                "PosterLogin",
+                "Messages",
+                "nvarchar(450)",
                 nullable: false,
                 defaultValue: "",
                 oldClrType: typeof(string),
@@ -21,10 +21,10 @@ namespace DataAccess.Migrations
                 oldNullable: true);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Messages_Users_PosterLogin",
-                table: "Messages",
-                column: "PosterLogin",
-                principalTable: "Users",
+                "FK_Messages_Users_PosterLogin",
+                "Messages",
+                "PosterLogin",
+                "Users",
                 principalColumn: "Login",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -32,22 +32,22 @@ namespace DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Messages_Users_PosterLogin",
-                table: "Messages");
+                "FK_Messages_Users_PosterLogin",
+                "Messages");
 
             migrationBuilder.AlterColumn<string>(
-                name: "PosterLogin",
-                table: "Messages",
-                type: "nvarchar(450)",
+                "PosterLogin",
+                "Messages",
+                "nvarchar(450)",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(450)");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Messages_Users_PosterLogin",
-                table: "Messages",
-                column: "PosterLogin",
-                principalTable: "Users",
+                "FK_Messages_Users_PosterLogin",
+                "Messages",
+                "PosterLogin",
+                "Users",
                 principalColumn: "Login",
                 onDelete: ReferentialAction.Restrict);
         }

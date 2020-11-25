@@ -1,10 +1,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class TagBan
+    public class TagBan : ISoftDelete
     {
         [Key] public int Id { get; set; }
 
@@ -16,5 +15,11 @@ namespace DataAccess.Entities
         public virtual Tag? Tag { get; set; }
         public virtual ApplicationUser? User { get; set; }
         public virtual ApplicationUser? Moderator { get; set; }
+
+        public bool IsDeleted
+        {
+            get => Cancelled;
+            set => Cancelled = value;
+        }
     }
 }

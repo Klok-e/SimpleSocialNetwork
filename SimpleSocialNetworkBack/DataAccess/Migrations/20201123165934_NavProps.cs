@@ -7,68 +7,68 @@ namespace DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_TagBans_Tags_TagId",
-                table: "TagBans");
+                "FK_TagBans_Tags_TagId",
+                "TagBans");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_TagBans_Users_ModeratorId",
-                table: "TagBans");
+                "FK_TagBans_Users_ModeratorId",
+                "TagBans");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_TagBans_Users_UserId",
-                table: "TagBans");
+                "FK_TagBans_Users_UserId",
+                "TagBans");
 
             migrationBuilder.RenameColumn(
-                name: "UserId",
-                table: "TagBans",
-                newName: "UserLogin");
+                "UserId",
+                "TagBans",
+                "UserLogin");
 
             migrationBuilder.RenameColumn(
-                name: "TagId",
-                table: "TagBans",
-                newName: "TagName");
+                "TagId",
+                "TagBans",
+                "TagName");
 
             migrationBuilder.RenameColumn(
-                name: "ModeratorId",
-                table: "TagBans",
-                newName: "ModeratorLogin");
+                "ModeratorId",
+                "TagBans",
+                "ModeratorLogin");
 
             migrationBuilder.RenameIndex(
-                name: "IX_TagBans_UserId",
+                "IX_TagBans_UserId",
                 table: "TagBans",
                 newName: "IX_TagBans_UserLogin");
 
             migrationBuilder.RenameIndex(
-                name: "IX_TagBans_TagId",
+                "IX_TagBans_TagId",
                 table: "TagBans",
                 newName: "IX_TagBans_TagName");
 
             migrationBuilder.RenameIndex(
-                name: "IX_TagBans_ModeratorId",
+                "IX_TagBans_ModeratorId",
                 table: "TagBans",
                 newName: "IX_TagBans_ModeratorLogin");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_TagBans_Tags_TagName",
-                table: "TagBans",
-                column: "TagName",
-                principalTable: "Tags",
+                "FK_TagBans_Tags_TagName",
+                "TagBans",
+                "TagName",
+                "Tags",
                 principalColumn: "Name",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_TagBans_Users_ModeratorLogin",
-                table: "TagBans",
-                column: "ModeratorLogin",
-                principalTable: "Users",
+                "FK_TagBans_Users_ModeratorLogin",
+                "TagBans",
+                "ModeratorLogin",
+                "Users",
                 principalColumn: "Login",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_TagBans_Users_UserLogin",
-                table: "TagBans",
-                column: "UserLogin",
-                principalTable: "Users",
+                "FK_TagBans_Users_UserLogin",
+                "TagBans",
+                "UserLogin",
+                "Users",
                 principalColumn: "Login",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -76,68 +76,68 @@ namespace DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_TagBans_Tags_TagName",
-                table: "TagBans");
+                "FK_TagBans_Tags_TagName",
+                "TagBans");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_TagBans_Users_ModeratorLogin",
-                table: "TagBans");
+                "FK_TagBans_Users_ModeratorLogin",
+                "TagBans");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_TagBans_Users_UserLogin",
-                table: "TagBans");
+                "FK_TagBans_Users_UserLogin",
+                "TagBans");
 
             migrationBuilder.RenameColumn(
-                name: "UserLogin",
-                table: "TagBans",
-                newName: "UserId");
+                "UserLogin",
+                "TagBans",
+                "UserId");
 
             migrationBuilder.RenameColumn(
-                name: "TagName",
-                table: "TagBans",
-                newName: "TagId");
+                "TagName",
+                "TagBans",
+                "TagId");
 
             migrationBuilder.RenameColumn(
-                name: "ModeratorLogin",
-                table: "TagBans",
-                newName: "ModeratorId");
+                "ModeratorLogin",
+                "TagBans",
+                "ModeratorId");
 
             migrationBuilder.RenameIndex(
-                name: "IX_TagBans_UserLogin",
+                "IX_TagBans_UserLogin",
                 table: "TagBans",
                 newName: "IX_TagBans_UserId");
 
             migrationBuilder.RenameIndex(
-                name: "IX_TagBans_TagName",
+                "IX_TagBans_TagName",
                 table: "TagBans",
                 newName: "IX_TagBans_TagId");
 
             migrationBuilder.RenameIndex(
-                name: "IX_TagBans_ModeratorLogin",
+                "IX_TagBans_ModeratorLogin",
                 table: "TagBans",
                 newName: "IX_TagBans_ModeratorId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_TagBans_Tags_TagId",
-                table: "TagBans",
-                column: "TagId",
-                principalTable: "Tags",
+                "FK_TagBans_Tags_TagId",
+                "TagBans",
+                "TagId",
+                "Tags",
                 principalColumn: "Name",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_TagBans_Users_ModeratorId",
-                table: "TagBans",
-                column: "ModeratorId",
-                principalTable: "Users",
+                "FK_TagBans_Users_ModeratorId",
+                "TagBans",
+                "ModeratorId",
+                "Users",
                 principalColumn: "Login",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_TagBans_Users_UserId",
-                table: "TagBans",
-                column: "UserId",
-                principalTable: "Users",
+                "FK_TagBans_Users_UserId",
+                "TagBans",
+                "UserId",
+                "Users",
                 principalColumn: "Login",
                 onDelete: ReferentialAction.Restrict);
         }

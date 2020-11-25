@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.Entities
 {
-    public class ApplicationUser
+    public class ApplicationUser : ISoftDelete
     {
         [Key] public string Login { get; set; } = null!;
 
@@ -12,11 +12,9 @@ namespace DataAccess.Entities
 
         public DateTime? DateBirth { get; set; }
 
-        public bool IsDeleted { get; set; }
-
         public bool IsAdmin { get; set; }
 
-        public virtual SecurePassword? Password { get; set; }
+        public virtual SecurePassword Password { get; set; } = null!;
 
         public virtual ICollection<Subscription> Subscriptions { get; set; } = null!;
 
@@ -31,5 +29,7 @@ namespace DataAccess.Entities
         public virtual ICollection<TagBan> BansIssued { get; set; } = null!;
 
         public virtual ICollection<TagModerator> ModeratorOfTags { get; set; } = null!;
+
+        public bool IsDeleted { get; set; }
     }
 }

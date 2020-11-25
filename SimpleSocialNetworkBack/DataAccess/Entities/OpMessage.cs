@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class OpMessage
+    public class OpMessage : ISoftDelete
     {
         [Key] public int Id { get; set; }
 
@@ -14,8 +13,6 @@ namespace DataAccess.Entities
 
         public int Points { get; set; }
 
-        public bool IsDeleted { get; set; }
-
         public DateTime SendDate { get; set; }
 
         public virtual ApplicationUser? Poster { get; set; }
@@ -23,5 +20,7 @@ namespace DataAccess.Entities
         public virtual ICollection<OpMessageTag> Tags { get; set; } = null!;
 
         public virtual ICollection<Message> Messages { get; set; } = null!;
+
+        public bool IsDeleted { get; set; }
     }
 }

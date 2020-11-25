@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Business.Models;
 using Business.Models.Responses;
 
 namespace Business.Services

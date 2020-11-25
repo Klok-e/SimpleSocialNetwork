@@ -1,10 +1,8 @@
-using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class TagModerator
+    public class TagModerator : ISoftDelete
     {
         public string TagId { get; set; } = null!;
 
@@ -14,5 +12,12 @@ namespace DataAccess.Entities
 
         public virtual Tag Tag { get; set; } = null!;
         public virtual ApplicationUser User { get; set; } = null!;
+
+        [NotMapped]
+        public bool IsDeleted
+        {
+            get => IsRevoked;
+            set => IsRevoked = value;
+        }
     }
 }

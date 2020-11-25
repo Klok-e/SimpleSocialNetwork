@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Common;
-using Business.Models;
 using Business.Models.Responses;
 using Business.Validation;
 using DataAccess;
@@ -20,9 +19,9 @@ namespace Business.Services.Implementations
 {
     public class AuthService : IAuthService
     {
+        private readonly AppSettings _appSettings;
         private readonly SocialDbContext _context;
         private readonly IMapper _mapper;
-        private readonly AppSettings _appSettings;
 
         public AuthService(SocialDbContext context, IMapper mapper, IOptions<AppSettings> appSettings)
         {
@@ -45,7 +44,7 @@ namespace Business.Services.Implementations
             {
                 Login = login,
                 Password = HashPassword(password),
-                IsAdmin = isAdmin,
+                IsAdmin = isAdmin
             };
 
             await _context.Users!.AddAsync(user);
@@ -58,10 +57,9 @@ namespace Business.Services.Implementations
         {
             // check whether user exists
             var user = await _context.Users.FindAsync(login);
-            if (user == null)
-                throw new ValidationException("Nonexistent login");
+            ExceptionHelper.CheckEntitySoft(user, "user");
 
-            if (!CheckPasswordHash(user.Password!.Salt, user.Password!.Hashed, password))
+            if (!CheckPasswordHash(user.Password.Salt, user.Password.Hashed, password))
                 throw new ValidationException("Wrong password");
 
             var role = user.IsAdmin ? Roles.Admin : Roles.User;
@@ -74,7 +72,7 @@ namespace Business.Services.Implementations
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, user.Login),
-                    new Claim(ClaimTypes.Role, role),
+                    new Claim(ClaimTypes.Role, role)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
@@ -87,7 +85,7 @@ namespace Business.Services.Implementations
             {
                 Login = user.Login,
                 Token = tokenStr,
-                Role = role,
+                Role = role
             };
         }
 
@@ -104,7 +102,6 @@ namespace Business.Services.Implementations
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="password"></param>
         /// <returns>SecurePassword with salt and hash set</returns>

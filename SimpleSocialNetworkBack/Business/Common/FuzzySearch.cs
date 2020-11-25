@@ -4,7 +4,7 @@ namespace Business.Common
     public static class FuzzySearch
     {
         /// <summary>
-        /// Does a fuzzy search for a pattern within a string.
+        ///     Does a fuzzy search for a pattern within a string.
         /// </summary>
         /// <param name="stringToSearch">The string to search for the pattern in.</param>
         /// <param name="pattern">The pattern to search for in the string.</param>

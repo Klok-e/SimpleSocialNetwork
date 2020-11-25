@@ -24,19 +24,17 @@ namespace Business.Services.Implementations
         public async Task CreateComment(CreateCommentModel comment)
         {
             var userEnt = await _context.Users.FindAsync(_principal.Name);
-            if (userEnt == null)
-                throw new BadCredentialsException("Nonexistent user");
+            ExceptionHelper.CheckSelfSoft(userEnt, "user commenter");
 
             var op = await _context.OpMessages.FindAsync(comment.OpId);
-            if (op == null)
-                throw new ValidationException();
+            ExceptionHelper.CheckEntitySoft(op, "post");
 
             await _context.Messages.AddAsync(new Message
             {
                 OpMessage = op,
                 Poster = userEnt,
                 Content = comment.Content,
-                SendDate = DateTime.UtcNow,
+                SendDate = DateTime.UtcNow
             });
             await _context.SaveChangesAsync();
         }
@@ -44,10 +42,7 @@ namespace Business.Services.Implementations
         public async Task VoteComment(VoteComment vote)
         {
             var message = await _context.Messages.FindAsync(vote.OpId, vote.MessageId);
-            if (message == null)
-                throw new ValidationException("Nonexistent comment");
-            if (message.IsDeleted)
-                throw new ValidationException("Comment was deleted");
+            ExceptionHelper.CheckEntitySoft(message, "comment");
 
             message.Points += vote.VoteType switch
             {

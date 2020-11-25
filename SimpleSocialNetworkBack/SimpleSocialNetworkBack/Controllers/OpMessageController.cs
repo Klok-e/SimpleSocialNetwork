@@ -1,15 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
-using Business.Models;
 using Business.Models.Requests;
 using Business.Models.Responses;
 using Business.Services;
-using Business.Validation;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SimpleSocialNetworkBack.Controllers

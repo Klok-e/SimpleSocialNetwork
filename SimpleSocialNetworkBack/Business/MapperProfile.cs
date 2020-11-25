@@ -1,9 +1,6 @@
-﻿using System;
-using AutoMapper;
-using Business.Models;
+﻿using AutoMapper;
 using Business.Models.Responses;
 using DataAccess.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace Business
 {
@@ -16,7 +13,7 @@ namespace Business
 
             CreateMap<Message, CommentModel>()
                 .ForMember(dest => dest.PosterId,
-                    opt => 
+                    opt =>
                         opt.MapFrom(src => src.Poster.Login));
 
             CreateMap<OpMessage, OpMessageModel>()

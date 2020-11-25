@@ -7,24 +7,24 @@ namespace DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_OpMessages_Users_PosterId",
-                table: "OpMessages");
+                "FK_OpMessages_Users_PosterId",
+                "OpMessages");
 
             migrationBuilder.RenameColumn(
-                name: "PosterId",
-                table: "OpMessages",
-                newName: "PosterLogin");
+                "PosterId",
+                "OpMessages",
+                "PosterLogin");
 
             migrationBuilder.RenameIndex(
-                name: "IX_OpMessages_PosterId",
+                "IX_OpMessages_PosterId",
                 table: "OpMessages",
                 newName: "IX_OpMessages_PosterLogin");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_OpMessages_Users_PosterLogin",
-                table: "OpMessages",
-                column: "PosterLogin",
-                principalTable: "Users",
+                "FK_OpMessages_Users_PosterLogin",
+                "OpMessages",
+                "PosterLogin",
+                "Users",
                 principalColumn: "Login",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -32,24 +32,24 @@ namespace DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_OpMessages_Users_PosterLogin",
-                table: "OpMessages");
+                "FK_OpMessages_Users_PosterLogin",
+                "OpMessages");
 
             migrationBuilder.RenameColumn(
-                name: "PosterLogin",
-                table: "OpMessages",
-                newName: "PosterId");
+                "PosterLogin",
+                "OpMessages",
+                "PosterId");
 
             migrationBuilder.RenameIndex(
-                name: "IX_OpMessages_PosterLogin",
+                "IX_OpMessages_PosterLogin",
                 table: "OpMessages",
                 newName: "IX_OpMessages_PosterId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_OpMessages_Users_PosterId",
-                table: "OpMessages",
-                column: "PosterId",
-                principalTable: "Users",
+                "FK_OpMessages_Users_PosterId",
+                "OpMessages",
+                "PosterId",
+                "Users",
                 principalColumn: "Login",
                 onDelete: ReferentialAction.Restrict);
         }

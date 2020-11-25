@@ -3,9 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Business;
 using Business.Common;
-using Business.Models;
 using Business.Models.Responses;
-using Business.Services;
 using Business.Services.Implementations;
 using Business.Validation;
 using DataAccess;
@@ -20,11 +18,6 @@ namespace Tests.Business
     [TestFixture]
     public class UserServiceTests
     {
-        private SqliteConnection _connection;
-        private SocialDbContext _context;
-        private IMapper _mapper;
-        private IOptions<AppSettings> _settings;
-
         [SetUp]
         public void SetUp()
         {
@@ -51,6 +44,11 @@ namespace Tests.Business
         {
             _connection.Close();
         }
+
+        private SqliteConnection _connection;
+        private SocialDbContext _context;
+        private IMapper _mapper;
+        private IOptions<AppSettings> _settings;
 
         [Test]
         public async Task UserService_Register_Happy()

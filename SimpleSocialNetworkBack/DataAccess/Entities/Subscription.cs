@@ -1,10 +1,9 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    public class Subscription
+    public class Subscription : ISoftDelete
     {
         [Key] public int Id { get; set; }
 
@@ -16,5 +15,12 @@ namespace DataAccess.Entities
         public virtual ApplicationUser? Subscriber { get; set; }
 
         public virtual ApplicationUser? Target { get; set; }
+
+        [NotMapped]
+        public bool IsDeleted
+        {
+            get => IsNotActive;
+            set => IsNotActive = value;
+        }
     }
 }
