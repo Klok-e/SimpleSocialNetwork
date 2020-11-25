@@ -31,6 +31,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   get isViewingSelf(): boolean {
     return this.currentUser.isCurrentSelf;
   }
+
   private subscriptions: Subscription = new Subscription();
 
   subscribedToCurrent = false;
@@ -179,6 +180,17 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   elevateUser(): void {
-
+    if (this.user === null) {
+      return;
+    }
+    this.userApiService.apiUserElevatePut(this.user.login)
+      .subscribe({
+        next: _ => {
+          if (this.user === null) {
+            return;
+          }
+          this.currentUser.changeUserTo(this.user.login);
+        }
+      });
   }
 }

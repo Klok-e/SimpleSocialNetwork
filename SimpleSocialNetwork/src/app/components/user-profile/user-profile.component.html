@@ -35,7 +35,7 @@
     <button *ngIf="!isViewingSelf && auth.isAdmin && isCurrentBanned" (click)="liftBan()"
             class="item admin_item">Lift ban
     </button>
-    <button *ngIf="!isViewingSelf && auth.isAdmin && !getUserModel(user)?.isAdmin"
+    <button *ngIf="!isViewingSelf && auth.isAdmin && !getUserModel(user)?.isAdmin" (click)="elevateUser()"
             class="item admin_item">Elevate to admin
     </button>
   </div>
