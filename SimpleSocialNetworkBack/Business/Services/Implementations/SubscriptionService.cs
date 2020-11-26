@@ -33,7 +33,7 @@ namespace Business.Services.Implementations
             ExceptionHelper.CheckEntitySoft(user, "user");
 
             return user.Subscriptions
-                .Where(x => !x.IsNotActive)
+                .Where(x => !x.IsNotActive && x.Target != null && !x.Target.IsDeleted)
                 .Select(x => _mapper.Map<Subscription, SubscriptionModel>(x));
         }
 
@@ -57,7 +57,7 @@ namespace Business.Services.Implementations
             var (subscriber, target) = await SubscriberAndTarget(_principal.Name, login);
 
             var subs = subscriber.Subscriptions
-                .Where(x => x.Target!.Login == target.Login)
+                .Where(x => x.Target != null && x.Target.Login == target.Login)
                 .ToList();
 
             // TODO: make sub and target into keys instead
@@ -81,7 +81,7 @@ namespace Business.Services.Implementations
             var (subscriber, target) = await SubscriberAndTarget(_principal.Name, login);
 
             var subs = subscriber.Subscriptions
-                .Where(x => x.Target!.Login == target.Login)
+                .Where(x => x.Target != null && x.Target.Login == target.Login)
                 .ToList();
 
             // TODO: make sub and target into keys instead
