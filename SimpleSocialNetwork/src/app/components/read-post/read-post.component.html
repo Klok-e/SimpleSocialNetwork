@@ -31,7 +31,7 @@
     </p>
   </div>
 </article>
-<div class="form_container">
+<div *ngIf="auth.isLoggedIn" class="form_container">
   <form [formGroup]="commentForm" (ngSubmit)="sendComment()">
     <span>Write a comment:</span>
     <div>
