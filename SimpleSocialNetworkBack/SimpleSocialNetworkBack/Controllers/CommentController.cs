@@ -34,7 +34,7 @@ namespace SimpleSocialNetworkBack.Controllers
             await _commentService.VoteComment(vote);
             return Ok();
         }
-        
+
         /// <summary>
         /// Soft delete comment
         /// </summary>
@@ -42,10 +42,10 @@ namespace SimpleSocialNetworkBack.Controllers
         /// <returns></returns>
         [HttpDelete]
         [Authorize]
-        public async Task<ActionResult> DeleteComment([Required]CommentKeyModel commentId)
+        public async Task<ActionResult> DeleteComment([Required] [FromQuery] CommentKeyModel commentId)
         {
             await _commentService.DeleteCommentSoft(commentId);
             return Ok();
-        }   
+        }
     }
 }

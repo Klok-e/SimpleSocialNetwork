@@ -24,7 +24,7 @@ export class ReadPostComponent implements OnInit {
               private router: Router,
               private posts: PostsService,
               private postsApi: OpMessageApiService,
-              private commentService: CommentApiService,
+              private commentApi: CommentApiService,
               private usersApi: UserApiService,
               private formBuilder: FormBuilder,
               public auth: AuthService) {
@@ -125,13 +125,33 @@ export class ReadPostComponent implements OnInit {
     });
   }
 
+  deleteComment(id: number): void {
+    const comment = this.comments.find((x) => {
+      return x.messageId === id;
+    });
+    if (comment === undefined) {
+      return;
+    }
+    // console.log('delete', comment);
+    this.commentApi.apiCommentDelete(comment.opId, comment.messageId).pipe(
+      mergeMap(_ => {
+          // console.log('update');
+          if (this.post === null) {
+            return EMPTY;
+          }
+          return this.updateComments(this.post.id);
+        }
+      )
+    ).subscribe();
+  }
+
   public upvoteComment(id: number): void {
     const comment = this.comments.find((x) => {
       return x.messageId === id;
     });
     if (comment !== undefined) {
       comment.points += 1;
-      this.commentService.apiCommentVotePost({
+      this.commentApi.apiCommentVotePost({
         commentId: {
           messageId: comment.messageId,
           opId: comment.opId,
@@ -147,7 +167,7 @@ export class ReadPostComponent implements OnInit {
     });
     if (comment !== undefined) {
       comment.points -= 1;
-      this.commentService.apiCommentVotePost({
+      this.commentApi.apiCommentVotePost({
         commentId: {
           messageId: comment.messageId,
           opId: comment.opId,
@@ -170,7 +190,7 @@ export class ReadPostComponent implements OnInit {
       return;
     }
 
-    this.commentService.apiCommentPost({
+    this.commentApi.apiCommentPost({
       content: this.commentForm.value.content,
       opId: this.post.id,
     }).pipe(

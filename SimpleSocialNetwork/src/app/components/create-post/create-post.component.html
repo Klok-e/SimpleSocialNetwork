@@ -16,6 +16,13 @@
       <label for="content">Content</label>
       <div class="break"></div>
       <textarea id="content" formControlName="content"></textarea>
+      <div *ngIf="createPostForm.controls.content.invalid &&
+        (createPostForm.controls.content.dirty || createPostForm.controls.content.touched)"
+           class="validation_err">
+        <div *ngIf="createPostForm.controls.content.errors?.required">
+          Content is required.
+        </div>
+      </div>
     </div>
     <div>
       <button type="submit">Post</button>

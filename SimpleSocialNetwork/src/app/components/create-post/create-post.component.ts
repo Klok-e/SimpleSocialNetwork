@@ -19,7 +19,9 @@ export class CreatePostComponent implements OnInit {
       title: new FormControl('', [
         Validators.required
       ]),
-      content: new FormControl('')
+      content: new FormControl('', [
+        Validators.required
+      ])
     });
   }
 

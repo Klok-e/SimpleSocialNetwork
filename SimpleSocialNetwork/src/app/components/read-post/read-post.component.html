@@ -67,6 +67,12 @@
             </a>
           </div>
           <div>At {{comment.sendDate | date:'d/M/yy, h:mm a'}}</div>
+          <button
+            *ngIf="auth.isAdmin || (comment.posterId === auth.userLogin)"
+            [class.admin_item]="auth.isAdmin && comment.posterId !== auth.userLogin"
+            class="delete_bttn" (click)="deleteComment(comment.messageId)">
+            Delete comment
+          </button>
         </div>
       </div>
     </div>
