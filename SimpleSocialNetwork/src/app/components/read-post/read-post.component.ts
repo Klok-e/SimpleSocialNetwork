@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {CommentModel, CommentApiService, OpMessageModel, VoteType} from '../../../backend_api_client';
+import {CommentModel, CommentApiService, OpMessageModel, VoteType, UserApiService} from '../../../backend_api_client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PostsService} from '../../services/posts.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {map, mergeMap} from 'rxjs/operators';
 import {EMPTY, Observable, throwError} from 'rxjs';
+import {CommentUserDeleted, OpMessageUserDeleted} from '../../models/helper-types';
+
 
 @Component({
   selector: 'app-read-post',
@@ -12,8 +14,8 @@ import {EMPTY, Observable, throwError} from 'rxjs';
   styleUrls: ['./read-post.component.scss']
 })
 export class ReadPostComponent implements OnInit {
-  post: OpMessageModel | null = null;
-  comments: CommentModel[] = [];
+  post: OpMessageUserDeleted | null = null;
+  comments: CommentUserDeleted[] = [];
 
   commentForm: FormGroup;
 
@@ -21,6 +23,7 @@ export class ReadPostComponent implements OnInit {
               private router: Router,
               private posts: PostsService,
               private commentService: CommentApiService,
+              private usersApi: UserApiService,
               private formBuilder: FormBuilder) {
     this.commentForm = formBuilder.group({
       content: new FormControl('', [
@@ -48,8 +51,18 @@ export class ReadPostComponent implements OnInit {
         }
         return this.posts.getPost(postId);
       }),
-      mergeMap(post => {
-        this.post = post;
+      mergeMap(x => {
+        const post1 = x as OpMessageUserDeleted;
+        post1.posterIsDeleted = false;
+        if (post1.posterId !== null && post1.posterId !== undefined) {
+          this.usersApi.apiUserDeletedGet(post1.posterId)
+            .subscribe({
+              next: deleted => {
+                post1.posterIsDeleted = deleted;
+              }
+            });
+        }
+        this.post = post1;
         return this.updateComments(postId);
       })
     ).subscribe({
@@ -66,7 +79,19 @@ export class ReadPostComponent implements OnInit {
   private updateComments(postId: number): Observable<void> {
     return this.posts.getComments(postId).pipe(
       map(comments => {
-        this.comments = comments;
+        this.comments = comments.map(x => {
+          const comment = x as CommentUserDeleted;
+          comment.commenterIsDeleted = false;
+
+          this.usersApi.apiUserDeletedGet(comment.posterId)
+            .subscribe({
+              next: deleted => {
+                comment.commenterIsDeleted = deleted;
+              }
+            });
+
+          return comment;
+        });
       }));
   }
 

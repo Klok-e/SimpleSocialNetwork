@@ -3,7 +3,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {LimitedUserModel, UserModel, UserApiService} from '../../backend_api_client';
 import {HttpErrorResponse} from '@angular/common/http';
 import {AuthService} from './auth.service';
-import {UnionUserModel} from '../models/UnionUserModel';
+import {UnionUserModel} from '../models/helper-types';
 import {map} from 'rxjs/operators';
 
 @Injectable({

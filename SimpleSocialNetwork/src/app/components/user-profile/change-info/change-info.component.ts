@@ -5,7 +5,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {Subscription} from 'rxjs';
-import {UnionUserModel} from '../../../models/UnionUserModel';
+import {UnionUserModel} from '../../../models/helper-types';
 
 @Component({
   selector: 'app-change-info',

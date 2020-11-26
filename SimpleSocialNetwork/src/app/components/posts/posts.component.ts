@@ -1,10 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PostsService} from '../../services/posts.service';
 import {OpMessageModel, UserApiService, VoteType} from '../../../backend_api_client';
-
-
-type OpMessageUserDeleted = OpMessageModel & { posterIsDeleted: boolean };
-
+import {OpMessageUserDeleted} from '../../models/helper-types';
 
 @Component({
   selector: 'app-posts',

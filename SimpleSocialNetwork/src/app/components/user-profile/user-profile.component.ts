@@ -5,7 +5,7 @@ import {AuthService} from '../../services/auth.service';
 import {Observable, Subscription} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 import {CurrentUserService} from '../../services/current-user.service';
-import {UnionUserModel} from '../../models/UnionUserModel';
+import {UnionUserModel} from '../../models/helper-types';
 import {DatePipe} from '@angular/common';
 
 @Component({
