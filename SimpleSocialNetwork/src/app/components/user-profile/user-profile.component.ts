@@ -2,11 +2,12 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LimitedUserModel, UserModel, UserApiService, SubscriptionApiService} from '../../../backend_api_client';
 import {AuthService} from '../../services/auth.service';
-import {Observable, Subscription} from 'rxjs';
+import {Observable, of, Subscription} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 import {CurrentUserService} from '../../services/current-user.service';
 import {UnionUserModel} from '../../models/helper-types';
 import {DatePipe} from '@angular/common';
+import {catchError, map, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-profile',
@@ -42,35 +43,34 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.route.paramMap.subscribe(params => {
-        const userName = params.get('userName');
-        if (userName === null) {
-          this.navigateTo404();
-          return;
-        }
-
-        this.currentUser.changeUserTo(userName);
-      })
-    );
-
-    this.subscriptions.add(
-      this.currentUser.user
-        .subscribe({
-          next: user => {
-            if (user === null) {
-              return;
-            }
-
-            this.updateIsSubscribed(user);
-            this.updateIsBanned(user);
-          },
-          error: (e: HttpErrorResponse) => {
-            if (e.status === 400 || e.status === 401 || e.status === 403) {
-              console.log('previous error was handled');
-              this.navigateTo404();
-            }
+      this.route.paramMap.pipe(
+        mergeMap(par => {
+          const userName = par.get('userName');
+          if (userName === null) {
+            this.navigateTo404();
+            return of(null);
           }
-        })
+          // console.log(userName);
+
+          return this.currentUser.changeUserTo(userName);
+        }),
+      ).subscribe({
+        next: user => {
+          // console.log(user);
+          if (user === null) {
+            return;
+          }
+
+          this.updateIsSubscribed(user);
+          this.updateIsBanned(user);
+        },
+        error: (e: HttpErrorResponse) => {
+          if (e.status === 400 || e.status === 401 || e.status === 403) {
+            console.log('previous error was handled');
+            this.navigateTo404();
+          }
+        }
+      })
     );
   }
 

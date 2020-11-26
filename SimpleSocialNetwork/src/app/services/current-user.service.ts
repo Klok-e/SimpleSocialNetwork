@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {LimitedUserModel, UserModel, UserApiService} from '../../backend_api_client';
-import {HttpErrorResponse} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {UnionUserModel} from '../models/helper-types';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +28,9 @@ export class CurrentUserService {
     return this.auth.getCurrentUserValue()?.login === this.currentUser?.login;
   }
 
-  public changeUserTo(userName: string): void {
+  public changeUserTo(userName: string): Observable<UnionUserModel> {
     const isMyProfile = this.auth.getCurrentUserValue()?.login === userName;
-    ((): Observable<UnionUserModel> => {
+    return ((): Observable<UnionUserModel> => {
       if (isMyProfile || this.auth.isAdmin) {
         return this.userService.apiUserGet(userName).pipe(
           map(us => {
@@ -57,13 +56,10 @@ export class CurrentUserService {
           })
         );
       }
-    })().subscribe({
-      next: u => {
-        this.userSubject.next(u);
-      },
-      error: e => {
-        this.userSubject.error(e);
-      }
-    });
+    })().pipe(
+      tap(x => {
+        this.userSubject.next(x);
+      })
+    );
   }
 }
