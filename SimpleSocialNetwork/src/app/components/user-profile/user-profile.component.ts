@@ -43,18 +43,24 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.route.paramMap.pipe(
-        mergeMap(par => {
+      this.route.paramMap.subscribe({
+        next: par => {
           const userName = par.get('userName');
           if (userName === null) {
             this.navigateTo404();
-            return of(null);
+            return;
           }
           // console.log(userName);
 
-          return this.currentUser.changeUserTo(userName);
-        }),
-      ).subscribe({
+          this.changeUser(userName);
+        }
+      })
+    );
+  }
+
+  private changeUser(userName: string): void {
+    this.currentUser.changeUserTo(userName)
+      .subscribe({
         next: user => {
           // console.log(user);
           if (user === null) {
@@ -70,8 +76,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
             this.navigateTo404();
           }
         }
-      })
-    );
+      });
   }
 
   ngOnDestroy(): void {
@@ -190,7 +195,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           if (this.user === null) {
             return;
           }
-          this.currentUser.changeUserTo(this.user.login);
+          this.changeUser(this.user.login);
         }
       });
   }
@@ -205,7 +210,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           if (this.user === null) {
             return;
           }
-          this.currentUser.changeUserTo(this.user.login);
+          this.changeUser(this.user.login);
         }
       });
   }

@@ -3,6 +3,7 @@ import {OpMessageApiService, OpMessageModel} from '../../../../backend_api_clien
 import {PostsService} from '../../../services/posts.service';
 import {CurrentUserService} from '../../../services/current-user.service';
 import {Subscription} from 'rxjs';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-profile-user-posts',
@@ -25,9 +26,15 @@ export class ProfileUserPostsComponent implements OnInit, OnDestroy {
           if (u === null) {
             return;
           }
+          // console.log(u);
           this.postsApi.apiOpMessageFromUserGet(u.login)
-            .subscribe(p => {
-              this.opMessages = p;
+            .subscribe({
+              next: p => {
+                this.opMessages = p;
+              },
+              error: (err: HttpErrorResponse) => {
+                console.log('prev error handled'); // no
+              }
             });
         })
     );
