@@ -37,6 +37,7 @@ export class ChangeInfoComponent implements OnInit, OnDestroy {
         if (u === null) {
           return;
         }
+        // console.log(u);
         if (u.modelType === 'full') {
           this.changeInfoForm.setValue({
             dateOfBirth: this.datePipe.transform(u.dateBirth, 'yyyy-MM-dd'),
@@ -62,7 +63,7 @@ export class ChangeInfoComponent implements OnInit, OnDestroy {
       if (this.user === null) {
         return;
       }
-      this.currentUser.changeUserTo(this.user.login);
+      this.currentUser.changeUserTo(this.user.login).subscribe();
     });
   }
 }
