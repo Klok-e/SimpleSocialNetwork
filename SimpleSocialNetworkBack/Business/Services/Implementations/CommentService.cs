@@ -41,7 +41,7 @@ namespace Business.Services.Implementations
 
         public async Task VoteComment(VoteComment vote)
         {
-            var message = await _context.Messages.FindAsync(vote.OpId, vote.MessageId);
+            var message = await _context.Messages.FindAsync(vote.CommentId.OpId, vote.CommentId.MessageId);
             ExceptionHelper.CheckEntitySoft(message, "comment");
 
             message.Points += vote.VoteType switch
@@ -50,6 +50,19 @@ namespace Business.Services.Implementations
                 VoteType.Down => -1,
                 _ => throw new ValidationException("Unknown VoteType value")
             };
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteCommentSoft(CommentKeyModel commentId)
+        {
+            var message = await _context.Messages.FindAsync(commentId.OpId, commentId.MessageId);
+            ExceptionHelper.CheckEntitySoft(message, "comment");
+            if (_principal.Role != Roles.Admin
+                && _principal.Name != message.Poster.Login)
+                throw new ForbiddenException("Can't delete post if its isn't yours or you're not an admin");
+
+            message.IsDeleted = true;
+
             await _context.SaveChangesAsync();
         }
     }

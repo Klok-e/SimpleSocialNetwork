@@ -20,5 +20,6 @@ namespace Business.Services
         Task VotePost(VotePost votePost);
 
         Task<IEnumerable<OpMessageModel>> PostsFromUser(string login);
+        Task DeletePostSoft(int postId);
     }
 }

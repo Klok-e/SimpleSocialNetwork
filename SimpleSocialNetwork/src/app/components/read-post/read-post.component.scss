@@ -32,6 +32,7 @@ article {
       .credits {
         display: flex;
         flex-direction: row;
+        align-items: center;
 
         div {
           display: inline-block;
@@ -43,6 +44,25 @@ article {
 
         a {
           color: $text_color;
+        }
+
+        .delete_bttn {
+          padding: 5pt 5pt 5pt 5pt;
+          margin-left: 20pt;
+          background-color: $blue2;
+          color: $text_color;
+          text-decoration: none;
+          border: none;
+          font: 16px sans-serif;
+        }
+
+        .delete_bttn:hover {
+          background: $blue4;
+          cursor: pointer;
+        }
+
+        .admin_item {
+          background-color: $reddish_blue;
         }
       }
 
@@ -77,6 +97,7 @@ article {
     margin: 5pt 5pt 5pt 5pt;
     padding: 10pt 10pt 10pt 10pt;
     background-color: $blue1-5;
+
     .comment_head {
       margin: 5pt 5pt 5pt 5pt;
       display: flex;
@@ -133,7 +154,7 @@ article {
   align-items: center;
 }
 
-.arrow.small{
+.arrow.small {
   padding: 6px;
 }
 

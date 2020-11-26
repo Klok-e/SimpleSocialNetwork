@@ -73,5 +73,13 @@ namespace SimpleSocialNetworkBack.Controllers
             await _opMessageService.VotePost(vote);
             return Ok();
         }
+        
+        [HttpDelete]
+        [Authorize]
+        public async Task<ActionResult> DeletePost([Required]int postId)
+        {
+            await _opMessageService.DeletePostSoft(postId);
+            return Ok();
+        }   
     }
 }

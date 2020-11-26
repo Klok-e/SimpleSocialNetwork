@@ -13,6 +13,12 @@
           </a>
         </div>
         <div>At {{post.sendDate | date:'d/M/yy, h:mm a'}}</div>
+        <button
+          *ngIf="auth.isAdmin || (post.posterId !== undefined && post.posterId !== null && post.posterId === auth.userLogin)"
+          [class.admin_item]="auth.isAdmin && post.posterId !== auth.userLogin"
+          class="delete_bttn" (click)="deletePost()">
+          Delete post
+        </button>
       </div>
       <div class="title">
         {{post.title}}

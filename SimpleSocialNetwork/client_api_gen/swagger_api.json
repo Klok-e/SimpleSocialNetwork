@@ -113,6 +113,38 @@
             "description": "Success"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Comment"
+        ],
+        "summary": "Soft delete comment",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentKeyModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentKeyModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentKeyModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
       }
     },
     "/api/Comment/vote": {
@@ -203,6 +235,27 @@
                 }
               }
             }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OpMessage"
+        ],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -870,19 +923,10 @@
         },
         "additionalProperties": false
       },
-      "VoteType": {
-        "enum": [
-          1,
-          2
-        ],
-        "type": "integer",
-        "format": "int32"
-      },
-      "VoteComment": {
+      "CommentKeyModel": {
         "required": [
           "messageId",
-          "opId",
-          "voteType"
+          "opId"
         ],
         "type": "object",
         "properties": {
@@ -893,6 +937,27 @@
           "messageId": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VoteType": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "VoteComment": {
+        "required": [
+          "commentId",
+          "voteType"
+        ],
+        "type": "object",
+        "properties": {
+          "commentId": {
+            "$ref": "#/components/schemas/CommentKeyModel"
           },
           "voteType": {
             "$ref": "#/components/schemas/VoteType"

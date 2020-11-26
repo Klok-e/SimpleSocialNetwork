@@ -1,5 +1,6 @@
 export * from './banUserModel';
 export * from './changeUserInfo';
+export * from './commentKeyModel';
 export * from './commentModel';
 export * from './createCommentModel';
 export * from './createOpMessageModel';

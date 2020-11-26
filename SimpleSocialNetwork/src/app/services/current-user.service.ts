@@ -9,8 +9,6 @@ import {map, tap} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CurrentUserService {
-
-
   constructor(private userService: UserApiService,
               private auth: AuthService) {
     this.userSubject = new BehaviorSubject<UnionUserModel | null>(null);

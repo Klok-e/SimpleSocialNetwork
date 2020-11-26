@@ -49,7 +49,7 @@ namespace Business.Services.Implementations
         public async Task<bool> UserExists(string login)
         {
             var user = await _context.Users.FindAsync(login);
-            // deleted users should still be regarded to as existing
+            // deleted users should still be regarded as existing
             return user != null;
         }
 

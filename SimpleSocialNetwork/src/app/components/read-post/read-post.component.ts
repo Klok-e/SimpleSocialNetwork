@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {CommentModel, CommentApiService, OpMessageModel, VoteType, UserApiService} from '../../../backend_api_client';
+import {CommentModel, CommentApiService, OpMessageModel, VoteType, UserApiService, OpMessageApiService} from '../../../backend_api_client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PostsService} from '../../services/posts.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {map, mergeMap} from 'rxjs/operators';
 import {EMPTY, Observable, throwError} from 'rxjs';
 import {CommentUserDeleted, OpMessageUserDeleted} from '../../models/helper-types';
+import {AuthService} from '../../services/auth.service';
 
 
 @Component({
@@ -22,9 +23,11 @@ export class ReadPostComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private posts: PostsService,
+              private postsApi: OpMessageApiService,
               private commentService: CommentApiService,
               private usersApi: UserApiService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              public auth: AuthService) {
     this.commentForm = formBuilder.group({
       content: new FormControl('', [
         Validators.required
@@ -111,6 +114,17 @@ export class ReadPostComponent implements OnInit {
     }
   }
 
+  deletePost(): void {
+    if (this.post === null) {
+      return;
+    }
+    this.postsApi.apiOpMessageDelete(this.post.id).subscribe({
+      next: _ => {
+        this.router.navigate(['']);
+      }
+    });
+  }
+
   public upvoteComment(id: number): void {
     const comment = this.comments.find((x) => {
       return x.messageId === id;
@@ -118,8 +132,10 @@ export class ReadPostComponent implements OnInit {
     if (comment !== undefined) {
       comment.points += 1;
       this.commentService.apiCommentVotePost({
-        messageId: comment.messageId,
-        opId: comment.opId,
+        commentId: {
+          messageId: comment.messageId,
+          opId: comment.opId,
+        },
         voteType: VoteType.NUMBER_1
       }).subscribe();
     }
@@ -132,8 +148,10 @@ export class ReadPostComponent implements OnInit {
     if (comment !== undefined) {
       comment.points -= 1;
       this.commentService.apiCommentVotePost({
-        messageId: comment.messageId,
-        opId: comment.opId,
+        commentId: {
+          messageId: comment.messageId,
+          opId: comment.opId,
+        },
         voteType: VoteType.NUMBER_2
       }).subscribe();
     }

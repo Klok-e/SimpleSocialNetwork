@@ -24,6 +24,14 @@ export class AuthService {
     return this.getCurrentUserValue() !== null;
   }
 
+  get userLogin(): string | null {
+    const user = this.getCurrentUserValue();
+    if (user === null) {
+      return null;
+    }
+    return user.login;
+  }
+
   get isAdmin(): boolean {
     const user = this.getCurrentUserValue();
     if (user === null) {

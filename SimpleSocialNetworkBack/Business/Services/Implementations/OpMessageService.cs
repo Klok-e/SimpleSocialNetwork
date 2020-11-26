@@ -51,6 +51,23 @@ namespace Business.Services.Implementations
                 .Select(x => _mapper.Map<OpMessage, OpMessageModel>(x));
         }
 
+        public async Task DeletePostSoft(int postId)
+        {
+            var opMessage = await _context.OpMessages.FindAsync(postId);
+            ExceptionHelper.CheckEntitySoft(opMessage, "opMessage");
+            if (_principal.Role != Roles.Admin
+                && opMessage.Poster != null
+                && _principal.Name != opMessage.Poster.Login)
+                throw new ForbiddenException("Can't delete post if its isn't yours or you're not an admin");
+            if (opMessage.Poster == null
+                && _principal.Role != Roles.Admin)
+                throw new ForbiddenException("only admin can delete posts without posters");
+
+            opMessage.IsDeleted = true;
+
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<int> MakeAPost(CreateOpMessageModel model)
         {
             var appUser = await _context.Users.FindAsync(_principal.Name);
@@ -76,8 +93,7 @@ namespace Business.Services.Implementations
         public async Task<OpMessageModel> GetById(int id)
         {
             var opMessage = await _context.OpMessages.FindAsync(id);
-            if (opMessage.IsDeleted)
-                throw new ValidationException("Post was deleted");
+            ExceptionHelper.CheckEntitySoft(opMessage, "opMessage");
             return _mapper.Map<OpMessage, OpMessageModel>(opMessage);
         }
 

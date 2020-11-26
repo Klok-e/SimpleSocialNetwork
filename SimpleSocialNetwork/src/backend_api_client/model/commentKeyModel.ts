@@ -9,13 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { CommentKeyModel } from './commentKeyModel';
-import { VoteType } from './voteType';
 
 
-export interface VoteComment { 
-    commentId: CommentKeyModel;
-    voteType: VoteType;
+export interface CommentKeyModel { 
+    opId: number;
+    messageId: number;
 }
 
 
