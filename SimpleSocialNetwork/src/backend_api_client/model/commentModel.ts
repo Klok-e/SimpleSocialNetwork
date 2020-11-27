@@ -18,7 +18,7 @@ export interface CommentModel {
     points: number;
     isDeleted: boolean;
     sendDate: string;
-    posterId: string;
+    posterId?: string | null;
 }
 
 

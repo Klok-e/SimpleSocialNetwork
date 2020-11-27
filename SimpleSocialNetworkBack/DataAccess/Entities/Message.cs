@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.Entities
 {
@@ -7,14 +8,14 @@ namespace DataAccess.Entities
         public int OpId { get; set; }
         public int MessageId { get; set; }
 
-        public string Content { get; set; } = null!;
+        [Required] public string Content { get; set; } = null!;
 
         public int Points { get; set; }
 
         public DateTime SendDate { get; set; }
 
 
-        public virtual ApplicationUser Poster { get; set; } = null!;
+        public virtual ApplicationUser? Poster { get; set; }
 
         public virtual OpMessage OpMessage { get; set; } = null!;
 

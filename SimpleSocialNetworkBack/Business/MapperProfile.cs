@@ -14,12 +14,12 @@ namespace Business
             CreateMap<Message, CommentModel>()
                 .ForMember(dest => dest.PosterId,
                     opt =>
-                        opt.MapFrom(src => src.Poster.Login));
+                        opt.MapFrom(src => src.Poster == null ? null : src.Poster.Login));
 
             CreateMap<OpMessage, OpMessageModel>()
                 .ForMember(dest => dest.PosterId,
                     opt =>
-                        opt.MapFrom(src => src.Poster!.Login));
+                        opt.MapFrom(src => src.Poster == null ? null : src.Poster.Login));
 
             CreateMap<Subscription, SubscriptionModel>();
         }

@@ -17,6 +17,6 @@ namespace Business.Models.Responses
 
         [Required] public DateTime SendDate { get; set; }
 
-        [Required] public string PosterId { get; set; } = null!;
+        public string? PosterId { get; set; }
     }
 }

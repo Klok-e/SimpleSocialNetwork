@@ -4,14 +4,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(SocialDbContext))]
-    partial class SocialDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201126221734_RemoveidentityCol")]
+    partial class RemoveidentityCol
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,6 +64,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PosterLogin")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("SendDate")
@@ -240,7 +243,9 @@ namespace DataAccess.Migrations
 
                     b.HasOne("DataAccess.Entities.ApplicationUser", "Poster")
                         .WithMany("Messages")
-                        .HasForeignKey("PosterLogin");
+                        .HasForeignKey("PosterLogin")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("OpMessage");
 
@@ -351,7 +356,8 @@ namespace DataAccess.Migrations
 
                     b.Navigation("ModeratorOfTags");
 
-                    b.Navigation("Password");
+                    b.Navigation("Password")
+                        .IsRequired();
 
                     b.Navigation("Posts");
 

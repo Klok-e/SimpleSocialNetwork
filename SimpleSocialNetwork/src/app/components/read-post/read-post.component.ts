@@ -57,7 +57,7 @@ export class ReadPostComponent implements OnInit {
       mergeMap(x => {
         const post1 = x as OpMessageUserDeleted;
         post1.posterIsDeleted = false;
-        if (post1.posterId !== null && post1.posterId !== undefined) {
+        if (post1.posterId != null) {
           this.usersApi.apiUserDeletedGet(post1.posterId)
             .subscribe({
               next: deleted => {
@@ -85,13 +85,14 @@ export class ReadPostComponent implements OnInit {
         this.comments = comments.map(x => {
           const comment = x as CommentUserDeleted;
           comment.commenterIsDeleted = false;
-
-          this.usersApi.apiUserDeletedGet(comment.posterId)
-            .subscribe({
-              next: deleted => {
-                comment.commenterIsDeleted = deleted;
-              }
-            });
+          if (comment.posterId != null) {
+            this.usersApi.apiUserDeletedGet(comment.posterId)
+              .subscribe({
+                next: deleted => {
+                  comment.commenterIsDeleted = deleted;
+                }
+              });
+          }
 
           return comment;
         });

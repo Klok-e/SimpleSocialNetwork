@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Business.Common;
 using Business.Models.Requests;
@@ -29,12 +30,18 @@ namespace Business.Services.Implementations
             var op = await _context.OpMessages.FindAsync(comment.OpId);
             ExceptionHelper.CheckEntitySoft(op, "post");
 
+            // do the unthinkable
+            // because sqlite doesn't support composite autoincrement keys (sql server does though)
+            // and it's impossible to test without manual msgId specification
+            var msgId = op.Messages.Select(x => x.MessageId).DefaultIfEmpty(0).Max() + 1;
+
             await _context.Messages.AddAsync(new Message
             {
                 OpMessage = op,
+                MessageId = msgId,
                 Poster = userEnt,
                 Content = comment.Content,
-                SendDate = DateTime.UtcNow
+                SendDate = DateTime.UtcNow,
             });
             await _context.SaveChangesAsync();
         }
@@ -58,8 +65,11 @@ namespace Business.Services.Implementations
             var message = await _context.Messages.FindAsync(commentId.OpId, commentId.MessageId);
             ExceptionHelper.CheckEntitySoft(message, "comment");
             if (_principal.Role != Roles.Admin
+                && message.Poster != null
                 && _principal.Name != message.Poster.Login)
                 throw new ForbiddenException("Can't delete post if its isn't yours or you're not an admin");
+            if (_principal.Role != Roles.Admin && message.Poster == null)
+                throw new ForbiddenException("Only admin can do this");
 
             message.IsDeleted = true;
 

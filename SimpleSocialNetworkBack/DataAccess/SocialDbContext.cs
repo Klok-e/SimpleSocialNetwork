@@ -27,19 +27,14 @@ namespace DataAccess
                 .HasKey(x => new {x.OpId, x.MessageId});
             modelBuilder.Entity<Message>()
                 .Property(x => x.MessageId)
-                .ValueGeneratedOnAdd()
-                .UseIdentityColumn();
-            modelBuilder.Entity<Message>()
-                .Property(x => x.Content)
-                .IsRequired();
+                .ValueGeneratedOnAdd();
             modelBuilder.Entity<Message>()
                 .HasOne(x => x.OpMessage)
                 .WithMany(x => x!.Messages)
                 .HasForeignKey(x => x.OpId);
             modelBuilder.Entity<Message>()
                 .HasOne(x => x.Poster)
-                .WithMany(x => x!.Messages)
-                .IsRequired();
+                .WithMany(x => x!.Messages);
 
             modelBuilder.Entity<OpMessage>()
                 .HasOne(x => x.Poster)

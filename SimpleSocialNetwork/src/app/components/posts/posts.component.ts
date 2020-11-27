@@ -24,7 +24,7 @@ export class PostsComponent implements OnInit {
       this.opMessages = next.map(x => {
         const post = x as OpMessageUserDeleted;
         post.posterIsDeleted = false;
-        if (post.posterId !== null && post.posterId !== undefined) {
+        if (post.posterId != null) {
           this.usersApi.apiUserDeletedGet(post.posterId)
             .subscribe({
               next: deleted => {

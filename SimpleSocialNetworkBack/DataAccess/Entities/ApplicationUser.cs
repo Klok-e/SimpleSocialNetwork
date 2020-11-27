@@ -14,7 +14,7 @@ namespace DataAccess.Entities
 
         public bool IsAdmin { get; set; }
 
-        public virtual SecurePassword Password { get; set; } = null!;
+        public virtual SecurePassword? Password { get; set; }
 
         public virtual ICollection<Subscription> Subscriptions { get; set; } = null!;
 

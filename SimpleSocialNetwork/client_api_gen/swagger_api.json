@@ -1033,7 +1033,6 @@
           "messageId",
           "opId",
           "points",
-          "posterId",
           "sendDate"
         ],
         "type": "object",
@@ -1061,7 +1060,8 @@
             "format": "date-time"
           },
           "posterId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

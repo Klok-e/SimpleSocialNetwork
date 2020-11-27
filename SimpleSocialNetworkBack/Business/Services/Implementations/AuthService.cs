@@ -59,6 +59,9 @@ namespace Business.Services.Implementations
             var user = await _context.Users.FindAsync(login);
             ExceptionHelper.CheckEntitySoft(user, "user");
 
+            if (user.Password == null)
+                throw new ArgumentNullException(nameof(user.Password),
+                    "Password somehow was null idk");
             if (!CheckPasswordHash(user.Password.Salt, user.Password.Hashed, password))
                 throw new ValidationException("Wrong password");
 
