@@ -13,13 +13,15 @@ namespace Business.Services.Implementations
     {
         private readonly SocialDbContext _context;
         private readonly TypedClaimsPrincipal _principal;
+        private readonly bool _isTest;
 
         public CommentService(
             SocialDbContext context,
-            TypedClaimsPrincipal principal)
+            TypedClaimsPrincipal principal, bool isTest = false)
         {
             _context = context;
             _principal = principal;
+            _isTest = isTest;
         }
 
         public async Task CreateComment(CreateCommentModel comment)
@@ -33,7 +35,12 @@ namespace Business.Services.Implementations
             // do the unthinkable
             // because sqlite doesn't support composite autoincrement keys (sql server does though)
             // and it's impossible to test without manual msgId specification
-            var msgId = op.Messages.Select(x => x.MessageId).DefaultIfEmpty(0).Max() + 1;
+            // check for whether unit testing to so that only in tests id is retrieved manually
+            // to explicitly add auto generated values: (solution seems too bad, so flag is used)
+            // https://docs.microsoft.com/en-us/ef/core/saving/explicit-values-generated-properties
+            int msgId = default;
+            if (_isTest)
+                msgId = op.Messages.Select(x => x.MessageId).DefaultIfEmpty(0).Max() + 1;
 
             await _context.Messages.AddAsync(new Message
             {

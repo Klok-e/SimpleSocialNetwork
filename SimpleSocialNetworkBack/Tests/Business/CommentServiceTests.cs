@@ -69,7 +69,7 @@ namespace Tests.Business
             {
                 Name = u.Login,
                 Role = Roles.User
-            });
+            }, true);
 
             // act
             await commentService.CreateComment(new CreateCommentModel
@@ -102,7 +102,7 @@ namespace Tests.Business
             {
                 Name = u.Login,
                 Role = Roles.User
-            });
+            }, true);
 
             // act
             await commentService.CreateComment(new CreateCommentModel
