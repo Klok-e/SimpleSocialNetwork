@@ -73,6 +73,8 @@ namespace Business.Services.Implementations
             var appUser = await _context.Users.FindAsync(_principal.Name);
             ExceptionHelper.CheckSelfSoft(appUser, "user");
 
+            ExceptionHelper.ThrowIfUserBanned(appUser);
+
             var superTag = await _context.Tags.FindAsync("") ?? new Tag {Name = ""};
 
             var op = new OpMessage

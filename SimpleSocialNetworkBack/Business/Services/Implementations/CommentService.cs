@@ -32,6 +32,8 @@ namespace Business.Services.Implementations
             var op = await _context.OpMessages.FindAsync(comment.OpId);
             ExceptionHelper.CheckEntitySoft(op, "post");
 
+            ExceptionHelper.ThrowIfUserBanned(userEnt);
+
             // do the unthinkable
             // because sqlite doesn't support composite autoincrement keys (sql server does though)
             // and it's impossible to test without manual msgId specification

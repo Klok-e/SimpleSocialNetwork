@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Business.Validation;
 using DataAccess.Entities;
 
@@ -21,6 +23,13 @@ namespace Business.Common
                 throw new BadCredentialsException($"Nonexistent {userArgName}");
             if (entity.IsDeleted)
                 throw new ValidationException($"Current {userArgName} was deleted");
+        }
+
+        public static void ThrowIfUserBanned(ApplicationUser entity)
+        {
+            if (entity.BansReceived
+                .Any(ban => !ban.Cancelled && ban.ExpirationDate > DateTime.UtcNow))
+                throw new ForbiddenException("You are banned");
         }
     }
 }
