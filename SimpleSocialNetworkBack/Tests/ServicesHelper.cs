@@ -39,6 +39,7 @@ namespace Tests
         /// </summary>
         public void ReloadContext()
         {
+            Context.SaveChanges();
             Context.Dispose();
             Context = new SocialDbContext(_options);
         }

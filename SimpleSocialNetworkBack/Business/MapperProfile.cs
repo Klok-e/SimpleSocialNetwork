@@ -21,7 +21,10 @@ namespace Business
                     opt =>
                         opt.MapFrom(src => src.Poster == null ? null : src.Poster.Login));
 
-            CreateMap<Subscription, SubscriptionModel>();
+            CreateMap<Subscription, SubscriptionModel>()
+                .ForMember(dest => dest.IsActive,
+                    opt =>
+                        opt.MapFrom(src => !src.IsNotActive));
         }
     }
 }
