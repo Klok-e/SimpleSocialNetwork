@@ -48,6 +48,7 @@ namespace Business.Services.Implementations
 
             return user.Posts
                 .Where(x => !x.IsDeleted)
+                .OrderByDescending(x => x.SendDate)
                 .Select(x => _mapper.Map<OpMessage, OpMessageModel>(x));
         }
 
@@ -61,7 +62,7 @@ namespace Business.Services.Implementations
                 throw new ForbiddenException("Can't delete post if its isn't yours or you're not an admin");
             if (opMessage.Poster == null
                 && _principal.Role != Roles.Admin)
-                throw new ForbiddenException("only admin can delete posts without posters");
+                throw new ForbiddenException("Only admin can delete posts without posters");
 
             opMessage.IsDeleted = true;
 

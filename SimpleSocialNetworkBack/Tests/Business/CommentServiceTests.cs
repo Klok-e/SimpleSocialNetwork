@@ -119,7 +119,7 @@ namespace Tests.Business
         }
 
         [Test]
-        public async Task CreateComment_VoteComment()
+        public async Task VoteComment_Happy()
         {
             // arrange
             await SeedData();
@@ -160,7 +160,7 @@ namespace Tests.Business
         }
 
         [Test]
-        public async Task CreateComment_DeleteSelfComment()
+        public async Task DeleteComment_Happy()
         {
             // arrange
             await SeedData();
@@ -194,7 +194,7 @@ namespace Tests.Business
         }
 
         [Test]
-        public async Task CreateComment_DeleteNotSelfCommentThrowsForbidden()
+        public async Task DeleteComment_NotSelfCommentThrowsForbidden()
         {
             // arrange
             await SeedData();
@@ -223,7 +223,7 @@ namespace Tests.Business
         }
 
         [Test]
-        public async Task CreateComment_DeleteCommentWithoutPosterNotAdminThrowsForbidden()
+        public async Task DeleteComment_WithoutPosterNotAdminThrowsForbidden()
         {
             // arrange
             await SeedData();
