@@ -1,7 +1,9 @@
 using System;
 using System.ComponentModel.Design;
 using System.IO;
+using System.Threading.Tasks;
 using DataAccess;
+using DataAccess.Entities;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,6 +49,35 @@ namespace Tests
         public void Dispose()
         {
             _connection.Dispose();
+        }
+
+        public async Task SeedUsers()
+        {
+            await Context.Users.AddAsync(new ApplicationUser
+            {
+                Login = "petya",
+                IsAdmin = true,
+            });
+
+            await Context.Users.AddAsync(new ApplicationUser
+            {
+                Login = "vasya",
+                About = "vaysa stuff asdasdasdsd"
+            });
+
+            await Context.Users.AddAsync(new ApplicationUser
+            {
+                Login = "george",
+            });
+
+            await Context.Users.AddAsync(new ApplicationUser
+            {
+                Login = "steve",
+                About = "steve stuff asdasdasdsd",
+                IsDeleted = true,
+            });
+            await Context.SaveChangesAsync();
+            ReloadContext();
         }
     }
 }

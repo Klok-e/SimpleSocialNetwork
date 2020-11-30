@@ -31,32 +31,7 @@ namespace Tests.Business
         private ServicesHelper _db = null!;
         private IMapper _mapper = null!;
 
-        private async Task SeedUsers()
-        {
-            await _db.Context.Users.AddAsync(new ApplicationUser
-            {
-                Login = "petya",
-                IsAdmin = true,
-            });
-
-            await _db.Context.Users.AddAsync(new ApplicationUser
-            {
-                Login = "vasya",
-            });
-
-            await _db.Context.Users.AddAsync(new ApplicationUser
-            {
-                Login = "george",
-            });
-
-            await _db.Context.Users.AddAsync(new ApplicationUser
-            {
-                Login = "steve",
-                IsDeleted = true,
-            });
-            await _db.Context.SaveChangesAsync();
-            _db.ReloadContext();
-        }
+        
 
         private async Task SeedSubscriptions()
         {
@@ -89,7 +64,7 @@ namespace Tests.Business
         public async Task SubscribeTo()
         {
             // arrange
-            await SeedUsers();
+            await _db.SeedUsers();
             var subscriber = await _db.Context.Users.FindAsync("vasya");
             var target = await _db.Context.Users.FindAsync("petya");
 
@@ -116,7 +91,7 @@ namespace Tests.Business
         public async Task SubscribeTo_SubUnsubSub()
         {
             // arrange
-            await SeedUsers();
+            await _db.SeedUsers();
             var subscriber = await _db.Context.Users.FindAsync("vasya");
             var target = await _db.Context.Users.FindAsync("petya");
             await _db.Context.Subscriptions.AddAsync(new Subscription
@@ -154,7 +129,7 @@ namespace Tests.Business
         public async Task UnsubFrom()
         {
             // arrange
-            await SeedUsers();
+            await _db.SeedUsers();
             var subscriber = await _db.Context.Users.FindAsync("vasya");
             var target = await _db.Context.Users.FindAsync("petya");
 
@@ -191,7 +166,7 @@ namespace Tests.Business
         public async Task GetUserSubscribedTo()
         {
             // arrange
-            await SeedUsers();
+            await _db.SeedUsers();
             await SeedSubscriptions();
 
             var subscriber = await _db.Context.Users.FindAsync("vasya");
@@ -212,7 +187,7 @@ namespace Tests.Business
         public async Task IsUserSubscribedTo()
         {
             // arrange
-            await SeedUsers();
+            await _db.SeedUsers();
             await SeedSubscriptions();
 
             var subscriber = await _db.Context.Users.FindAsync("vasya");

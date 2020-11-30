@@ -69,6 +69,7 @@ namespace Business.Services.Implementations
             return Task.FromResult(
                 _context.Users
                     .Where(x => !x.IsDeleted)
+                    .OrderBy(x => x.Login)
                     .AsEnumerable()
                     .Where(u =>
                     {
@@ -77,8 +78,10 @@ namespace Business.Services.Implementations
                             name = FuzzySearch.FuzzyMatch(u.Login, search.NamePattern);
 
                         var about = true;
-                        if (u.About == null)
+                        if (u.About == null && !string.IsNullOrEmpty(search.AboutPattern))
                             about = false;
+                        else if (string.IsNullOrEmpty(search.AboutPattern))
+                            about = true;
                         else if (!string.IsNullOrEmpty(search.AboutPattern))
                             about = FuzzySearch.FuzzyMatch(u.About, search.AboutPattern);
 
