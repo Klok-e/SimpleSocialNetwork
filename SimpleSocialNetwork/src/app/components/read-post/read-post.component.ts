@@ -1,12 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommentModel, CommentApiService, OpMessageModel, VoteType, UserApiService, OpMessageApiService} from '../../../backend_api_client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PostsService} from '../../services/posts.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {map, mergeMap} from 'rxjs/operators';
-import {EMPTY, Observable, throwError} from 'rxjs';
+import {EMPTY, Observable, Subscription, throwError} from 'rxjs';
 import {CommentUserDeleted, OpMessageUserDeleted} from '../../models/helper-types';
 import {AuthService} from '../../services/auth.service';
+import {ScrollToBottomService} from '../../services/scroll-to-bottom.service';
 
 
 @Component({
@@ -14,11 +15,13 @@ import {AuthService} from '../../services/auth.service';
   templateUrl: './read-post.component.html',
   styleUrls: ['./read-post.component.scss']
 })
-export class ReadPostComponent implements OnInit {
+export class ReadPostComponent implements OnInit, OnDestroy {
   post: OpMessageUserDeleted | null = null;
   comments: CommentUserDeleted[] = [];
 
   commentForm: FormGroup;
+
+  subs: Subscription = new Subscription();
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -27,13 +30,15 @@ export class ReadPostComponent implements OnInit {
               private commentApi: CommentApiService,
               private usersApi: UserApiService,
               private formBuilder: FormBuilder,
-              public auth: AuthService) {
+              public auth: AuthService,
+              private scroll: ScrollToBottomService) {
     this.commentForm = formBuilder.group({
       content: new FormControl('', [
         Validators.required
       ])
     });
   }
+
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -46,57 +51,80 @@ export class ReadPostComponent implements OnInit {
       this.navigateTo404();
       return;
     }
-    this.posts.postExists(postId).pipe(
-      mergeMap(exists => {
-        if (!exists) {
-          this.navigateTo404();
-          return throwError(new Error('Post doesn\'t exist'));
+    this.subs.add(
+      this.posts.postExists(postId).pipe(
+        mergeMap(exists => {
+          if (!exists) {
+            this.navigateTo404();
+            return throwError(new Error('Post doesn\'t exist'));
+          }
+          return this.posts.getPost(postId);
+        }),
+        mergeMap(x => {
+          const post1 = x as OpMessageUserDeleted;
+          post1.posterIsDeleted = false;
+          if (post1.posterId != null) {
+            this.usersApi.apiUserDeletedGet(post1.posterId)
+              .subscribe({
+                next: deleted => {
+                  post1.posterIsDeleted = deleted;
+                }
+              });
+          }
+          this.post = post1;
+
+          return this.scroll.user.pipe(
+            mergeMap(_ => {
+              return this.updateComments(postId, this.currentCommentPage());
+            })
+          );
+        })
+      ).subscribe({
+        error: e => {
+          console.log(e);
         }
-        return this.posts.getPost(postId);
-      }),
-      mergeMap(x => {
-        const post1 = x as OpMessageUserDeleted;
-        post1.posterIsDeleted = false;
-        if (post1.posterId != null) {
-          this.usersApi.apiUserDeletedGet(post1.posterId)
-            .subscribe({
-              next: deleted => {
-                post1.posterIsDeleted = deleted;
-              }
-            });
-        }
-        this.post = post1;
-        return this.updateComments(postId);
       })
-    ).subscribe({
-      error: e => {
-        console.log(e);
-      }
-    });
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 
   private navigateTo404(): void {
     this.router.navigate(['404-route-please-match-this-really-long-route'], {skipLocationChange: true});
   }
 
-  private updateComments(postId: number): Observable<void> {
-    return this.posts.getComments(postId).pipe(
-      map(comments => {
-        this.comments = comments.map(x => {
-          const comment = x as CommentUserDeleted;
-          comment.commenterIsDeleted = false;
-          if (comment.posterId != null) {
-            this.usersApi.apiUserDeletedGet(comment.posterId)
-              .subscribe({
-                next: deleted => {
-                  comment.commenterIsDeleted = deleted;
-                }
-              });
-          }
+  private currentCommentPage(): number {
+    const count = this.comments.length;
+    return Math.floor(count / 5);
+  }
 
-          return comment;
-        });
-      }));
+  private updateComments(postId: number, page: number): Observable<void> {
+    const currPg = this.currentCommentPage();
+    return this.posts.getComments(postId, page).pipe(
+      map(comments => {
+          if (page < currPg) {
+            this.comments = [];
+          }
+          this.comments.push(...comments.map(x => {
+              const comment = x as CommentUserDeleted;
+              comment.commenterIsDeleted = false;
+              if (comment.posterId != null) {
+                this.usersApi.apiUserDeletedGet(comment.posterId)
+                  .subscribe({
+                    next: deleted => {
+                      comment.commenterIsDeleted = deleted;
+                    }
+                  });
+              }
+
+              return comment;
+            })
+          );
+        }
+      )
+    );
   }
 
   public upvote(): void {
@@ -140,7 +168,7 @@ export class ReadPostComponent implements OnInit {
           if (this.post === null) {
             return EMPTY;
           }
-          return this.updateComments(this.post.id);
+          return this.updateComments(this.post.id, 0);
         }
       )
     ).subscribe();
@@ -197,7 +225,7 @@ export class ReadPostComponent implements OnInit {
     }).pipe(
       mergeMap(_ => {
         if (this.post !== null) {
-          return this.updateComments(this.post.id);
+          return this.updateComments(this.post.id, 0);
         }
         return EMPTY;
       })

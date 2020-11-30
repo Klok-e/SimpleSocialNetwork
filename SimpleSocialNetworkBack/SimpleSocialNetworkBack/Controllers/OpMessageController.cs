@@ -38,9 +38,9 @@ namespace SimpleSocialNetworkBack.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<OpMessageModel>>> GetOpMessages()
+        public async Task<ActionResult<IEnumerable<OpMessageModel>>> GetOpMessages([FromQuery] int page = 0)
         {
-            return Ok(await _opMessageService.GetAll());
+            return Ok(await _opMessageService.GetAll(page));
         }
 
         [HttpGet("from_user")]
@@ -51,11 +51,11 @@ namespace SimpleSocialNetworkBack.Controllers
             return Ok(posts);
         }
 
-        [HttpGet("comments/{postId}")]
+        [HttpGet("comments/{postId}/{page}")]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<CommentModel>>> GetComments(int postId)
+        public async Task<ActionResult<IEnumerable<CommentModel>>> GetComments(int postId, int page)
         {
-            return Ok(await _opMessageService.GetComments(postId));
+            return Ok(await _opMessageService.GetComments(postId, page));
         }
 
         [HttpGet("exists/{postId}")]
@@ -73,13 +73,13 @@ namespace SimpleSocialNetworkBack.Controllers
             await _opMessageService.VotePost(vote);
             return Ok();
         }
-        
+
         [HttpDelete]
         [Authorize]
-        public async Task<ActionResult> DeletePost([Required]int postId)
+        public async Task<ActionResult> DeletePost([Required] int postId)
         {
             await _opMessageService.DeletePostSoft(postId);
             return Ok();
-        }   
+        }
     }
 }

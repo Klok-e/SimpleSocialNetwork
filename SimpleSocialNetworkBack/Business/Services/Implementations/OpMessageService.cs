@@ -29,7 +29,7 @@ namespace Business.Services.Implementations
             _principal = principal;
         }
 
-        public Task<IEnumerable<OpMessageModel>> GetAll()
+        public Task<IEnumerable<OpMessageModel>> GetAll(int page)
         {
             return Task.FromResult(_context.OpMessages
                 // include to prevent "There is already an open DataReader associated with this Connection which must be closed first."
@@ -38,6 +38,8 @@ namespace Business.Services.Implementations
                 .Where(x => !x.IsDeleted)
                 .OrderByDescending(x => x.SendDate)
                 .Select(x => _mapper.Map<OpMessage, OpMessageModel>(x))
+                .Skip(Constants.PageSize * page)
+                .Take(Constants.PageSize)
                 .AsEnumerable());
         }
 
@@ -100,7 +102,7 @@ namespace Business.Services.Implementations
             return _mapper.Map<OpMessage, OpMessageModel>(opMessage);
         }
 
-        public async Task<IEnumerable<CommentModel>> GetComments(int postId)
+        public async Task<IEnumerable<CommentModel>> GetComments(int postId, int page)
         {
             var op = await _context.OpMessages.FindAsync(postId);
             ExceptionHelper.CheckEntitySoft(op, "post");
@@ -108,7 +110,9 @@ namespace Business.Services.Implementations
             return op.Messages
                 .Where(x => !x.IsDeleted)
                 .OrderByDescending(x => x.SendDate)
-                .Select(x => _mapper.Map<Message, CommentModel>(x));
+                .Select(x => _mapper.Map<Message, CommentModel>(x))
+                .Skip(Constants.PageSize * page)
+                .Take(Constants.PageSize);
         }
 
         public async Task<bool> PostExists(int postId)

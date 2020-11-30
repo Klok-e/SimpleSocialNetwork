@@ -82,7 +82,7 @@ namespace Business.Services.Implementations
                             about = false;
                         else if (string.IsNullOrEmpty(search.AboutPattern))
                             about = true;
-                        else if (!string.IsNullOrEmpty(search.AboutPattern))
+                        else if (!string.IsNullOrEmpty(search.AboutPattern) && u.About != null)
                             about = FuzzySearch.FuzzyMatch(u.About, search.AboutPattern);
 
                         return name && about;

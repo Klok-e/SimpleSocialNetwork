@@ -90,15 +90,19 @@ export class OpMessageApiService {
 
     /**
      * @param postId 
+     * @param page 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiOpMessageCommentsPostIdGet(postId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<CommentModel>>;
-    public apiOpMessageCommentsPostIdGet(postId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<CommentModel>>>;
-    public apiOpMessageCommentsPostIdGet(postId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<CommentModel>>>;
-    public apiOpMessageCommentsPostIdGet(postId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public apiOpMessageCommentsPostIdPageGet(postId: number, page: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<CommentModel>>;
+    public apiOpMessageCommentsPostIdPageGet(postId: number, page: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<CommentModel>>>;
+    public apiOpMessageCommentsPostIdPageGet(postId: number, page: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<CommentModel>>>;
+    public apiOpMessageCommentsPostIdPageGet(postId: number, page: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
         if (postId === null || postId === undefined) {
-            throw new Error('Required parameter postId was null or undefined when calling apiOpMessageCommentsPostIdGet.');
+            throw new Error('Required parameter postId was null or undefined when calling apiOpMessageCommentsPostIdPageGet.');
+        }
+        if (page === null || page === undefined) {
+            throw new Error('Required parameter page was null or undefined when calling apiOpMessageCommentsPostIdPageGet.');
         }
 
         let headers = this.defaultHeaders;
@@ -121,7 +125,7 @@ export class OpMessageApiService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<Array<CommentModel>>(`${this.configuration.basePath}/api/OpMessage/comments/${encodeURIComponent(String(postId))}`,
+        return this.httpClient.get<Array<CommentModel>>(`${this.configuration.basePath}/api/OpMessage/comments/${encodeURIComponent(String(postId))}/${encodeURIComponent(String(page))}`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
@@ -278,13 +282,20 @@ export class OpMessageApiService {
     }
 
     /**
+     * @param page 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiOpMessageGet(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<OpMessageModel>>;
-    public apiOpMessageGet(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<OpMessageModel>>>;
-    public apiOpMessageGet(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<OpMessageModel>>>;
-    public apiOpMessageGet(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public apiOpMessageGet(page?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<OpMessageModel>>;
+    public apiOpMessageGet(page?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<OpMessageModel>>>;
+    public apiOpMessageGet(page?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<OpMessageModel>>>;
+    public apiOpMessageGet(page?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+
+        let queryParameters = new HttpParams({encoder: this.encoder});
+        if (page !== undefined && page !== null) {
+          queryParameters = this.addToHttpParams(queryParameters,
+            <any>page, 'page');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -308,6 +319,7 @@ export class OpMessageApiService {
 
         return this.httpClient.get<Array<OpMessageModel>>(`${this.configuration.basePath}/api/OpMessage`,
             {
+                params: queryParameters,
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

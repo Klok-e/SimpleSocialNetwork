@@ -1,39 +1,65 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PostsService} from '../../services/posts.service';
 import {OpMessageModel, UserApiService, VoteType} from '../../../backend_api_client';
 import {OpMessageUserDeleted} from '../../models/helper-types';
+import {ScrollToBottomService} from '../../services/scroll-to-bottom.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss']
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, OnDestroy {
+  private subs: Subscription = new Subscription();
+
   opMessages: OpMessageUserDeleted[] | null = null;
 
   constructor(private posts: PostsService,
-              private usersApi: UserApiService) {
+              private usersApi: UserApiService,
+              private scrollService: ScrollToBottomService) {
   }
 
   ngOnInit(): void {
-    this.updatePostList();
+    this.subs.add(
+      this.scrollService.user.subscribe({
+        next: _ => {
+          this.addPosts(this.currentPage());
+          console.log('add posts');
+        }
+      })
+    );
   }
 
-  public updatePostList(): void {
-    this.posts.getAllPosts().subscribe((next) => {
-      this.opMessages = next.map(x => {
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+  }
+
+  private currentPage(): number {
+    const count = this.opMessages?.length ?? 0;
+    return Math.floor(count / 5);
+  }
+
+  public addPosts(page: number): void {
+    this.posts.getAllPosts(page).subscribe((next) => {
+      const posts = next.map(x => {
         const post = x as OpMessageUserDeleted;
         post.posterIsDeleted = false;
         if (post.posterId != null) {
           this.usersApi.apiUserDeletedGet(post.posterId)
             .subscribe({
-              next: deleted => {
+              next: (deleted: boolean) => {
                 post.posterIsDeleted = deleted;
               }
             });
         }
         return post;
       });
+      if (this.opMessages === null) {
+        this.opMessages = posts;
+      } else {
+        this.opMessages.push(...posts);
+      }
     });
   }
 

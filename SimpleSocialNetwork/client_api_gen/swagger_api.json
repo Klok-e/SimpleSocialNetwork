@@ -221,6 +221,17 @@
         "tags": [
           "OpMessage"
         ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -321,7 +332,7 @@
         }
       }
     },
-    "/api/OpMessage/comments/{postId}": {
+    "/api/OpMessage/comments/{postId}/{page}": {
       "get": {
         "tags": [
           "OpMessage"
@@ -329,6 +340,15 @@
         "parameters": [
           {
             "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "page",
             "in": "path",
             "required": true,
             "schema": {

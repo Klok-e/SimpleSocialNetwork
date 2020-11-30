@@ -10,20 +10,20 @@ export class PostsService {
   constructor(private posts: OpMessageApiService) {
   }
 
-  public getAllPosts(): Observable<OpMessageModel[]> {
-    return this.posts.apiOpMessageGet('body');
+  public getAllPosts(page: number): Observable<OpMessageModel[]> {
+    return this.posts.apiOpMessageGet(page);
   }
 
   public getPost(id: number): Observable<OpMessageModel> {
-    return this.posts.apiOpMessageIdGet(id, 'body');
+    return this.posts.apiOpMessageIdGet(id);
   }
 
   public createPost(message: CreateOpMessageModel): Observable<number> {
-    return this.posts.apiOpMessagePost(message, 'body');
+    return this.posts.apiOpMessagePost(message);
   }
 
-  public getComments(postId: number): Observable<CommentModel[]> {
-    return this.posts.apiOpMessageCommentsPostIdGet(postId, 'body');
+  public getComments(postId: number, page: number): Observable<CommentModel[]> {
+    return this.posts.apiOpMessageCommentsPostIdPageGet(postId, page);
   }
 
   public postExists(postId: number): Observable<boolean> {

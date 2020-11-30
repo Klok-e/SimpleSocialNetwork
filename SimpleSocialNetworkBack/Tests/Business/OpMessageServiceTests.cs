@@ -308,7 +308,7 @@ namespace Tests.Business
             var service = new OpMessageService(_db.Context, _mapper, new TypedClaimsPrincipal());
 
             // act
-            var posts = (await service.GetAll()).ToArray();
+            var posts = (await service.GetAll(0)).ToArray();
 
             // assert
             Assert.AreEqual(3, posts.Length);
@@ -405,7 +405,7 @@ namespace Tests.Business
             var service = new OpMessageService(_db.Context, _mapper, new TypedClaimsPrincipal());
 
             // act
-            var comments = (await service.GetComments(4)).ToArray();
+            var comments = (await service.GetComments(4, 0)).ToArray();
 
             // assert
             Assert.AreEqual(3, comments.Length);
@@ -413,7 +413,7 @@ namespace Tests.Business
             Assert.AreEqual("bar", comments[1].Content);
             Assert.AreEqual("baz", comments[2].Content);
         }
-        
+
         [Test]
         public async Task PostExists()
         {
@@ -428,9 +428,9 @@ namespace Tests.Business
             var nonexistentExists = await service.PostExists(-3);
 
             // assert
-            Assert.AreEqual(false,deletedExists);
-            Assert.AreEqual(true,exists);
-            Assert.AreEqual(false,nonexistentExists);
+            Assert.AreEqual(false, deletedExists);
+            Assert.AreEqual(true, exists);
+            Assert.AreEqual(false, nonexistentExists);
         }
     }
 }
