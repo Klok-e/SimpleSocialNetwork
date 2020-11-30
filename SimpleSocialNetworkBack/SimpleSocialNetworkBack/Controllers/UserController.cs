@@ -22,7 +22,11 @@ namespace SimpleSocialNetworkBack.Controllers
             _userService = userService;
         }
 
-
+        /// <summary>
+        /// Check whether the specified user exists (deleted users also regarded as existing)
+        /// </summary>
+        /// <param name="login">The specified user's login</param>
+        /// <returns>Whether exists</returns>
         [HttpGet("exists")]
         [AllowAnonymous]
         public async Task<ActionResult<bool>> UserExists([Required] string login)
@@ -30,7 +34,12 @@ namespace SimpleSocialNetworkBack.Controllers
             var exists = await _userService.UserExists(login);
             return Ok(exists);
         }
-        
+
+        /// <summary>
+        /// Check whether the specified user was deleted
+        /// </summary>
+        /// <param name="login">The specified user's login</param>
+        /// <returns>Whether deleted</returns>
         [HttpGet("deleted")]
         [AllowAnonymous]
         public async Task<ActionResult<bool>> UserDeleted([Required] string login)
@@ -39,6 +48,11 @@ namespace SimpleSocialNetworkBack.Controllers
             return Ok(exists);
         }
 
+        /// <summary>
+        /// Get a full model of the specified user
+        /// </summary>
+        /// <param name="login">Login of a user</param>
+        /// <returns>Full model</returns>
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<UserModel>> GetUser([Required] string login)
@@ -47,6 +61,10 @@ namespace SimpleSocialNetworkBack.Controllers
             return Ok(user);
         }
 
+        /// <summary>
+        /// Change user info
+        /// </summary>
+        /// <param name="changeInfo">New user info</param>
         [HttpPut("info")]
         [Authorize]
         public async Task<ActionResult> ChangeUserInfo([Required] ChangeUserInfo changeInfo)
@@ -55,6 +73,11 @@ namespace SimpleSocialNetworkBack.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Get a limited model of the specified user
+        /// </summary>
+        /// <param name="login">Login of a user</param>
+        /// <returns>Limited model</returns>
         [HttpGet("limited")]
         [AllowAnonymous]
         public async Task<ActionResult<LimitedUserModel>> GetUserLimited([Required] string login)
@@ -63,6 +86,11 @@ namespace SimpleSocialNetworkBack.Controllers
             return Ok(user);
         }
 
+        /// <summary>
+        /// Search users
+        /// </summary>
+        /// <param name="search">Parameters to search for</param>
+        /// <returns>List of matching limited user models</returns>
         [HttpGet("search")]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<LimitedUserModel>>> SearchUsers([FromQuery] SearchUsersModel search)
@@ -71,6 +99,10 @@ namespace SimpleSocialNetworkBack.Controllers
             return Ok(users);
         }
 
+        /// <summary>
+        /// Elevate the specified user to admin
+        /// </summary>
+        /// <param name="login">Login of a user</param>
         [HttpPut("elevate")]
         [Authorize(Roles = Roles.Admin)]
         public async Task<ActionResult> ElevateUser([Required] string login)
@@ -79,6 +111,10 @@ namespace SimpleSocialNetworkBack.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Ban the specified user
+        /// </summary>
+        /// <param name="ban">Ban data</param>
         [HttpPost("ban")]
         [Authorize(Roles = Roles.Admin)]
         public async Task<ActionResult> BanUser([Required] BanUserModel ban)
@@ -87,6 +123,10 @@ namespace SimpleSocialNetworkBack.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Lift all current bans of the specified user 
+        /// </summary>
+        /// <param name="user">Login of a user</param>
         [HttpPost("unban")]
         [Authorize(Roles = Roles.Admin)]
         public async Task<ActionResult> LiftUserBan([Required] string user)
@@ -96,11 +136,10 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        ///     Soft delete user;
-        ///     Authorized: either user themselves or an admin
+        /// Soft delete user;
+        /// Authorized: either user themselves or an admin
         /// </summary>
-        /// <param name="login"></param>
-        /// <returns></returns>
+        /// <param name="login">Login of a user</param>
         [HttpDelete]
         [Authorize(Roles = Roles.Admin)]
         public async Task<ActionResult> DeleteUser([Required] string login)
@@ -109,6 +148,11 @@ namespace SimpleSocialNetworkBack.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Check whether user is banned
+        /// </summary>
+        /// <param name="login">Login of a user</param>
+        /// <returns>Whether user is banned</returns>
         [HttpGet("banned")]
         [Authorize]
         public async Task<ActionResult<bool>> UserBanned([Required] string login)

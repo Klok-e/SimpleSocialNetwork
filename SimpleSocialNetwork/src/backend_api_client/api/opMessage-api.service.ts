@@ -89,8 +89,9 @@ export class OpMessageApiService {
     }
 
     /**
-     * @param postId 
-     * @param page 
+     * Get comments in a post
+     * @param postId Post id
+     * @param page Page
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -137,7 +138,8 @@ export class OpMessageApiService {
     }
 
     /**
-     * @param postId 
+     * Delete the specifid post
+     * @param postId Id of a post
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -187,7 +189,8 @@ export class OpMessageApiService {
     }
 
     /**
-     * @param postId 
+     * Check whether the specified post exists
+     * @param postId Id of a post
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -231,7 +234,8 @@ export class OpMessageApiService {
     }
 
     /**
-     * @param login 
+     * Get posts from the specified user
+     * @param login User login to get posts from
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -282,7 +286,8 @@ export class OpMessageApiService {
     }
 
     /**
-     * @param page 
+     * Get a page of posts
+     * @param page Page
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -330,7 +335,8 @@ export class OpMessageApiService {
     }
 
     /**
-     * @param id 
+     * Get a post model with the specified id
+     * @param id Id of apost
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -374,7 +380,8 @@ export class OpMessageApiService {
     }
 
     /**
-     * @param createOpMessageModel 
+     * Create a new post using provided data
+     * @param createOpMessageModel Post data
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -430,7 +437,8 @@ export class OpMessageApiService {
     }
 
     /**
-     * @param votePost 
+     * Vote on a post
+     * @param votePost Vote data
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

@@ -146,7 +146,8 @@ export class CommentApiService {
     }
 
     /**
-     * @param createCommentModel 
+     * Create a new comment in specified post
+     * @param createCommentModel Comment data
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -201,7 +202,8 @@ export class CommentApiService {
     }
 
     /**
-     * @param voteComment 
+     * Vote on a comment
+     * @param voteComment Vote data
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

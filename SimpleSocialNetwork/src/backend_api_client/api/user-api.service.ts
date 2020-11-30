@@ -89,7 +89,8 @@ export class UserApiService {
     }
 
     /**
-     * @param banUserModel 
+     * Ban the specified user
+     * @param banUserModel Ban data
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -144,7 +145,8 @@ export class UserApiService {
     }
 
     /**
-     * @param login 
+     * Check whether user is banned
+     * @param login Login of a user
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -196,7 +198,7 @@ export class UserApiService {
 
     /**
      * Soft delete user;  Authorized: either user themselves or an admin
-     * @param login 
+     * @param login Login of a user
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -246,7 +248,8 @@ export class UserApiService {
     }
 
     /**
-     * @param login 
+     * Check whether the specified user was deleted
+     * @param login The specified user\&#39;s login
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -297,7 +300,8 @@ export class UserApiService {
     }
 
     /**
-     * @param login 
+     * Elevate the specified user to admin
+     * @param login Login of a user
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -348,7 +352,8 @@ export class UserApiService {
     }
 
     /**
-     * @param login 
+     * Check whether the specified user exists (deleted users also regarded as existing)
+     * @param login The specified user\&#39;s login
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -399,7 +404,8 @@ export class UserApiService {
     }
 
     /**
-     * @param login 
+     * Get a full model of the specified user
+     * @param login Login of a user
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -450,7 +456,8 @@ export class UserApiService {
     }
 
     /**
-     * @param changeUserInfo 
+     * Change user info
+     * @param changeUserInfo New user info
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -505,7 +512,8 @@ export class UserApiService {
     }
 
     /**
-     * @param login 
+     * Get a limited model of the specified user
+     * @param login Login of a user
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -556,6 +564,7 @@ export class UserApiService {
     }
 
     /**
+     * Search users
      * @param namePattern 
      * @param aboutPattern 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -609,7 +618,8 @@ export class UserApiService {
     }
 
     /**
-     * @param user 
+     * Lift all current bans of the specified user
+     * @param user Login of a user
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

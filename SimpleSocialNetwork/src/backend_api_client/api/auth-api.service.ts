@@ -88,7 +88,8 @@ export class AuthApiService {
     }
 
     /**
-     * @param credentialsModel 
+     * Login into an account using provided credentials
+     * @param credentialsModel User credentials
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -144,7 +145,8 @@ export class AuthApiService {
     }
 
     /**
-     * @param credentialsModel 
+     * Register a new user
+     * @param credentialsModel User credentials that will be used on login
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

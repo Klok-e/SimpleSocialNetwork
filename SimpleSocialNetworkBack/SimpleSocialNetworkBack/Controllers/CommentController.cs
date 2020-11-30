@@ -19,6 +19,10 @@ namespace SimpleSocialNetworkBack.Controllers
             _commentService = commentService;
         }
 
+        /// <summary>
+        /// Create a new comment in specified post
+        /// </summary>
+        /// <param name="comment">Comment data</param>
         [HttpPost]
         [Authorize]
         public async Task<ActionResult> CreateComment([Required] [FromBody] CreateCommentModel comment)
@@ -27,6 +31,10 @@ namespace SimpleSocialNetworkBack.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Vote on a comment
+        /// </summary>
+        /// <param name="vote">Vote data</param>
         [HttpPost("vote")]
         [Authorize]
         public async Task<ActionResult> VoteComment([Required] [FromBody] VoteComment vote)

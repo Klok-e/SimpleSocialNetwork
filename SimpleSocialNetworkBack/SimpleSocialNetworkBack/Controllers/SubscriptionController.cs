@@ -20,6 +20,11 @@ namespace SimpleSocialNetworkBack.Controllers
             _subscriptionService = subscriptionService;
         }
 
+        /// <summary>
+        /// Get all users the specified user is subscribed to
+        /// </summary>
+        /// <param name="login">Login of a user</param>
+        /// <returns>List of subscriptions</returns>
         [HttpGet("subscribed_to")]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<SubscriptionModel>>> GetUserSubscribedTo([Required] string login)
@@ -28,6 +33,11 @@ namespace SimpleSocialNetworkBack.Controllers
             return Ok(subs);
         }
 
+        /// <summary>
+        /// Check whether current user is subscribed to the specified user
+        /// </summary>
+        /// <param name="login">User login</param>
+        /// <returns>Bool indicating whether current user is subscribed to the specified user</returns>
         [HttpGet("is_subscribed_to")]
         [Authorize]
         public async Task<ActionResult<bool>> IsUserSubscribedTo([Required] string login)
@@ -36,6 +46,10 @@ namespace SimpleSocialNetworkBack.Controllers
             return Ok(isSub);
         }
 
+        /// <summary>
+        /// Subscribe current user to the specified user
+        /// </summary>
+        /// <param name="login">Specified user's login</param>
         [HttpPost("sub")]
         [Authorize]
         public async Task<ActionResult> Subscribe([Required] string login)
@@ -44,6 +58,10 @@ namespace SimpleSocialNetworkBack.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Unsubscribe current user from the specified user
+        /// </summary>
+        /// <param name="login">Specified user's login</param>
         [HttpPost("unsub")]
         [Authorize]
         public async Task<ActionResult> Unsubscribe([Required] string login)

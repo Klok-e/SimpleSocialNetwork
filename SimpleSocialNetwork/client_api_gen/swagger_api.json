@@ -10,7 +10,9 @@
         "tags": [
           "Auth"
         ],
+        "summary": "Register a new user",
         "requestBody": {
+          "description": "User credentials that will be used on login",
           "content": {
             "application/json": {
               "schema": {
@@ -49,7 +51,9 @@
         "tags": [
           "Auth"
         ],
+        "summary": "Login into an account using provided credentials",
         "requestBody": {
+          "description": "User credentials",
           "content": {
             "application/json": {
               "schema": {
@@ -88,7 +92,9 @@
         "tags": [
           "Comment"
         ],
+        "summary": "Create a new comment in specified post",
         "requestBody": {
+          "description": "Comment data",
           "content": {
             "application/json": {
               "schema": {
@@ -151,7 +157,9 @@
         "tags": [
           "Comment"
         ],
+        "summary": "Vote on a comment",
         "requestBody": {
+          "description": "Vote data",
           "content": {
             "application/json": {
               "schema": {
@@ -183,7 +191,9 @@
         "tags": [
           "OpMessage"
         ],
+        "summary": "Create a new post using provided data",
         "requestBody": {
+          "description": "Post data",
           "content": {
             "application/json": {
               "schema": {
@@ -221,12 +231,15 @@
         "tags": [
           "OpMessage"
         ],
+        "summary": "Get a page of posts",
         "parameters": [
           {
             "name": "page",
             "in": "query",
+            "description": "Page",
             "schema": {
               "type": "integer",
+              "description": "Page",
               "format": "int32",
               "default": 0
             }
@@ -252,13 +265,16 @@
         "tags": [
           "OpMessage"
         ],
+        "summary": "Delete the specifid post",
         "parameters": [
           {
             "name": "postId",
             "in": "query",
+            "description": "Id of a post",
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of a post",
               "format": "int32"
             }
           }
@@ -275,13 +291,16 @@
         "tags": [
           "OpMessage"
         ],
+        "summary": "Get a post model with the specified id",
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "Id of apost",
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of apost",
               "format": "int32"
             }
           }
@@ -305,13 +324,16 @@
         "tags": [
           "OpMessage"
         ],
+        "summary": "Get posts from the specified user",
         "parameters": [
           {
             "name": "login",
             "in": "query",
+            "description": "User login to get posts from",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "User login to get posts from"
             }
           }
         ],
@@ -337,22 +359,27 @@
         "tags": [
           "OpMessage"
         ],
+        "summary": "Get comments in a post",
         "parameters": [
           {
             "name": "postId",
             "in": "path",
+            "description": "Post id",
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Post id",
               "format": "int32"
             }
           },
           {
             "name": "page",
             "in": "path",
+            "description": "Page",
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Page",
               "format": "int32"
             }
           }
@@ -379,13 +406,16 @@
         "tags": [
           "OpMessage"
         ],
+        "summary": "Check whether the specified post exists",
         "parameters": [
           {
             "name": "postId",
             "in": "path",
+            "description": "Id of a post",
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Id of a post",
               "format": "int32"
             }
           }
@@ -409,7 +439,9 @@
         "tags": [
           "OpMessage"
         ],
+        "summary": "Vote on a post",
         "requestBody": {
+          "description": "Vote data",
           "content": {
             "application/json": {
               "schema": {
@@ -441,13 +473,16 @@
         "tags": [
           "Subscription"
         ],
+        "summary": "Get all users the specified user is subscribed to",
         "parameters": [
           {
             "name": "login",
             "in": "query",
+            "description": "Login of a user",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "Login of a user"
             }
           }
         ],
@@ -473,13 +508,16 @@
         "tags": [
           "Subscription"
         ],
+        "summary": "Check whether current user is subscribed to the specified user",
         "parameters": [
           {
             "name": "login",
             "in": "query",
+            "description": "User login",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "User login"
             }
           }
         ],
@@ -502,13 +540,16 @@
         "tags": [
           "Subscription"
         ],
+        "summary": "Subscribe current user to the specified user",
         "parameters": [
           {
             "name": "login",
             "in": "query",
+            "description": "Specified user's login",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "Specified user's login"
             }
           }
         ],
@@ -524,13 +565,16 @@
         "tags": [
           "Subscription"
         ],
+        "summary": "Unsubscribe current user from the specified user",
         "parameters": [
           {
             "name": "login",
             "in": "query",
+            "description": "Specified user's login",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "Specified user's login"
             }
           }
         ],
@@ -546,13 +590,16 @@
         "tags": [
           "User"
         ],
+        "summary": "Check whether the specified user exists (deleted users also regarded as existing)",
         "parameters": [
           {
             "name": "login",
             "in": "query",
+            "description": "The specified user's login",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "The specified user's login"
             }
           }
         ],
@@ -575,13 +622,16 @@
         "tags": [
           "User"
         ],
+        "summary": "Check whether the specified user was deleted",
         "parameters": [
           {
             "name": "login",
             "in": "query",
+            "description": "The specified user's login",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "The specified user's login"
             }
           }
         ],
@@ -604,13 +654,16 @@
         "tags": [
           "User"
         ],
+        "summary": "Get a full model of the specified user",
         "parameters": [
           {
             "name": "login",
             "in": "query",
+            "description": "Login of a user",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "Login of a user"
             }
           }
         ],
@@ -636,11 +689,11 @@
           {
             "name": "login",
             "in": "query",
-            "description": "",
+            "description": "Login of a user",
             "required": true,
             "schema": {
               "type": "string",
-              "description": ""
+              "description": "Login of a user"
             }
           }
         ],
@@ -656,7 +709,9 @@
         "tags": [
           "User"
         ],
+        "summary": "Change user info",
         "requestBody": {
+          "description": "New user info",
           "content": {
             "application/json": {
               "schema": {
@@ -688,13 +743,16 @@
         "tags": [
           "User"
         ],
+        "summary": "Get a limited model of the specified user",
         "parameters": [
           {
             "name": "login",
             "in": "query",
+            "description": "Login of a user",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "Login of a user"
             }
           }
         ],
@@ -717,6 +775,7 @@
         "tags": [
           "User"
         ],
+        "summary": "Search users",
         "parameters": [
           {
             "name": "NamePattern",
@@ -757,13 +816,16 @@
         "tags": [
           "User"
         ],
+        "summary": "Elevate the specified user to admin",
         "parameters": [
           {
             "name": "login",
             "in": "query",
+            "description": "Login of a user",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "Login of a user"
             }
           }
         ],
@@ -779,7 +841,9 @@
         "tags": [
           "User"
         ],
+        "summary": "Ban the specified user",
         "requestBody": {
+          "description": "Ban data",
           "content": {
             "application/json": {
               "schema": {
@@ -811,13 +875,16 @@
         "tags": [
           "User"
         ],
+        "summary": "Lift all current bans of the specified user",
         "parameters": [
           {
             "name": "user",
             "in": "query",
+            "description": "Login of a user",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "Login of a user"
             }
           }
         ],
@@ -833,13 +900,16 @@
         "tags": [
           "User"
         ],
+        "summary": "Check whether user is banned",
         "parameters": [
           {
             "name": "login",
             "in": "query",
+            "description": "Login of a user",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "Login of a user"
             }
           }
         ],

@@ -86,7 +86,8 @@ export class SubscriptionApiService {
     }
 
     /**
-     * @param login 
+     * Check whether current user is subscribed to the specified user
+     * @param login User login
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -137,7 +138,8 @@ export class SubscriptionApiService {
     }
 
     /**
-     * @param login 
+     * Subscribe current user to the specified user
+     * @param login Specified user\&#39;s login
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -188,7 +190,8 @@ export class SubscriptionApiService {
     }
 
     /**
-     * @param login 
+     * Get all users the specified user is subscribed to
+     * @param login Login of a user
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -239,7 +242,8 @@ export class SubscriptionApiService {
     }
 
     /**
-     * @param login 
+     * Unsubscribe current user from the specified user
+     * @param login Specified user\&#39;s login
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
