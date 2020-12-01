@@ -35,6 +35,7 @@ namespace Business.Services.Implementations
                 // include to prevent "There is already an open DataReader associated with this Connection which must be closed first."
                 // error by preloading poster
                 .Include(x => x.Poster)
+                .Include(x => x.Votes)
                 .Where(x => !x.IsDeleted)
                 .OrderByDescending(x => x.SendDate)
                 .Select(x => _mapper.Map<OpMessage, OpMessageModel>(x))
@@ -123,15 +124,24 @@ namespace Business.Services.Implementations
 
         public async Task VotePost(VotePost votePost)
         {
+            var appUser = await _context.Users.FindAsync(_principal.Name);
+            ExceptionHelper.CheckSelfSoft(appUser, "user");
+
             var post = await _context.OpMessages.FindAsync(votePost.PostId);
             ExceptionHelper.CheckEntitySoft(post, "post");
 
-            post.Points += votePost.VoteType switch
+            // TODO: validation
+
+            post.Votes.Add(new PostVote
             {
-                VoteType.Up => 1,
-                VoteType.Down => -1,
-                _ => throw new ValidationException("Unknown VoteType value")
-            };
+                Voter = appUser,
+                IsUpvote = votePost.VoteType switch
+                {
+                    VoteType.Up => true,
+                    VoteType.Down => false,
+                    _ => throw new ValidationException("Unknown VoteType value")
+                }
+            });
             await _context.SaveChangesAsync();
         }
     }

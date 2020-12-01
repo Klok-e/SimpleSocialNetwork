@@ -17,7 +17,8 @@ export class CreatePostComponent implements OnInit {
               private posts: PostsService) {
     this.createPostForm = formBuilder.group({
       title: new FormControl('', [
-        Validators.required
+        Validators.required,
+        Validators.minLength(10),
       ]),
       content: new FormControl('', [
         Validators.required

@@ -11,11 +11,11 @@ export class ScrollToBottomService {
   constructor() {
     // TODO: idk how to make an event here, so observable of nulls is used instead
     this.userSubject = new BehaviorSubject<null>(null);
-    this.user = this.userSubject.asObservable();
+    this.toBottom = this.userSubject.asObservable();
   }
 
   private userSubject: BehaviorSubject<null>;
-  public user: Observable<null>;
+  public toBottom: Observable<null>;
 
   public scrolledToBottom(): void {
     this.userSubject.next(null);

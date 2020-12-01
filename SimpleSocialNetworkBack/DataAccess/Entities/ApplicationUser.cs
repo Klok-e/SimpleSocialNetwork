@@ -29,6 +29,8 @@ namespace DataAccess.Entities
         public virtual ICollection<TagBan> BansIssued { get; set; } = null!;
 
         public virtual ICollection<TagModerator> ModeratorOfTags { get; set; } = null!;
+        
+        public virtual ICollection<PostVote> PostVotes { get; set; } = null!;
 
         public bool IsDeleted { get; set; }
     }

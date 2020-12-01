@@ -51,6 +51,17 @@ namespace DataAccess
                 .WithMany(x => x.Tags)
                 .HasForeignKey(x => x.OpId);
 
+            modelBuilder.Entity<PostVote>()
+                .HasKey(x => new {x.VoterLogin, x.PostId});
+            modelBuilder.Entity<PostVote>()
+                .HasOne(x => x.Voter)
+                .WithMany(x => x.PostVotes)
+                .HasForeignKey(x => x.VoterLogin);
+            modelBuilder.Entity<PostVote>()
+                .HasOne(x => x.OpMessage)
+                .WithMany(x => x.Votes)
+                .HasForeignKey(x => x.PostId);
+            
             modelBuilder.Entity<Subscription>()
                 .HasOne(x => x.Subscriber)
                 .WithMany(x => x!.Subscriptions)

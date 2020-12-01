@@ -10,6 +10,9 @@
         <div *ngIf="createPostForm.controls.title.errors?.required">
           Title is required.
         </div>
+        <div *ngIf="createPostForm.controls.title.errors?.minlength">
+          Title is must be at leat 10 characters long.
+        </div>
       </div>
     </div>
     <div>

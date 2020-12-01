@@ -73,7 +73,7 @@ export class ReadPostComponent implements OnInit, OnDestroy {
           }
           this.post = post1;
 
-          return this.scroll.user.pipe(
+          return this.scroll.toBottom.pipe(
             mergeMap(_ => {
               return this.updateComments(postId, this.currentCommentPage());
             })
@@ -104,24 +104,29 @@ export class ReadPostComponent implements OnInit, OnDestroy {
     const currPg = this.currentCommentPage();
     return this.posts.getComments(postId, page).pipe(
       map(comments => {
+          const cm = comments.map(x => {
+            const comment = x as CommentUserDeleted;
+            comment.commenterIsDeleted = false;
+            if (comment.posterId != null) {
+              this.usersApi.apiUserDeletedGet(comment.posterId)
+                .subscribe({
+                  next: deleted => {
+                    comment.commenterIsDeleted = deleted;
+                  }
+                });
+            }
+
+            return comment;
+          });
           if (page < currPg) {
             this.comments = [];
+          } else if (page === currPg) {
+            console.log('aa');
+            const bbb = this.comments.length % 5;
+            const c = this.comments.length / 5;
+            this.comments = this.comments.slice(0, bbb ? c : this.comments.length);
           }
-          this.comments.push(...comments.map(x => {
-              const comment = x as CommentUserDeleted;
-              comment.commenterIsDeleted = false;
-              if (comment.posterId != null) {
-                this.usersApi.apiUserDeletedGet(comment.posterId)
-                  .subscribe({
-                    next: deleted => {
-                      comment.commenterIsDeleted = deleted;
-                    }
-                  });
-              }
-
-              return comment;
-            })
-          );
+          this.comments.push(...cm);
         }
       )
     );

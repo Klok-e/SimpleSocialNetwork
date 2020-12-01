@@ -22,7 +22,7 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subs.add(
-      this.scrollService.user.subscribe({
+      this.scrollService.toBottom.subscribe({
         next: _ => {
           this.addPosts(this.currentPage());
           console.log('add posts');
@@ -67,7 +67,7 @@ export class PostsComponent implements OnInit, OnDestroy {
     const post = this.opMessages?.find((x) => {
       return x.id === postId;
     });
-    if (typeof post?.points === 'number') {
+    if (post !== undefined) {
       post.points += 1;
       this.posts.votePost({postId, voteType: VoteType.NUMBER_1})
         .subscribe();

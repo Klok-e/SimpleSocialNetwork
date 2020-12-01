@@ -11,7 +11,7 @@ namespace DataAccess.Entities
         [Required] public string Title { get; set; } = null!;
         [Required] public string Content { get; set; } = null!;
 
-        public int Points { get; set; }
+        //public int Points { get; set; }
 
         public DateTime SendDate { get; set; }
 
@@ -20,6 +20,7 @@ namespace DataAccess.Entities
         public virtual ICollection<OpMessageTag> Tags { get; set; } = null!;
 
         public virtual ICollection<Message> Messages { get; set; } = null!;
+        public virtual ICollection<PostVote> Votes { get; set; } = null!;
 
         public bool IsDeleted { get; set; }
     }

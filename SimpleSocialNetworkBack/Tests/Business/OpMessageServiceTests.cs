@@ -185,42 +185,42 @@ namespace Tests.Business
             Assert.AreEqual(u.Login, msg.Poster!.Login);
         }
 
-        [Test]
-        public async Task VotePost_Happy()
-        {
-            // arrange
-            await SeedUsers();
-            var u = await _db.Context.Users.FindAsync("vasya");
-            await SeedPost(u);
-
-            var service = new OpMessageService(_db.Context, _mapper,
-                new TypedClaimsPrincipal
-                {
-                    Name = u.Login,
-                    Role = Roles.User
-                });
-
-            // act
-            await service.VotePost(new VotePost
-            {
-                PostId = 1,
-                VoteType = VoteType.Up
-            });
-            await service.VotePost(new VotePost
-            {
-                PostId = 1,
-                VoteType = VoteType.Down
-            });
-            await service.VotePost(new VotePost
-            {
-                PostId = 1,
-                VoteType = VoteType.Down
-            });
-
-            // assert
-            var post = await _db.Context.OpMessages.FindAsync(1);
-            Assert.AreEqual(-1, post.Points);
-        }
+        // [Test]
+        // public async Task VotePost_Happy()
+        // {
+        //     // arrange
+        //     await SeedUsers();
+        //     var u = await _db.Context.Users.FindAsync("vasya");
+        //     await SeedPost(u);
+        //
+        //     var service = new OpMessageService(_db.Context, _mapper,
+        //         new TypedClaimsPrincipal
+        //         {
+        //             Name = u.Login,
+        //             Role = Roles.User
+        //         });
+        //
+        //     // act
+        //     await service.VotePost(new VotePost
+        //     {
+        //         PostId = 1,
+        //         VoteType = VoteType.Up
+        //     });
+        //     await service.VotePost(new VotePost
+        //     {
+        //         PostId = 1,
+        //         VoteType = VoteType.Down
+        //     });
+        //     await service.VotePost(new VotePost
+        //     {
+        //         PostId = 1,
+        //         VoteType = VoteType.Down
+        //     });
+        //
+        //     // assert
+        //     var post = await _db.Context.OpMessages.FindAsync(1);
+        //     Assert.AreEqual(-1, post.Points);
+        // }
 
         [Test]
         public async Task DeletePost_Happy()
