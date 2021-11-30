@@ -16,6 +16,10 @@ namespace Tests.Business
     [TestFixture]
     public class OpMessageServiceTests
     {
+        private int _commentId;
+        private ServicesHelper _db = null!;
+        private IMapper _mapper = null!;
+
         [SetUp]
         public void SetUp()
         {
@@ -33,128 +37,6 @@ namespace Tests.Business
             _db.Dispose();
         }
 
-        private ServicesHelper _db = null!;
-        private IMapper _mapper = null!;
-
-        private async Task SeedUsers()
-        {
-            await _db.Context.Users.AddAsync(new ApplicationUser
-            {
-                Login = "petya",
-                IsAdmin = true,
-            });
-
-            const string login = "vasya";
-            var u = await _db.Context.Users.AddAsync(new ApplicationUser
-            {
-                Login = login,
-            });
-            await _db.Context.SaveChangesAsync();
-            _db.ReloadContext();
-        }
-
-        private async Task SeedPost(ApplicationUser? poster = null)
-        {
-            await _db.Context.OpMessages.AddAsync(new OpMessage
-            {
-                Content = "1234",
-                Title = "foo",
-                Poster = poster,
-            });
-
-            await _db.Context.SaveChangesAsync();
-            _db.ReloadContext();
-        }
-
-        private async Task SeedSeveralPosts(ApplicationUser? poster = null, Func<OpMessage, Task>? postMod = null)
-        {
-            foreach (var post in new[]
-            {
-                new OpMessage
-                {
-                    Title = "foo",
-                    Content = "bar",
-                    SendDate = new DateTime(2020, 11, 29),
-                    Poster = poster
-                },
-                new OpMessage
-                {
-                    Title = "fook",
-                    Content = "baz",
-                    SendDate = new DateTime(2020, 11, 25),
-                    Poster = poster
-                },
-                new OpMessage
-                {
-                    Title = "foobard",
-                    Content = "contentd",
-                    SendDate = new DateTime(2020, 12, 2),
-                    IsDeleted = true,
-                    Poster = poster
-                },
-                new OpMessage
-                {
-                    Title = "foobar",
-                    Content = "content",
-                    SendDate = new DateTime(2020, 12, 1),
-                    Poster = poster
-                },
-            })
-            {
-                if (postMod != null)
-                    await postMod.Invoke(post);
-                await _db.Context.OpMessages.AddAsync(post);
-            }
-
-            await _db.Context.SaveChangesAsync();
-            _db.ReloadContext();
-        }
-
-        private int _commentId;
-
-        private async Task SeedComments(OpMessage post, ApplicationUser? poster = null)
-        {
-            foreach (var comment in new[]
-            {
-                new Message
-                {
-                    Content = "bar",
-                    SendDate = new DateTime(2020, 11, 29),
-                    Poster = poster,
-                    OpMessage = post,
-                    MessageId = ++_commentId,
-                },
-                new Message
-                {
-                    Content = "baz",
-                    SendDate = new DateTime(2020, 11, 25),
-                    Poster = poster,
-                    OpMessage = post,
-                    MessageId = ++_commentId,
-                },
-                new Message
-                {
-                    Content = "contentd",
-                    SendDate = new DateTime(2020, 12, 2),
-                    IsDeleted = true,
-                    Poster = poster,
-                    OpMessage = post,
-                    MessageId = ++_commentId,
-                },
-                new Message
-                {
-                    Content = "content",
-                    SendDate = new DateTime(2020, 12, 1),
-                    Poster = poster,
-                    OpMessage = post,
-                    MessageId = ++_commentId,
-                },
-            })
-            {
-                await _db.Context.Messages.AddAsync(comment);
-            }
-        }
-
         [Test]
         public async Task CreatePost_Happy()
         {
@@ -165,17 +47,12 @@ namespace Tests.Business
             const string expectedContent = "foobar";
 
             var service = new OpMessageService(_db.Context, _mapper,
-                new TypedClaimsPrincipal
-                {
-                    Name = u.Login,
-                    Role = Roles.User
-                });
+                new TypedClaimsPrincipal { Name = u.Login, Role = Roles.User });
 
             // act
             var id = await service.MakeAPost(new CreateOpMessageModel
             {
-                Title = expectedTitle,
-                Content = expectedContent,
+                Title = expectedTitle, Content = expectedContent
             });
 
             // assert
@@ -234,11 +111,7 @@ namespace Tests.Business
             _db.ReloadContext();
 
             var service = new OpMessageService(_db.Context, _mapper,
-                new TypedClaimsPrincipal
-                {
-                    Name = u.Login,
-                    Role = Roles.User
-                });
+                new TypedClaimsPrincipal { Name = u.Login, Role = Roles.User });
             var beforeDel = (await _db.Context.OpMessages.FindAsync(1)).IsDeleted;
 
             // act
@@ -262,14 +135,13 @@ namespace Tests.Business
             _db.ReloadContext();
 
             var service = new OpMessageService(_db.Context, _mapper,
-                new TypedClaimsPrincipal
-                {
-                    Name = "george",
-                    Role = Roles.User
-                });
+                new TypedClaimsPrincipal { Name = "george", Role = Roles.User });
 
             // act
-            async Task Throws() => await service.DeletePostSoft(1);
+            async Task Throws()
+            {
+                await service.DeletePostSoft(1);
+            }
 
             // assert
             Assert.ThrowsAsync<ForbiddenException>(async () => await Throws());
@@ -285,15 +157,13 @@ namespace Tests.Business
             _db.ReloadContext();
 
             var service = new OpMessageService(_db.Context, _mapper,
-                new TypedClaimsPrincipal
-                {
-                    Name = "george",
-                    Role = Roles.User
-                });
+                new TypedClaimsPrincipal { Name = "george", Role = Roles.User });
 
             // act
-            async Task Throws() =>
+            async Task Throws()
+            {
                 await service.DeletePostSoft(1);
+            }
 
             // assert
             Assert.ThrowsAsync<ForbiddenException>(async () => await Throws());
@@ -312,9 +182,12 @@ namespace Tests.Business
 
             // assert
             Assert.AreEqual(3, posts.Length);
-            Assert.AreEqual("foobar", posts[0].Title);
-            Assert.AreEqual("foo", posts[1].Title);
-            Assert.AreEqual("fook", posts[2].Title);
+            Assert.AreEqual("foobar", posts[0]
+                .Title);
+            Assert.AreEqual("foo", posts[1]
+                .Title);
+            Assert.AreEqual("fook", posts[2]
+                .Title);
         }
 
         [Test]
@@ -333,12 +206,18 @@ namespace Tests.Business
 
             // assert
             Assert.AreEqual(3, posts.Length);
-            Assert.AreEqual("foobar", posts[0].Title);
-            Assert.AreEqual(u.Login, posts[0].PosterId);
-            Assert.AreEqual("foo", posts[1].Title);
-            Assert.AreEqual(u.Login, posts[1].PosterId);
-            Assert.AreEqual("fook", posts[2].Title);
-            Assert.AreEqual(u.Login, posts[2].PosterId);
+            Assert.AreEqual("foobar", posts[0]
+                .Title);
+            Assert.AreEqual(u.Login, posts[0]
+                .PosterId);
+            Assert.AreEqual("foo", posts[1]
+                .Title);
+            Assert.AreEqual(u.Login, posts[1]
+                .PosterId);
+            Assert.AreEqual("fook", posts[2]
+                .Title);
+            Assert.AreEqual(u.Login, posts[2]
+                .PosterId);
         }
 
         [Test]
@@ -371,7 +250,10 @@ namespace Tests.Business
             var service = new OpMessageService(_db.Context, _mapper, new TypedClaimsPrincipal());
 
             // act
-            async Task<OpMessageModel> Throws() => await service.GetById(20);
+            async Task<OpMessageModel> Throws()
+            {
+                return await service.GetById(20);
+            }
 
             // assert
             Assert.ThrowsAsync<ValidationException>(Throws);
@@ -389,7 +271,10 @@ namespace Tests.Business
             var service = new OpMessageService(_db.Context, _mapper, new TypedClaimsPrincipal());
 
             // act
-            async Task<OpMessageModel> Throws() => await service.GetById(3);
+            async Task<OpMessageModel> Throws()
+            {
+                return await service.GetById(3);
+            }
 
             // assert
             Assert.ThrowsAsync<ValidationException>(Throws);
@@ -409,9 +294,12 @@ namespace Tests.Business
 
             // assert
             Assert.AreEqual(3, comments.Length);
-            Assert.AreEqual("content", comments[0].Content);
-            Assert.AreEqual("bar", comments[1].Content);
-            Assert.AreEqual("baz", comments[2].Content);
+            Assert.AreEqual("content", comments[0]
+                .Content);
+            Assert.AreEqual("bar", comments[1]
+                .Content);
+            Assert.AreEqual("baz", comments[2]
+                .Content);
         }
 
         [Test]
@@ -431,6 +319,100 @@ namespace Tests.Business
             Assert.AreEqual(false, deletedExists);
             Assert.AreEqual(true, exists);
             Assert.AreEqual(false, nonexistentExists);
+        }
+
+        private async Task SeedUsers()
+        {
+            await _db.Context.Users.AddAsync(new ApplicationUser { Login = "petya", IsAdmin = true });
+
+            const string login = "vasya";
+            var u = await _db.Context.Users.AddAsync(new ApplicationUser { Login = login });
+            await _db.Context.SaveChangesAsync();
+            _db.ReloadContext();
+        }
+
+        private async Task SeedPost(ApplicationUser? poster = null)
+        {
+            await _db.Context.OpMessages.AddAsync(new OpMessage { Content = "1234", Title = "foo", Poster = poster });
+
+            await _db.Context.SaveChangesAsync();
+            _db.ReloadContext();
+        }
+
+        private async Task SeedSeveralPosts(ApplicationUser? poster = null, Func<OpMessage, Task>? postMod = null)
+        {
+            foreach (var post in new[]
+            {
+                new OpMessage
+                {
+                    Title = "foo", Content = "bar", SendDate = new DateTime(2020, 11, 29), Poster = poster
+                },
+                new OpMessage
+                {
+                    Title = "fook", Content = "baz", SendDate = new DateTime(2020, 11, 25), Poster = poster
+                },
+                new OpMessage
+                {
+                    Title = "foobard",
+                    Content = "contentd",
+                    SendDate = new DateTime(2020, 12, 2),
+                    IsDeleted = true,
+                    Poster = poster
+                },
+                new OpMessage
+                {
+                    Title = "foobar", Content = "content", SendDate = new DateTime(2020, 12, 1), Poster = poster
+                }
+            })
+            {
+                if (postMod != null)
+                    await postMod.Invoke(post);
+                await _db.Context.OpMessages.AddAsync(post);
+            }
+
+            await _db.Context.SaveChangesAsync();
+            _db.ReloadContext();
+        }
+
+        private async Task SeedComments(OpMessage post, ApplicationUser? poster = null)
+        {
+            foreach (var comment in new[]
+            {
+                new Message
+                {
+                    Content = "bar",
+                    SendDate = new DateTime(2020, 11, 29),
+                    Poster = poster,
+                    OpMessage = post,
+                    MessageId = ++_commentId
+                },
+                new Message
+                {
+                    Content = "baz",
+                    SendDate = new DateTime(2020, 11, 25),
+                    Poster = poster,
+                    OpMessage = post,
+                    MessageId = ++_commentId
+                },
+                new Message
+                {
+                    Content = "contentd",
+                    SendDate = new DateTime(2020, 12, 2),
+                    IsDeleted = true,
+                    Poster = poster,
+                    OpMessage = post,
+                    MessageId = ++_commentId
+                },
+                new Message
+                {
+                    Content = "content",
+                    SendDate = new DateTime(2020, 12, 1),
+                    Poster = poster,
+                    OpMessage = post,
+                    MessageId = ++_commentId
+                }
+            })
+                await _db.Context.Messages.AddAsync(comment);
         }
     }
 }

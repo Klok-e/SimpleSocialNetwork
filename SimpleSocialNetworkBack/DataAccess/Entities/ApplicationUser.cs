@@ -6,7 +6,8 @@ namespace DataAccess.Entities
 {
     public class ApplicationUser : ISoftDelete
     {
-        [Key] public string Login { get; set; } = null!;
+        [Key]
+        public string Login { get; set; } = null!;
 
         public string? About { get; set; }
 
@@ -29,9 +30,13 @@ namespace DataAccess.Entities
         public virtual ICollection<TagBan> BansIssued { get; set; } = null!;
 
         public virtual ICollection<TagModerator> ModeratorOfTags { get; set; } = null!;
-        
+
         public virtual ICollection<PostVote> PostVotes { get; set; } = null!;
 
+        #region ISoftDelete Members
+
         public bool IsDeleted { get; set; }
+
+        #endregion
     }
 }

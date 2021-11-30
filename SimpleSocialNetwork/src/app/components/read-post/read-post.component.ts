@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CommentModel, CommentApiService, OpMessageModel, VoteType, UserApiService, OpMessageApiService} from '../../../backend_api_client';
+import {CommentApiService, OpMessageApiService, UserApiService, VoteType} from '../../../backend_api_client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PostsService} from '../../services/posts.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';

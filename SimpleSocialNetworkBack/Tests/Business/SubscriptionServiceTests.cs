@@ -12,6 +12,9 @@ namespace Tests.Business
     [TestFixture]
     public class SubscriptionServiceTests
     {
+        private ServicesHelper _db = null!;
+        private IMapper _mapper = null!;
+
         [SetUp]
         public void SetUp()
         {
@@ -28,38 +31,6 @@ namespace Tests.Business
             _db.Dispose();
         }
 
-        private ServicesHelper _db = null!;
-        private IMapper _mapper = null!;
-
-        
-
-        private async Task SeedSubscriptions()
-        {
-            var subscriber = await _db.Context.Users.FindAsync("vasya");
-            var target = await _db.Context.Users.FindAsync("petya");
-            var t2 = await _db.Context.Users.FindAsync("george");
-
-            foreach (var sub in new[]
-            {
-                new Subscription
-                {
-                    Subscriber = subscriber,
-                    Target = target,
-                    IsNotActive = true,
-                },
-                new Subscription
-                {
-                    Subscriber = subscriber,
-                    Target = t2,
-                },
-            })
-            {
-                await _db.Context.Subscriptions.AddAsync(sub);
-            }
-
-            _db.ReloadContext();
-        }
-
         [Test]
         public async Task SubscribeTo()
         {
@@ -69,11 +40,7 @@ namespace Tests.Business
             var target = await _db.Context.Users.FindAsync("petya");
 
             var service = new SubscriptionService(_db.Context, _mapper,
-                new TypedClaimsPrincipal
-                {
-                    Name = subscriber.Login,
-                    Role = Roles.User
-                });
+                new TypedClaimsPrincipal { Name = subscriber.Login, Role = Roles.User });
 
             // act
             await service.SubscribeTo(target.Login);
@@ -96,22 +63,15 @@ namespace Tests.Business
             var target = await _db.Context.Users.FindAsync("petya");
             await _db.Context.Subscriptions.AddAsync(new Subscription
             {
-                Subscriber = subscriber,
-                Target = target,
-                IsNotActive = true,
+                Subscriber = subscriber, Target = target, IsNotActive = true
             });
             _db.ReloadContext();
 
             subscriber = await _db.Context.Users.FindAsync("vasya");
             target = await _db.Context.Users.FindAsync("petya");
 
-
             var service = new SubscriptionService(_db.Context, _mapper,
-                new TypedClaimsPrincipal
-                {
-                    Name = subscriber.Login,
-                    Role = Roles.User
-                });
+                new TypedClaimsPrincipal { Name = subscriber.Login, Role = Roles.User });
 
             // act
             await service.SubscribeTo(target.Login);
@@ -133,22 +93,14 @@ namespace Tests.Business
             var subscriber = await _db.Context.Users.FindAsync("vasya");
             var target = await _db.Context.Users.FindAsync("petya");
 
-            await _db.Context.Subscriptions.AddAsync(new Subscription
-            {
-                Subscriber = subscriber,
-                Target = target,
-            });
+            await _db.Context.Subscriptions.AddAsync(new Subscription { Subscriber = subscriber, Target = target });
             _db.ReloadContext();
 
             subscriber = await _db.Context.Users.FindAsync("vasya");
             target = await _db.Context.Users.FindAsync("petya");
 
             var service = new SubscriptionService(_db.Context, _mapper,
-                new TypedClaimsPrincipal
-                {
-                    Name = subscriber.Login,
-                    Role = Roles.User
-                });
+                new TypedClaimsPrincipal { Name = subscriber.Login, Role = Roles.User });
 
             // act
             await service.UnsubscribeFrom(target.Login);
@@ -171,16 +123,17 @@ namespace Tests.Business
 
             var subscriber = await _db.Context.Users.FindAsync("vasya");
 
-            var service = new SubscriptionService(_db.Context, _mapper,
-                new TypedClaimsPrincipal());
+            var service = new SubscriptionService(_db.Context, _mapper, new TypedClaimsPrincipal());
 
             // act
             var subs = (await service.GetUserSubscribedTo(subscriber.Login)).ToArray();
 
             // assert
             Assert.AreEqual(1, subs.Length);
-            Assert.AreEqual(true, subs[0].IsActive);
-            Assert.AreEqual(subscriber.Login, subs[0].SubscriberId);
+            Assert.AreEqual(true, subs[0]
+                .IsActive);
+            Assert.AreEqual(subscriber.Login, subs[0]
+                .SubscriberId);
         }
 
         [Test]
@@ -196,11 +149,7 @@ namespace Tests.Business
             var t3 = await _db.Context.Users.FindAsync("steve");
 
             var service = new SubscriptionService(_db.Context, _mapper,
-                new TypedClaimsPrincipal
-                {
-                    Name = subscriber.Login,
-                    Role = Roles.User,
-                });
+                new TypedClaimsPrincipal { Name = subscriber.Login, Role = Roles.User });
 
             // act
             var subSelf = await service.IsUserSubscribedTo(subscriber.Login);
@@ -213,6 +162,22 @@ namespace Tests.Business
             Assert.AreEqual(false, sub2);
             Assert.AreEqual(true, sub3);
             Assert.AreEqual(false, sub4);
+        }
+
+        private async Task SeedSubscriptions()
+        {
+            var subscriber = await _db.Context.Users.FindAsync("vasya");
+            var target = await _db.Context.Users.FindAsync("petya");
+            var t2 = await _db.Context.Users.FindAsync("george");
+
+            foreach (var sub in new[]
+            {
+                new Subscription { Subscriber = subscriber, Target = target, IsNotActive = true },
+                new Subscription { Subscriber = subscriber, Target = t2 }
+            })
+                await _db.Context.Subscriptions.AddAsync(sub);
+
+            _db.ReloadContext();
         }
     }
 }

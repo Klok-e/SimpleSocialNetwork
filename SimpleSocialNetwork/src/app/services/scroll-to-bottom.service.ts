@@ -1,8 +1,5 @@
 import {Injectable} from '@angular/core';
-import {UserApiService} from '../../backend_api_client';
-import {AuthService} from './auth.service';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {UnionUserModel} from '../models/helper-types';
 
 @Injectable({
   providedIn: 'root'

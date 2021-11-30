@@ -1,5 +1,11 @@
 import {Injectable} from '@angular/core';
-import {CommentModel, CreateOpMessageModel, OpMessageModel, OpMessageApiService, VotePost} from '../../backend_api_client';
+import {
+  CommentModel,
+  CreateOpMessageModel,
+  OpMessageApiService,
+  OpMessageModel,
+  VotePost
+} from '../../backend_api_client';
 import {Observable} from 'rxjs';
 
 @Injectable({

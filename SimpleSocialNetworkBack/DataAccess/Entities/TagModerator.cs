@@ -11,7 +11,10 @@ namespace DataAccess.Entities
         public bool IsRevoked { get; set; }
 
         public virtual Tag Tag { get; set; } = null!;
+
         public virtual ApplicationUser User { get; set; } = null!;
+
+        #region ISoftDelete Members
 
         [NotMapped]
         public bool IsDeleted
@@ -19,5 +22,7 @@ namespace DataAccess.Entities
             get => IsRevoked;
             set => IsRevoked = value;
         }
+
+        #endregion
     }
 }

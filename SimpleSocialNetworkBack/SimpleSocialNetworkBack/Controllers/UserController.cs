@@ -23,7 +23,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Check whether the specified user exists (deleted users also regarded as existing)
+        ///     Check whether the specified user exists (deleted users also regarded as existing)
         /// </summary>
         /// <param name="login">The specified user's login</param>
         /// <returns>Whether exists</returns>
@@ -36,7 +36,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Check whether the specified user was deleted
+        ///     Check whether the specified user was deleted
         /// </summary>
         /// <param name="login">The specified user's login</param>
         /// <returns>Whether deleted</returns>
@@ -49,7 +49,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Get a full model of the specified user
+        ///     Get a full model of the specified user
         /// </summary>
         /// <param name="login">Login of a user</param>
         /// <returns>Full model</returns>
@@ -62,7 +62,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Change user info
+        ///     Change user info
         /// </summary>
         /// <param name="changeInfo">New user info</param>
         [HttpPut("info")]
@@ -74,7 +74,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Get a limited model of the specified user
+        ///     Get a limited model of the specified user
         /// </summary>
         /// <param name="login">Login of a user</param>
         /// <returns>Limited model</returns>
@@ -87,7 +87,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Search users
+        ///     Search users
         /// </summary>
         /// <param name="search">Parameters to search for</param>
         /// <returns>List of matching limited user models</returns>
@@ -100,7 +100,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Elevate the specified user to admin
+        ///     Elevate the specified user to admin
         /// </summary>
         /// <param name="login">Login of a user</param>
         [HttpPut("elevate")]
@@ -112,7 +112,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Ban the specified user
+        ///     Ban the specified user
         /// </summary>
         /// <param name="ban">Ban data</param>
         [HttpPost("ban")]
@@ -124,7 +124,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Lift all current bans of the specified user 
+        ///     Lift all current bans of the specified user
         /// </summary>
         /// <param name="user">Login of a user</param>
         [HttpPost("unban")]
@@ -136,8 +136,8 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Soft delete user;
-        /// Authorized: either user themselves or an admin
+        ///     Soft delete user;
+        ///     Authorized: either user themselves or an admin
         /// </summary>
         /// <param name="login">Login of a user</param>
         [HttpDelete]
@@ -149,7 +149,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Check whether user is banned
+        ///     Check whether user is banned
         /// </summary>
         /// <param name="login">Login of a user</param>
         /// <returns>Whether user is banned</returns>

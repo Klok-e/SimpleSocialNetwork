@@ -15,6 +15,9 @@ namespace Tests.Business
     [TestFixture]
     public class UserServiceTests
     {
+        private ServicesHelper _db = null!;
+        private IMapper _mapper = null!;
+
         [SetUp]
         public void SetUp()
         {
@@ -31,33 +34,6 @@ namespace Tests.Business
             _db.Dispose();
         }
 
-        private ServicesHelper _db = null!;
-        private IMapper _mapper = null!;
-
-        private async Task SeedBan()
-        {
-            var admin = await _db.Context.Users.FindAsync("petya");
-            var u1 = await _db.Context.Users.FindAsync("vasya");
-            //var u2 = await _db.Context.Users.FindAsync("george");
-
-            foreach (var sub in new[]
-            {
-                new TagBan
-                {
-                    Moderator = admin,
-                    User = u1,
-                    Tag = new Tag {Name = ""},
-                    ExpirationDate = new DateTime(3000, 1, 1),
-                    BanIssuedDate = DateTime.UtcNow
-                }
-            })
-            {
-                await _db.Context.TagBans.AddAsync(sub);
-            }
-
-            _db.ReloadContext();
-        }
-
         [Test]
         public async Task GetUser()
         {
@@ -66,11 +42,7 @@ namespace Tests.Business
 
             var user = await _db.Context.Users.FindAsync("vasya");
 
-            var service = new UserService(_db.Context, _mapper,
-                new TypedClaimsPrincipal
-                {
-                    Role = Roles.Admin
-                });
+            var service = new UserService(_db.Context, _mapper, new TypedClaimsPrincipal { Role = Roles.Admin });
 
             // act
             var u = await service.GetUser(user.Login);
@@ -88,14 +60,13 @@ namespace Tests.Business
 
             var user = await _db.Context.Users.FindAsync("vasya");
 
-            var service = new UserService(_db.Context, _mapper,
-                new TypedClaimsPrincipal
-                {
-                    Role = Roles.User
-                });
+            var service = new UserService(_db.Context, _mapper, new TypedClaimsPrincipal { Role = Roles.User });
 
             // act
-            async Task Throws() => await service.GetUser(user.Login);
+            async Task Throws()
+            {
+                await service.GetUser(user.Login);
+            }
 
             // assert
             Assert.ThrowsAsync<ForbiddenException>(Throws);
@@ -109,11 +80,7 @@ namespace Tests.Business
 
             var user = await _db.Context.Users.FindAsync("vasya");
 
-            var service = new UserService(_db.Context, _mapper,
-                new TypedClaimsPrincipal
-                {
-                    Role = Roles.User
-                });
+            var service = new UserService(_db.Context, _mapper, new TypedClaimsPrincipal { Role = Roles.User });
 
             // act
             var u = await service.GetUserLimited(user.Login);
@@ -165,15 +132,11 @@ namespace Tests.Business
 
             var user = await _db.Context.Users.FindAsync("vasya");
 
-            var service = new UserService(_db.Context, _mapper, new TypedClaimsPrincipal
-            {
-                Name = user.Login,
-                Role = Roles.User,
-            });
+            var service = new UserService(_db.Context, _mapper,
+                new TypedClaimsPrincipal { Name = user.Login, Role = Roles.User });
             var info = new ChangeUserInfo
             {
-                About = "foobarbaz foobarbaz foobarbaz foobarbaz",
-                DateBirth = new DateTime(50, 4, 23),
+                About = "foobarbaz foobarbaz foobarbaz foobarbaz", DateBirth = new DateTime(50, 4, 23)
             };
 
             // act
@@ -191,15 +154,11 @@ namespace Tests.Business
             await _db.SeedUsers();
 
             var service = new UserService(_db.Context, _mapper, new TypedClaimsPrincipal());
-            var expectedUserList = new[]
-            {
-                "george", "petya", "vasya",
-            };
+            var expectedUserList = new[] { "george", "petya", "vasya" };
 
             // act
-            var users = (await service.SearchUsers(new SearchUsersModel()))
-                .Select(x => x.Login)
-                .ToArray();
+            var users = (await service.SearchUsers(new SearchUsersModel())).Select(x => x.Login)
+                                                                           .ToArray();
 
             // assert
             Assert.AreEqual(expectedUserList, users);
@@ -212,17 +171,10 @@ namespace Tests.Business
             await _db.SeedUsers();
 
             var service = new UserService(_db.Context, _mapper, new TypedClaimsPrincipal());
-            var expectedUserList = new[]
-            {
-                "vasya",
-            };
+            var expectedUserList = new[] { "vasya" };
 
             // act
-            var users = (await service.SearchUsers(new SearchUsersModel
-                {
-                    AboutPattern = "sff"
-                }))
-                .Select(x => x.Login)
+            var users = (await service.SearchUsers(new SearchUsersModel { AboutPattern = "sff" })).Select(x => x.Login)
                 .ToArray();
 
             // assert
@@ -236,17 +188,10 @@ namespace Tests.Business
             await _db.SeedUsers();
 
             var service = new UserService(_db.Context, _mapper, new TypedClaimsPrincipal());
-            var expectedUserList = new[]
-            {
-                "petya", "vasya"
-            };
+            var expectedUserList = new[] { "petya", "vasya" };
 
             // act
-            var users = (await service.SearchUsers(new SearchUsersModel
-                {
-                    NamePattern = "ya"
-                }))
-                .Select(x => x.Login)
+            var users = (await service.SearchUsers(new SearchUsersModel { NamePattern = "ya" })).Select(x => x.Login)
                 .ToArray();
 
             // assert
@@ -261,25 +206,20 @@ namespace Tests.Business
 
             var user = await _db.Context.Users.FindAsync("petya");
 
-            var service = new UserService(_db.Context, _mapper, new TypedClaimsPrincipal
-            {
-                Name = user.Login,
-                Role = Roles.Admin,
-            });
+            var service = new UserService(_db.Context, _mapper,
+                new TypedClaimsPrincipal { Name = user.Login, Role = Roles.Admin });
 
             var banTarget = await _db.Context.Users.FindAsync("vasya");
             var banExp = new DateTime(3000, 1, 1);
 
             // act
-            await service.BanUser(new BanUserModel
-            {
-                Login = banTarget.Login,
-                ExpirationDate = banExp,
-            });
+            await service.BanUser(new BanUserModel { Login = banTarget.Login, ExpirationDate = banExp });
 
             // assert
-            Assert.AreEqual(banExp, banTarget.BansReceived.First().ExpirationDate);
-            Assert.AreEqual(false, banTarget.BansReceived.First().IsDeleted);
+            Assert.AreEqual(banExp, banTarget.BansReceived.First()
+                                             .ExpirationDate);
+            Assert.AreEqual(false, banTarget.BansReceived.First()
+                                            .IsDeleted);
         }
 
         [Test]
@@ -291,11 +231,8 @@ namespace Tests.Business
 
             var admin = await _db.Context.Users.FindAsync("petya");
 
-            var service = new UserService(_db.Context, _mapper, new TypedClaimsPrincipal
-            {
-                Name = admin.Login,
-                Role = Roles.Admin,
-            });
+            var service = new UserService(_db.Context, _mapper,
+                new TypedClaimsPrincipal { Name = admin.Login, Role = Roles.Admin });
 
             var banTarget = await _db.Context.Users.FindAsync("vasya");
 
@@ -303,7 +240,8 @@ namespace Tests.Business
             await service.LiftBanFromUser(banTarget.Login);
 
             // assert
-            Assert.AreEqual(true, banTarget.BansReceived.First().IsDeleted);
+            Assert.AreEqual(true, banTarget.BansReceived.First()
+                                           .IsDeleted);
         }
 
         [Test]
@@ -332,7 +270,10 @@ namespace Tests.Business
             var service = new UserService(_db.Context, _mapper, new TypedClaimsPrincipal());
 
             // act
-            async Task Throws() => await service.UserDeleted("vasya123456");
+            async Task Throws()
+            {
+                await service.UserDeleted("vasya123456");
+            }
 
             // assert
             Assert.ThrowsAsync<ValidationException>(Throws);
@@ -346,11 +287,8 @@ namespace Tests.Business
 
             var admin = await _db.Context.Users.FindAsync("petya");
 
-            var service = new UserService(_db.Context, _mapper, new TypedClaimsPrincipal
-            {
-                Name = admin.Login,
-                Role = Roles.Admin,
-            });
+            var service = new UserService(_db.Context, _mapper,
+                new TypedClaimsPrincipal { Name = admin.Login, Role = Roles.Admin });
 
             var target = await _db.Context.Users.FindAsync("vasya");
 
@@ -370,16 +308,16 @@ namespace Tests.Business
 
             var admin = await _db.Context.Users.FindAsync("petya");
 
-            var service = new UserService(_db.Context, _mapper, new TypedClaimsPrincipal
-            {
-                Name = admin.Login,
-                Role = Roles.User,
-            });
+            var service = new UserService(_db.Context, _mapper,
+                new TypedClaimsPrincipal { Name = admin.Login, Role = Roles.User });
 
             var target = await _db.Context.Users.FindAsync("vasya");
 
             // act
-            async Task Throws() => await service.ElevateUser(target.Login);
+            async Task Throws()
+            {
+                await service.ElevateUser(target.Login);
+            }
 
             // assert
             Assert.ThrowsAsync<ForbiddenException>(Throws);
@@ -391,11 +329,8 @@ namespace Tests.Business
             // arrange
             await _db.SeedUsers();
 
-            var service = new UserService(_db.Context, _mapper, new TypedClaimsPrincipal
-            {
-                Name = "petya",
-                Role = Roles.Admin,
-            });
+            var service = new UserService(_db.Context, _mapper,
+                new TypedClaimsPrincipal { Name = "petya", Role = Roles.Admin });
 
             var iseDelBefore = (await _db.Context.Users.FindAsync("vasya")).IsDeleted;
 
@@ -417,11 +352,8 @@ namespace Tests.Business
 
             var admin = await _db.Context.Users.FindAsync("petya");
 
-            var service = new UserService(_db.Context, _mapper, new TypedClaimsPrincipal
-            {
-                Name = admin.Login,
-                Role = Roles.Admin,
-            });
+            var service = new UserService(_db.Context, _mapper,
+                new TypedClaimsPrincipal { Name = admin.Login, Role = Roles.Admin });
 
             // act
             var banned = await service.UserBanned("vasya");
@@ -440,19 +372,42 @@ namespace Tests.Business
 
             var u = await _db.Context.Users.FindAsync("vasya");
 
-            var service = new UserService(_db.Context, _mapper, new TypedClaimsPrincipal
-            {
-                Name = u.Login,
-                Role = Roles.User,
-            });
+            var service = new UserService(_db.Context, _mapper,
+                new TypedClaimsPrincipal { Name = u.Login, Role = Roles.User });
 
             // act
             var selfBanned = await service.UserBanned("vasya");
-            async Task Throws() => await service.UserBanned("petya");
+
+            async Task Throws()
+            {
+                await service.UserBanned("petya");
+            }
 
             // assert
             Assert.AreEqual(false, selfBanned);
             Assert.ThrowsAsync<ForbiddenException>(Throws);
+        }
+
+        private async Task SeedBan()
+        {
+            var admin = await _db.Context.Users.FindAsync("petya");
+            var u1 = await _db.Context.Users.FindAsync("vasya");
+            //var u2 = await _db.Context.Users.FindAsync("george");
+
+            foreach (var sub in new[]
+            {
+                new TagBan
+                {
+                    Moderator = admin,
+                    User = u1,
+                    Tag = new Tag { Name = "" },
+                    ExpirationDate = new DateTime(3000, 1, 1),
+                    BanIssuedDate = DateTime.UtcNow
+                }
+            })
+                await _db.Context.TagBans.AddAsync(sub);
+
+            _db.ReloadContext();
         }
     }
 }

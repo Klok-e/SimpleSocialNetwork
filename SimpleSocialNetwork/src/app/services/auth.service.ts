@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-import {CredentialsModel, LoggedInUser, UserModel, AuthApiService, UserApiService} from '../../backend_api_client';
+import {AuthApiService, CredentialsModel, LoggedInUser, UserModel} from '../../backend_api_client';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
-import {Router} from '@angular/router';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

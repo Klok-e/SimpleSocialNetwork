@@ -12,17 +12,17 @@ namespace Business.Services.Implementations
     public class CommentService : ICommentService
     {
         private readonly SocialDbContext _context;
-        private readonly TypedClaimsPrincipal _principal;
         private readonly bool _isTest;
+        private readonly TypedClaimsPrincipal _principal;
 
-        public CommentService(
-            SocialDbContext context,
-            TypedClaimsPrincipal principal, bool isTest = false)
+        public CommentService(SocialDbContext context, TypedClaimsPrincipal principal, bool isTest = false)
         {
             _context = context;
             _principal = principal;
             _isTest = isTest;
         }
+
+        #region ICommentService Members
 
         public async Task CreateComment(CreateCommentModel comment)
         {
@@ -42,7 +42,9 @@ namespace Business.Services.Implementations
             // https://docs.microsoft.com/en-us/ef/core/saving/explicit-values-generated-properties
             int msgId = default;
             if (_isTest)
-                msgId = op.Messages.Select(x => x.MessageId).DefaultIfEmpty(0).Max() + 1;
+                msgId = op.Messages.Select(x => x.MessageId)
+                          .DefaultIfEmpty(0)
+                          .Max() + 1;
 
             await _context.Messages.AddAsync(new Message
             {
@@ -50,7 +52,7 @@ namespace Business.Services.Implementations
                 MessageId = msgId,
                 Poster = userEnt,
                 Content = comment.Content,
-                SendDate = DateTime.UtcNow,
+                SendDate = DateTime.UtcNow
             });
             await _context.SaveChangesAsync();
         }
@@ -73,9 +75,7 @@ namespace Business.Services.Implementations
         {
             var message = await _context.Messages.FindAsync(commentId.OpId, commentId.MessageId);
             ExceptionHelper.CheckEntitySoft(message, "comment");
-            if (_principal.Role != Roles.Admin
-                && message.Poster != null
-                && _principal.Name != message.Poster.Login)
+            if (_principal.Role != Roles.Admin && message.Poster != null && _principal.Name != message.Poster.Login)
                 throw new ForbiddenException("Can't delete post if its isn't yours or you're not an admin");
             if (_principal.Role != Roles.Admin && message.Poster == null)
                 throw new ForbiddenException("Only admin can do this");
@@ -84,5 +84,7 @@ namespace Business.Services.Implementations
 
             await _context.SaveChangesAsync();
         }
+
+        #endregion
     }
 }

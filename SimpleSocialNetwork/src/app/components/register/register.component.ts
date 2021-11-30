@@ -12,8 +12,7 @@ import {
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {UserApiService} from '../../../backend_api_client';
-import {Observable} from 'rxjs';
-import {map, mergeMap} from 'rxjs/operators';
+import {mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',

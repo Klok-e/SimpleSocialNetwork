@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {LimitedUserModel, UserApiService, UserModel} from '../../../backend_api_client';
+import {LimitedUserModel, UserApiService} from '../../../backend_api_client';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';

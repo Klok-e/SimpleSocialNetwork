@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CurrentUserService} from '../../../services/current-user.service';
-import {LimitedUserModel, UserApiService, UserModel} from '../../../../backend_api_client';
-import {HttpErrorResponse} from '@angular/common/http';
+import {UserApiService} from '../../../../backend_api_client';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {Subscription} from 'rxjs';

@@ -6,10 +6,14 @@ namespace DataAccess.Entities
 {
     public class OpMessage : ISoftDelete
     {
-        [Key] public int Id { get; set; }
+        [Key]
+        public int Id { get; set; }
 
-        [Required] public string Title { get; set; } = null!;
-        [Required] public string Content { get; set; } = null!;
+        [Required]
+        public string Title { get; set; } = null!;
+
+        [Required]
+        public string Content { get; set; } = null!;
 
         //public int Points { get; set; }
 
@@ -20,8 +24,13 @@ namespace DataAccess.Entities
         public virtual ICollection<OpMessageTag> Tags { get; set; } = null!;
 
         public virtual ICollection<Message> Messages { get; set; } = null!;
+
         public virtual ICollection<PostVote> Votes { get; set; } = null!;
 
+        #region ISoftDelete Members
+
         public bool IsDeleted { get; set; }
+
+        #endregion
     }
 }

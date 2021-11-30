@@ -7,13 +7,15 @@ namespace SimpleSocialNetworkBack.Misc
 {
     public class AddRequiredHeaderParameter : IOperationFilter
     {
+        #region IOperationFilter Members
+
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             var filterDescriptors = context.ApiDescription.ActionDescriptor.FilterDescriptors;
             var isAuthorized = filterDescriptors.Select(filterInfo => filterInfo.Filter)
-                .Any(filter => filter is AuthorizeFilter);
+                                                .Any(filter => filter is AuthorizeFilter);
             var allowAnonymous = filterDescriptors.Select(filterInfo => filterInfo.Filter)
-                .Any(filter => filter is IAllowAnonymousFilter);
+                                                  .Any(filter => filter is IAllowAnonymousFilter);
 
             //TODO: fix this
             //if (!isAuthorized || allowAnonymous) return;
@@ -29,5 +31,7 @@ namespace SimpleSocialNetworkBack.Misc
             //     Schema = new OpenApiSchema {Type = "String", Default = new OpenApiString("Bearer {access token}")}
             // });
         }
+
+        #endregion
     }
 }

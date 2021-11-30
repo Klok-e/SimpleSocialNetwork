@@ -8,6 +8,7 @@ namespace Business.Services
         public Task CreateComment(CreateCommentModel comment);
 
         public Task VoteComment(VoteComment vote);
+
         Task DeleteCommentSoft(CommentKeyModel commentId);
     }
 }

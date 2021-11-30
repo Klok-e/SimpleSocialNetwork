@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {LimitedUserModel, UserModel, UserApiService} from '../../backend_api_client';
+import {UserApiService} from '../../backend_api_client';
 import {AuthService} from './auth.service';
 import {UnionUserModel} from '../models/helper-types';
 import {map, tap} from 'rxjs/operators';

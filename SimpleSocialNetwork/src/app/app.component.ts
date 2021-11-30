@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {AuthService} from './services/auth.service';
 import {Router} from '@angular/router';
 import {ScrollToBottomService} from './services/scroll-to-bottom.service';

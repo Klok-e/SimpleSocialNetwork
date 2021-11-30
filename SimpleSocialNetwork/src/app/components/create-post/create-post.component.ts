@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {PostsService} from '../../services/posts.service';
-import {map, mergeMap} from 'rxjs/operators';
+import {mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-post',

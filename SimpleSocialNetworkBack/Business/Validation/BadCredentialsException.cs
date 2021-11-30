@@ -10,15 +10,18 @@ namespace Business.Validation
         {
         }
 
-        protected BadCredentialsException(SerializationInfo info, StreamingContext context) : base(info, context)
+        public BadCredentialsException(string? message)
+            : base(message)
         {
         }
 
-        public BadCredentialsException(string? message) : base(message)
+        public BadCredentialsException(string? message, Exception? innerException)
+            : base(message, innerException)
         {
         }
 
-        public BadCredentialsException(string? message, Exception? innerException) : base(message, innerException)
+        protected BadCredentialsException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

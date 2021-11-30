@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ReadPostComponent } from './read-post.component';
+import {ReadPostComponent} from './read-post.component';
 
 describe('ReadPostComponent', () => {
   let component: ReadPostComponent;
@@ -8,9 +8,9 @@ describe('ReadPostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReadPostComponent ]
+      declarations: [ReadPostComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

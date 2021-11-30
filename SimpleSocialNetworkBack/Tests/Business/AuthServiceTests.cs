@@ -6,10 +6,7 @@ using Business.Common;
 using Business.Models.Responses;
 using Business.Services.Implementations;
 using Business.Validation;
-using DataAccess;
 using DataAccess.Entities;
-using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using NUnit.Framework;
 
@@ -18,6 +15,10 @@ namespace Tests.Business
     [TestFixture]
     public class AuthServiceTests
     {
+        private ServicesHelper _db = null!;
+        private IMapper _mapper = null!;
+        private IOptions<AppSettings> _settings = null!;
+
         [SetUp]
         public void SetUp()
         {
@@ -28,7 +29,9 @@ namespace Tests.Business
             _mapper = new Mapper(configuration);
 
             _settings = Options.Create(new AppSettings
-                {Secret = "123456789asdddddasdafafwgerghrtyhergkernuitvlgbilerklgergjb"});
+            {
+                Secret = "123456789asdddddasdafafwgerghrtyhergkernuitvlgbilerklgergjb"
+            });
         }
 
         [TearDown]
@@ -36,10 +39,6 @@ namespace Tests.Business
         {
             _db.Dispose();
         }
-
-        private ServicesHelper _db = null!;
-        private IMapper _mapper = null!;
-        private IOptions<AppSettings> _settings = null!;
 
         [Test]
         public async Task Register_Happy()

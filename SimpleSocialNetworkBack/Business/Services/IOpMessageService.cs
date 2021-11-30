@@ -13,13 +13,14 @@ namespace Business.Services
 
         Task<OpMessageModel> GetById(int id);
 
-        Task<IEnumerable<CommentModel>> GetComments(int postId,int page);
+        Task<IEnumerable<CommentModel>> GetComments(int postId, int page);
 
         Task<bool> PostExists(int postId);
 
         Task VotePost(VotePost votePost);
 
         Task<IEnumerable<OpMessageModel>> PostsFromUser(string login);
+
         Task DeletePostSoft(int postId);
     }
 }

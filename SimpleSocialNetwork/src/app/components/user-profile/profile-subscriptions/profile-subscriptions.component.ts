@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SubscriptionApiService, SubscriptionModel, UserApiService} from '../../../../backend_api_client';
+import {SubscriptionApiService, SubscriptionModel} from '../../../../backend_api_client';
 import {CurrentUserService} from '../../../services/current-user.service';
 import {Subscription} from 'rxjs';
 

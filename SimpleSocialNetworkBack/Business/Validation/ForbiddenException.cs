@@ -10,15 +10,18 @@ namespace Business.Validation
         {
         }
 
-        protected ForbiddenException(SerializationInfo info, StreamingContext context) : base(info, context)
+        public ForbiddenException(string? message)
+            : base(message)
         {
         }
 
-        public ForbiddenException(string? message) : base(message)
+        public ForbiddenException(string? message, Exception? innerException)
+            : base(message, innerException)
         {
         }
 
-        public ForbiddenException(string? message, Exception? innerException) : base(message, innerException)
+        protected ForbiddenException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

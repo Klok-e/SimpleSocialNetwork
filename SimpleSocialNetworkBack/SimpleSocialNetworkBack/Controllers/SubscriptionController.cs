@@ -21,7 +21,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Get all users the specified user is subscribed to
+        ///     Get all users the specified user is subscribed to
         /// </summary>
         /// <param name="login">Login of a user</param>
         /// <returns>List of subscriptions</returns>
@@ -34,7 +34,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Check whether current user is subscribed to the specified user
+        ///     Check whether current user is subscribed to the specified user
         /// </summary>
         /// <param name="login">User login</param>
         /// <returns>Bool indicating whether current user is subscribed to the specified user</returns>
@@ -47,7 +47,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Subscribe current user to the specified user
+        ///     Subscribe current user to the specified user
         /// </summary>
         /// <param name="login">Specified user's login</param>
         [HttpPost("sub")]
@@ -59,7 +59,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Unsubscribe current user from the specified user
+        ///     Unsubscribe current user from the specified user
         /// </summary>
         /// <param name="login">Specified user's login</param>
         [HttpPost("unsub")]

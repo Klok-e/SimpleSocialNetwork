@@ -10,15 +10,18 @@ namespace Business.Validation
         {
         }
 
-        protected ValidationException(SerializationInfo info, StreamingContext context) : base(info, context)
+        public ValidationException(string? message)
+            : base(message)
         {
         }
 
-        public ValidationException(string? message) : base(message)
+        public ValidationException(string? message, Exception? innerException)
+            : base(message, innerException)
         {
         }
 
-        public ValidationException(string? message, Exception? innerException) : base(message, innerException)
+        protected ValidationException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

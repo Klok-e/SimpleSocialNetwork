@@ -22,7 +22,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Create a new post using provided data
+        ///     Create a new post using provided data
         /// </summary>
         /// <param name="opMessage">Post data</param>
         /// <returns>Id of the created post</returns>
@@ -35,7 +35,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Get a post model with the specified id
+        ///     Get a post model with the specified id
         /// </summary>
         /// <param name="id">Id of apost</param>
         /// <returns>Post model</returns>
@@ -47,7 +47,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Get a page of posts
+        ///     Get a page of posts
         /// </summary>
         /// <param name="page">Page</param>
         /// <returns>List of posts</returns>
@@ -59,7 +59,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Get posts from the specified user
+        ///     Get posts from the specified user
         /// </summary>
         /// <param name="login">User login to get posts from</param>
         /// <returns>Post list</returns>
@@ -72,7 +72,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Get comments in a post
+        ///     Get comments in a post
         /// </summary>
         /// <param name="postId">Post id</param>
         /// <param name="page">Page</param>
@@ -85,7 +85,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Check whether the specified post exists
+        ///     Check whether the specified post exists
         /// </summary>
         /// <param name="postId">Id of a post</param>
         /// <returns>A bool indicating whether the post exists</returns>
@@ -98,7 +98,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Vote on a post
+        ///     Vote on a post
         /// </summary>
         /// <param name="vote">Vote data</param>
         [HttpPost("vote")]
@@ -110,7 +110,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Delete the specifid post
+        ///     Delete the specifid post
         /// </summary>
         /// <param name="postId">Id of a post</param>
         [HttpDelete]

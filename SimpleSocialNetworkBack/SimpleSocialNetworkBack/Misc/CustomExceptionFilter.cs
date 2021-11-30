@@ -7,6 +7,8 @@ namespace SimpleSocialNetworkBack.Misc
     // TODO: come up with a better name
     public class CustomExceptionFilter : IExceptionFilter
     {
+        #region IExceptionFilter Members
+
         public void OnException(ExceptionContext context)
         {
             switch (context.Exception)
@@ -22,5 +24,7 @@ namespace SimpleSocialNetworkBack.Misc
                     break;
             }
         }
+
+        #endregion
     }
 }

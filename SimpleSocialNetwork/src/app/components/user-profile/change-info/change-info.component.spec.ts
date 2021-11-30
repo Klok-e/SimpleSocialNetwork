@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ChangeInfoComponent } from './change-info.component';
+import {ChangeInfoComponent} from './change-info.component';
 
 describe('ChangeInfoComponent', () => {
   let component: ChangeInfoComponent;
@@ -8,9 +8,9 @@ describe('ChangeInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChangeInfoComponent ]
+      declarations: [ChangeInfoComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

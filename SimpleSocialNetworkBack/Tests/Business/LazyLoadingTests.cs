@@ -11,6 +11,8 @@ namespace Tests.Business
     [TestFixture]
     public class LazyLoadingTests
     {
+        private ServicesHelper _db = null!;
+
         [SetUp]
         public void SetUp()
         {
@@ -25,8 +27,6 @@ namespace Tests.Business
         {
             _db.Dispose();
         }
-
-        private ServicesHelper _db = null!;
 
         [Test]
         public async Task CreatesProxy()
@@ -43,21 +43,13 @@ namespace Tests.Business
         [Test]
         public async Task FindProxy()
         {
-            await _db.Context.Users.AddAsync(new ApplicationUser
-            {
-                Login = "abcde"
-            });
+            await _db.Context.Users.AddAsync(new ApplicationUser { Login = "abcde" });
             await _db.Context.SaveChangesAsync();
             _db.ReloadContext();
 
             var user = await _db.Context.Users.FindAsync("abcde");
             var msgs = user.Messages.ToArray();
-            await _db.Context.OpMessages.AddAsync(new OpMessage
-            {
-                Title = "1234",
-                Content = "qwerty",
-                Poster = user,
-            });
+            await _db.Context.OpMessages.AddAsync(new OpMessage { Title = "1234", Content = "qwerty", Poster = user });
             await _db.Context.SaveChangesAsync();
 
             Assert.AreEqual(new Message[0], msgs);

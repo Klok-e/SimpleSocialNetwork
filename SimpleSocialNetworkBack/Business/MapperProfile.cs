@@ -14,22 +14,16 @@ namespace Business
 
             CreateMap<Message, CommentModel>()
                 .ForMember(dest => dest.PosterId,
-                    opt =>
-                        opt.MapFrom(src => src.Poster == null ? null : src.Poster.Login));
+                    opt => opt.MapFrom(src => src.Poster == null ? null : src.Poster.Login));
 
             CreateMap<OpMessage, OpMessageModel>()
                 .ForMember(dest => dest.PosterId,
-                    opt =>
-                        opt.MapFrom(src => src.Poster == null ? null : src.Poster.Login))
-                .ForMember(dest => dest.Points,
-                    opt =>
-                        opt.MapFrom(src => src
-                            .Votes.Select(x => x.IsUpvote ? 1 : -1).Sum()));
+                    opt => opt.MapFrom(src => src.Poster == null ? null : src.Poster.Login))
+                .ForMember(dest => dest.Points, opt => opt.MapFrom(src => src.Votes.Select(x => x.IsUpvote ? 1 : -1)
+                                                                             .Sum()));
 
             CreateMap<Subscription, SubscriptionModel>()
-                .ForMember(dest => dest.IsActive,
-                    opt =>
-                        opt.MapFrom(src => !src.IsNotActive));
+                .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => !src.IsNotActive));
         }
     }
 }

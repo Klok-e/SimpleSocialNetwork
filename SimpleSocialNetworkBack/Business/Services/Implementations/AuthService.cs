@@ -30,6 +30,8 @@ namespace Business.Services.Implementations
             _appSettings = appSettings.Value;
         }
 
+        #region IAuthService Members
+
         public async Task<UserModel> Register(string login, string password)
         {
             // check whether user exists
@@ -40,12 +42,7 @@ namespace Business.Services.Implementations
             // if first user ever, make admin
             var isAdmin = !_context.Users.Any();
 
-            var user = new ApplicationUser
-            {
-                Login = login,
-                Password = HashPassword(password),
-                IsAdmin = isAdmin
-            };
+            var user = new ApplicationUser { Login = login, Password = HashPassword(password), IsAdmin = isAdmin };
 
             await _context.Users!.AddAsync(user);
             await _context.SaveChangesAsync();
@@ -60,8 +57,7 @@ namespace Business.Services.Implementations
             ExceptionHelper.CheckEntitySoft(user, "user");
 
             if (user.Password == null)
-                throw new ArgumentNullException(nameof(user.Password),
-                    "Password somehow was null idk");
+                throw new ArgumentNullException(nameof(user.Password), "Password somehow was null idk");
             if (!CheckPasswordHash(user.Password.Salt, user.Password.Hashed, password))
                 throw new ValidationException("Wrong password");
 
@@ -74,8 +70,7 @@ namespace Business.Services.Implementations
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, user.Login),
-                    new Claim(ClaimTypes.Role, role)
+                    new Claim(ClaimTypes.Name, user.Login), new Claim(ClaimTypes.Role, role)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
@@ -84,22 +79,15 @@ namespace Business.Services.Implementations
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenStr = tokenHandler.WriteToken(token);
 
-            return new LoggedInUser
-            {
-                Login = user.Login,
-                Token = tokenStr,
-                Role = role
-            };
+            return new LoggedInUser { Login = user.Login, Token = tokenStr, Role = role };
         }
+
+        #endregion
 
         private static bool CheckPasswordHash(string salt, string hash, string passwordToCheck)
         {
-            var hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                passwordToCheck,
-                Convert.FromBase64String(salt),
-                KeyDerivationPrf.HMACSHA1,
-                10000,
-                256 / 8));
+            var hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(passwordToCheck, Convert.FromBase64String(salt),
+                KeyDerivationPrf.HMACSHA1, 10000, 256 / 8));
 
             return hashed == hash;
         }
@@ -122,12 +110,8 @@ namespace Business.Services.Implementations
 
             // derive a 256-bit subkey (use HMACSHA1 with 10,000 iterations)
             string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password,
-                salt,
-                KeyDerivationPrf.HMACSHA1,
-                10000,
-                256 / 8));
-            return new SecurePassword {Hashed = hashed, Salt = Convert.ToBase64String(salt)};
+                password, salt, KeyDerivationPrf.HMACSHA1, 10000, 256 / 8));
+            return new SecurePassword { Hashed = hashed, Salt = Convert.ToBase64String(salt) };
         }
     }
 }

@@ -5,7 +5,8 @@ namespace DataAccess.Entities
 {
     public class Tag
     {
-        [Key] public string Name { get; set; } = null!;
+        [Key]
+        public string Name { get; set; } = null!;
 
         public virtual ICollection<TagBan> Bans { get; set; } = null!;
 

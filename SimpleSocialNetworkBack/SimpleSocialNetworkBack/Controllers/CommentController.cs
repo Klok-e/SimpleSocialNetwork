@@ -20,7 +20,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Create a new comment in specified post
+        ///     Create a new comment in specified post
         /// </summary>
         /// <param name="comment">Comment data</param>
         [HttpPost]
@@ -32,7 +32,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Vote on a comment
+        ///     Vote on a comment
         /// </summary>
         /// <param name="vote">Vote data</param>
         [HttpPost("vote")]
@@ -44,7 +44,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Soft delete comment
+        ///     Soft delete comment
         /// </summary>
         /// <param name="commentId"></param>
         /// <returns></returns>

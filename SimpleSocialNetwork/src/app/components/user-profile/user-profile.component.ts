@@ -1,13 +1,12 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {LimitedUserModel, UserModel, UserApiService, SubscriptionApiService} from '../../../backend_api_client';
+import {SubscriptionApiService, UserApiService, UserModel} from '../../../backend_api_client';
 import {AuthService} from '../../services/auth.service';
-import {Observable, of, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 import {CurrentUserService} from '../../services/current-user.service';
 import {UnionUserModel} from '../../models/helper-types';
 import {DatePipe} from '@angular/common';
-import {catchError, map, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-profile',

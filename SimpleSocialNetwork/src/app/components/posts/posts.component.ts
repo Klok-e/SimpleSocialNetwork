@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PostsService} from '../../services/posts.service';
-import {OpMessageModel, UserApiService, VoteType} from '../../../backend_api_client';
+import {UserApiService, VoteType} from '../../../backend_api_client';
 import {OpMessageUserDeleted} from '../../models/helper-types';
 import {ScrollToBottomService} from '../../services/scroll-to-bottom.service';
 import {Subscription} from 'rxjs';

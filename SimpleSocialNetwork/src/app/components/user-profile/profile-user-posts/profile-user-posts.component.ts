@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {OpMessageApiService, OpMessageModel} from '../../../../backend_api_client';
-import {PostsService} from '../../../services/posts.service';
 import {CurrentUserService} from '../../../services/current-user.service';
 import {Subscription} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';

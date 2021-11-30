@@ -19,29 +19,28 @@ namespace Business.Services.Implementations
         private readonly IMapper _mapper;
         private readonly TypedClaimsPrincipal _principal;
 
-        public OpMessageService(
-            SocialDbContext context,
-            IMapper mapper,
-            TypedClaimsPrincipal principal)
+        public OpMessageService(SocialDbContext context, IMapper mapper, TypedClaimsPrincipal principal)
         {
             _context = context;
             _mapper = mapper;
             _principal = principal;
         }
 
+        #region IOpMessageService Members
+
         public Task<IEnumerable<OpMessageModel>> GetAll(int page)
         {
             return Task.FromResult(_context.OpMessages
-                // include to prevent "There is already an open DataReader associated with this Connection which must be closed first."
-                // error by preloading poster
-                .Include(x => x.Poster)
-                .Include(x => x.Votes)
-                .Where(x => !x.IsDeleted)
-                .OrderByDescending(x => x.SendDate)
-                .Select(x => _mapper.Map<OpMessage, OpMessageModel>(x))
-                .Skip(Constants.PageSize * page)
-                .Take(Constants.PageSize)
-                .AsEnumerable());
+                                           // include to prevent "There is already an open DataReader associated with this Connection which must be closed first."
+                                           // error by preloading poster
+                                           .Include(x => x.Poster)
+                                           .Include(x => x.Votes)
+                                           .Where(x => !x.IsDeleted)
+                                           .OrderByDescending(x => x.SendDate)
+                                           .Select(x => _mapper.Map<OpMessage, OpMessageModel>(x))
+                                           .Skip(Constants.PageSize * page)
+                                           .Take(Constants.PageSize)
+                                           .AsEnumerable());
         }
 
         public async Task<IEnumerable<OpMessageModel>> PostsFromUser(string login)
@@ -49,22 +48,18 @@ namespace Business.Services.Implementations
             var user = await _context.Users.FindAsync(login);
             ExceptionHelper.CheckEntitySoft(user, "user");
 
-            return user.Posts
-                .Where(x => !x.IsDeleted)
-                .OrderByDescending(x => x.SendDate)
-                .Select(x => _mapper.Map<OpMessage, OpMessageModel>(x));
+            return user.Posts.Where(x => !x.IsDeleted)
+                       .OrderByDescending(x => x.SendDate)
+                       .Select(x => _mapper.Map<OpMessage, OpMessageModel>(x));
         }
 
         public async Task DeletePostSoft(int postId)
         {
             var opMessage = await _context.OpMessages.FindAsync(postId);
             ExceptionHelper.CheckEntitySoft(opMessage, "opMessage");
-            if (_principal.Role != Roles.Admin
-                && opMessage.Poster != null
-                && _principal.Name != opMessage.Poster.Login)
+            if (_principal.Role != Roles.Admin && opMessage.Poster != null && _principal.Name != opMessage.Poster.Login)
                 throw new ForbiddenException("Can't delete post if its isn't yours or you're not an admin");
-            if (opMessage.Poster == null
-                && _principal.Role != Roles.Admin)
+            if (opMessage.Poster == null && _principal.Role != Roles.Admin)
                 throw new ForbiddenException("Only admin can delete posts without posters");
 
             opMessage.IsDeleted = true;
@@ -79,7 +74,7 @@ namespace Business.Services.Implementations
 
             ExceptionHelper.ThrowIfUserBanned(appUser);
 
-            var superTag = await _context.Tags.FindAsync("") ?? new Tag {Name = ""};
+            var superTag = await _context.Tags.FindAsync("") ?? new Tag { Name = "" };
 
             var op = new OpMessage
             {
@@ -87,7 +82,7 @@ namespace Business.Services.Implementations
                 Title = model.Title,
                 SendDate = DateTime.UtcNow,
                 Poster = appUser,
-                Tags = new[] {new OpMessageTag {Tag = superTag}}
+                Tags = new[] { new OpMessageTag { Tag = superTag } }
             };
             await _context.OpMessages.AddAsync(op);
 
@@ -108,12 +103,11 @@ namespace Business.Services.Implementations
             var op = await _context.OpMessages.FindAsync(postId);
             ExceptionHelper.CheckEntitySoft(op, "post");
 
-            return op.Messages
-                .Where(x => !x.IsDeleted)
-                .OrderByDescending(x => x.SendDate)
-                .Select(x => _mapper.Map<Message, CommentModel>(x))
-                .Skip(Constants.PageSize * page)
-                .Take(Constants.PageSize);
+            return op.Messages.Where(x => !x.IsDeleted)
+                     .OrderByDescending(x => x.SendDate)
+                     .Select(x => _mapper.Map<Message, CommentModel>(x))
+                     .Skip(Constants.PageSize * page)
+                     .Take(Constants.PageSize);
         }
 
         public async Task<bool> PostExists(int postId)
@@ -144,5 +138,7 @@ namespace Business.Services.Implementations
             });
             await _context.SaveChangesAsync();
         }
+
+        #endregion
     }
 }

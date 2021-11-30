@@ -22,7 +22,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Register a new user
+        ///     Register a new user
         /// </summary>
         /// <param name="cred">User credentials that will be used on login</param>
         /// <returns>Registered user's model</returns>
@@ -34,7 +34,7 @@ namespace SimpleSocialNetworkBack.Controllers
         }
 
         /// <summary>
-        /// Login into an account using provided credentials
+        ///     Login into an account using provided credentials
         /// </summary>
         /// <param name="cred">User credentials</param>
         /// <returns>Data that's used to authenticate requests</returns>
