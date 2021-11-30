@@ -5,11 +5,10 @@ import {
   HttpEvent,
   HttpInterceptor, HttpErrorResponse
 } from '@angular/common/http';
-import {Observable, of, throwError} from 'rxjs';
+import {Observable, of, throwError,from} from 'rxjs';
 import {AuthService} from '../services/auth.service';
 import {catchError, finalize, map, mergeMap, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {fromPromise} from 'rxjs/internal-compatibility';
 
 @Injectable()
 export class JwtAuthInterceptor implements HttpInterceptor {
@@ -39,7 +38,7 @@ export class JwtAuthInterceptor implements HttpInterceptor {
     if (err.status === 401 || err.status === 403) {
       console.log('observe1', err);
 
-      return fromPromise(this.router.navigate([''])).pipe(
+      return from(this.router.navigate([''])).pipe(
         tap(_ => {
           this.auth.logout();
         }),

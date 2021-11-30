@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import {Observable, from} from 'rxjs';
 import {AuthService} from '../services/auth.service';
 import {map} from 'rxjs/operators';
-import {fromPromise} from 'rxjs/internal-compatibility';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    return fromPromise(this.router.navigate(['/login'])).pipe(
+    return from(this.router.navigate(['/login'])).pipe(
       map(_ => {
         return false;
       })
